@@ -28,7 +28,7 @@ Caracterizticas tecnicas
  2. bootstrap
  3. jquery, angularjs
  4. Manejo de objetos en el cliente
- 5. Comunicación cliente servidor a traves de API (nutrifami.js), RestFull.
+ 5. Comunicación cliente servidor a traves de API (nutrifami.js), RestFul.
 
 
 Distribución de Archivos
