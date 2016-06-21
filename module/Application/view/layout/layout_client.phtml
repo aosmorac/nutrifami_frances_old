@@ -1,6 +1,6 @@
 <?php echo $this->doctype(); ?>
 
-<html lang="en">
+<html ng-app="nutrifamiWeb">
     <head>
         <meta charset="utf-8">
         <?php echo $this->headTitle('Nutrifami')->setSeparator(' - ')->setAutoEscape(false) ?>
@@ -15,19 +15,25 @@
                         ->prependStylesheet($this->basePath('css/style.css'))
                         ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
                         ->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
-
+    </head>
+    <body>
+        <div ng-view><?php echo $this->content; ?></div>
+        
         <!-- Scripts -->
         <?php echo $this->headScript()
             ->prependFile($this->basePath('js/main.js'))
+            ->prependFile($this->basePath('modules/authentication/services.js'))
+            ->prependFile($this->basePath('modules/authentication/controllers.js'))
+            ->prependFile($this->basePath('modules/authentication/services.js'))
+            ->prependFile($this->basePath('js/app.js'))
             ->prependFile($this->basePath('js/nutrifami.js'))
+            ->prependFile($this->basePath('js/angular-cookies.min.js'))
+            ->prependFile($this->basePath('js/angular-route.min.js'))
+            ->prependFile($this->basePath('js/angular.min.js'))
             ->prependFile($this->basePath('js/bootstrap.min.js'))
             ->prependFile($this->basePath('js/jquery.min.js'))
             ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
             ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
         ; ?>
-
-    </head>
-    <body>
-        <?php echo $this->content; ?>
     </body>
 </html>
