@@ -7,7 +7,7 @@ Una vez descargados los archivos se debe configurar el servidor virtual.
 
 VirtualHost
 --------------
- A continuación un ejemplo de la configuración del host virtual.
+ A continuación un ejemplo de la configuración del host virtual, en windows.
  
     Listen 83
     NameVirtualHost *:83
