@@ -3,26 +3,87 @@ var usuarioActivo = Object();
 
 var familiaObj = Object();
 
+var base_url = 'http://127.0.0.1:83/'; /* Direccion del servidor */
+
 var nutrifami = {
     
     /* nutrifami.usuarioActivoServerInfo */
     usuarioActivoServerInfo: Object(),
     
-    isloginFlag: false,
     
     /*
-     * nutrifami.login(documento, codigo, callback);
+     * nutrifami.getSessionId(callback);
+     */
+    getSessionId: function(callback){
+        callback = callback || function(){};
+        var serv = base_url+"app/api/get-session-id";
+	$.ajax({
+            url: serv,
+            async: false,
+            success: function(data){ 
+                var objServ = JSON.parse(data);
+                usuarioActivo.sesionId = objServ.sid;
+                usuarioActivo.isLogin = usuarioActivo.isLogin || false;
+                usuarioActivo.login_documento = usuarioActivo.login_documento || '';
+                usuarioActivo.login_codigo = usuarioActivo.login_codigo || '';
+                usuarioActivo.token = usuarioActivo.token || '';
+                callback();
+            }
+	});	
+    },
+    
+    /*
+     * nutrifami.buildToken(callback)
+     */
+    buildToken: function(callback){
+        callback = callback || function(){};
+        if ( usuarioActivo.sesionId && usuarioActivo.sesionId != '' && usuarioActivo.login_documento && usuarioActivo.login_documento != '' && usuarioActivo.login_codigo && usuarioActivo.login_codigo != '' ) {
+            var tempSid = usuarioActivo.sesionId;
+            var tempLdoc = usuarioActivo.login_documento;
+            var tempLcod = usuarioActivo.login_codigo;
+            var tokenTemp = tempSid.substring(0,4) + tempLdoc.substring(0,4) + tempSid.substring(4,8) + tempLcod.substring(0,4) + tempSid.substring(8,12);
+            usuarioActivo.token = tokenTemp; /*$.md5(tokenTemp);*/
+        }else {
+            usuarioActivo.token = '';
+        }
+    },
+    
+    /*
+     * nutrifami.setLoginData(documento, codigo, callback)
+     */
+    setLoginData: function(documento, codigo, callback){
+        documento = documento || '';
+        codigo = codigo || '';
+        callback = callback || function(){};
+        if (documento != '' && codigo != '') {
+            usuarioActivo.login_documento = documento;
+            usuarioActivo.login_codigo = codigo;
+            this.buildToken(function(){
+                callback();
+            });
+        }
+    },
+    
+    /*
+     * nutrifami.login(callback);
      * 
      * @param {type} documento
      * @param {type} codigo
      * @param {type} callback
      * @returns {undefined}
      */
-    login: function(documento, codigo, callback){
+    login: function(callback){
         callback = callback || function(){};
-        /*
-         * Ajax con token (Armar con documento, codigo y sesion)
-         */
+        
+        var serv = base_url+"app/api/login";
+        $.ajax({
+            url: serv,
+            async: false,
+            success: function(data){ 
+                callback();
+            }
+	});	
+        
         /* Inicio onSuccess Ajax */
         familiaObj.codigo = '123456';
         familiaObj.personas = Array();
@@ -75,6 +136,8 @@ var nutrifami = {
         usuarioActivo.municipio = 'Bogotá';
         usuarioActivo.comunidad = '';
         usuarioActivo.avatar = '';
+        usuarioActivo.login_documento = '';
+        usuarioActivo.login_codigo = '';
         usuarioActivo.sesionId = 'xxxxx';
         usuarioActivo.token = 'xxxxxx';
         

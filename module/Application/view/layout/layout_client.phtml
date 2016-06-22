@@ -16,9 +16,9 @@
                         ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
                         ->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
     </head>
-    <body>
-        <div ng-view><?php echo $this->content; ?></div>
-        
+    <body><div id="ncontent">
+        <div ng-view class="col-md-12"><?php echo $this->content; ?></div>
+    </div>
         <!-- Scripts -->
         <?php echo $this->headScript()
             ->prependFile($this->basePath('js/main.js'))

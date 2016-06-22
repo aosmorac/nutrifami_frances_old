@@ -37,6 +37,7 @@ angular.module('nutrifamiWeb', [
     function ($rootScope, $location, $cookieStore) {
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
+        nutrifami.getSessionId();
         if ($rootScope.globals.currentUser) {
             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
         }

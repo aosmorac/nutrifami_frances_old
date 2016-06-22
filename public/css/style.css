@@ -1,37 +1,134 @@
-body {
-    padding-top: 60px;
-    padding-bottom: 40px;
+@font-face {
+    font-family: Muli;
+    src: url(../fonts/Muli-Regular.ttf);
+}
+@font-face {
+    font-family: Muli-Light;
+    src: url(../fonts/Muli-Light.ttf);
 }
 
-.zf-green {
-    color: #68b604;
+html, body {
+    padding: 0;
+    margin: 0;
 }
 
-.btn-success {
-  background-color: #57a900;
-  background-image: -moz-linear-gradient(top, #70d900, #57a900);
-  background-image: -ms-linear-gradient(top, #70d900, #57a900);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#70d900), to(#57a900));
-  background-image: -webkit-linear-gradient(top, #70d900, #57a900);
-  background-image: -o-linear-gradient(top, #70d900, #57a900);
-  background-image: linear-gradient(top, #70d900, #57a900);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#70d900', endColorstr='#57a900', GradientType=0);
+body{
+    background: #1863dc;
+    font-family: 'Muli', sans-serif;
 }
 
-.btn-success:hover,
-.btn-success:active,
-.btn-success.active,
-.btn-success.disabled,
-.btn-success[disabled] {
-  background-color: #57a900;
+#ncontent{
+    max-width: 1280px;
+    margin: 0 auto;
 }
 
-.btn-success:active, .btn-success.active {
-  background-color: #57a900;
+#nlogin{
+    
+}
+#nlogin .lbox{
+    background: #3dc0fd;
+    max-width: 490px;
+    margin: 60px auto 25px auto;
+    border-radius: 20px;
+    -webkit-box-shadow: -1px 7px 20px -7px rgba(85,85,85,0.94);
+    -moz-box-shadow: -1px 7px 20px -7px rgba(85,85,85,0.94);
+    box-shadow: -1px 7px 20px -7px rgba(85,85,85,0.94);
+    padding: 35px 10px;
+}
+#nlogin .lbox .logo{
+    max-width: 257px;
+    height: 127px;
+    margin: 0 auto 35px auto;
+    background: url("../img/nutrifami_white_257x127.png") no-repeat center;
+    -webkit-background-size: 100% auto;
+    -moz-background-size: 100% auto;
+    -o-background-size: 100% auto;
+    background-size: 100% auto;
+    position: relative;
+}
+#nlogin .lbox .text{
+    max-width: 340px;
+    margin: 0 auto;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    padding: 20px 0;
+    line-height: 25px;
+    font-family: 'Muli-Light', sans-serif;
+}
+#nlogin .lbox .form-group, #nlogin .lbox .form-actions, #nlogin .lbox .error-msj{
+    max-width: 325px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+#nlogin .lbox .error-msj {
+    background: #fe26a5;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+}
+#nlogin .lbox form input[type="text"] {
+    color: #3dc0fd;
+    font-size: 18px;
+    padding: 12px 30px 12px 60px;
+    text-align: center;
+    margin: 14px auto;
+    border: 0;
+    border-radius: 100px;
+    width: 100%;
+}
+#nlogin .lbox form input[type="text"]::-webkit-input-placeholder {
+    color: #3dc0fd;
+    font-size: 16px;
+}
+#nlogin .lbox form input[type="text"]:-moz-placeholder { /* Firefox 18- */
+    color: #3dc0fd;
+    font-size: 16px;
 }
 
-div.container a.brand {
-    background: url("../img/zf2-logo.png") no-repeat scroll 0 10px transparent;
-    margin-left: 0;
-    padding: 8px 20px 12px 40px;
+#nlogin .lbox form input[type="text"]::-moz-placeholder {  /* Firefox 19+ */
+    color: #3dc0fd;
+    font-size: 16px;
+}
+#nlogin .lbox form input[type="text"]:-ms-input-placeholder {  
+    color: #3dc0fd;
+    font-size: 16px;
+}
+#nlogin .lbox .form-group .ldocumento {
+    background: #fff url("../img/icons/document_42x42.png") no-repeat;
+    background-position: 15px center;
+}
+#nlogin .lbox .form-group .lcodigo {
+    background: #fff url("../img/icons/card_42x42.png") no-repeat;
+    background-position: 15px center;
+}
+#nlogin .lbox .form-group .help-block {
+    margin-top: -14px;
+    color: #fe26a5;
+}
+#nlogin .lbox .form-actions .lingresar {
+    background: #fe26a5;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 12px 60px 12px 60px;
+    text-align: center;
+    margin: 40px auto;
+    border: 0;
+    border-radius: 100px;
+    width: 100%;
+    cursor: pointer;
+    letter-spacing: 3px;
+}
+#nlogin .lbox .form-actions .lingresar:hover {
+    background: #fd0496;
+}
+#nlogin .wfp-logo {
+    margin-bottom: 25px;
+    text-align: center;
+}
+#nlogin .wfp-logo img{
+    width: 100%;
+    max-width: 250px;
+    height: auto;
 }
