@@ -46,7 +46,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'App\Controller\Index' => 'App\Controller\IndexController'
+            'App\Controller\Index' => 'App\Controller\IndexController',
+            'App\Controller\Api' => 'App\Controller\ApiController'
         ),
     ),
     'view_manager' => array(

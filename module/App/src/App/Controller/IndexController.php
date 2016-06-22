@@ -16,7 +16,7 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        print_r(\Util\UserSession::getCurrentSessionID());
+        //print_r(\Util\UserSession::getCurrentSessionID());
         $this->layout('layout/layout_client');
         return new ViewModel();
     }

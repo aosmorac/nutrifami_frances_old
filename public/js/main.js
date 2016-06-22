@@ -6,11 +6,7 @@
 
 $(function(){
     
-    $('#loginButton').click(function(){
-        nutrifami.login('123456', '78910', function(){
-            alert('callback ok');
-        });
-    });
+
     
     
 });
