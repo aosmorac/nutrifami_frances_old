@@ -23,6 +23,10 @@ class Module
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
         
+        $sm = $e->getApplication()->getServiceManager();
+         $adapter = $sm->get('Zend\Db\Adapter\Adapter');
+\Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($adapter);
+        
         $this->initSession(array(
             'remember_me_seconds' => 180,
             'use_cookies' => true,

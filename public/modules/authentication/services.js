@@ -12,9 +12,14 @@ angular.module('Authentication')
             /* Dummy authentication for testing, uses $timeout to simulate api call
              ----------------------------------------------*/
             $timeout(function(){
+                nutrifami.setLoginData(username, password, function(){
+                    nutrifami.login(function(){
+                        alert('login OK');
+                    });
+                });
                 var response = { success: username === 'test' && password === 'test' };
                 if(!response.success) {
-                    response.message = 'Username or password is incorrect';
+                    response.message = 'Documento o Código incorrecto';
                 }
                 callback(response);
             }, 1000);
