@@ -1,0 +1,36 @@
+{
+  "name": "Nutrifami-webapp",
+  "version": "0.0.1",
+  "description": "Front-end web para la aplicación Nutrifami",
+  "author": "Alejandro Tunaroza <alejandro.tun@gmail.com>",
+  "contributors": [
+    {
+      "name": "Alejandro Tunaroza",
+      "email": "alejandro.tunaroza@gmail.com"
+    },
+    {
+      "name": "Abel Moreno",
+      "email": "abel.moreno@wfp.org"
+    }
+  ],
+  "scripts": {},
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WFPColombia/nutrifami-webapp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WFPColombia/nutrifami-webapp/issues"
+  },
+  "keywords": [
+    "PMA",
+    "Nutrifami"
+  ],
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-webserver": "^0.9.1"
+  },
+  "preferGlobal": true,
+  "private": false,
+  "license": "MIT"
+}

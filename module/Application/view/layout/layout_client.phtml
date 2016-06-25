@@ -1,39 +1,45 @@
 <?php echo $this->doctype(); ?>
+<html>
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle('Nutrifami')->setSeparator(' - ')->setAutoEscape(false) ?>
 
-<html ng-app="nutrifamiWeb">
-    <head>
-        <meta charset="utf-8">
-        <?php echo $this->headTitle('Nutrifami')->setSeparator(' - ')->setAutoEscape(false) ?>
+    <?php echo $this->headMeta()
+    ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+    ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+?>
 
-        <?php echo $this->headMeta()
-            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
-            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
-        ?>
+    <!-- Le styles -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+    ->prependStylesheet($this->basePath('css/style.css'))
+    ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+    ->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
+    <!-- Scripts -->
+    <?php echo $this->headScript()
+    ->prependFile($this->basePath('js/main.js'))
+    ->prependFile($this->basePath('js/nutrifami.js'))
+    ->prependFile($this->basePath('js/bootstrap.min.js'))
+    ->prependFile($this->basePath('js/md5.js'))
+    ->prependFile($this->basePath('js/jquery.min.js'))
+    ->prependFile($this->basePath('modules/authentication/services.js'))
+    ->prependFile($this->basePath('modules/authentication/controllers.js'))
+    ->prependFile($this->basePath('js/controller/homeController.js'))
+    ->prependFile($this->basePath('js/mainController.js'))
+    ->prependFile($this->basePath('js/angular-cookies.min.js'))
+    ->prependFile($this->basePath('js/angular-route.min.js'))
+    ->prependFile($this->basePath('lib/angular/angular.js'))
+    ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
+    ->prependFile($this->basePath('js/html5shiv.min.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
+; ?>
+</head>
 
-        <!-- Le styles -->
-        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                        ->prependStylesheet($this->basePath('css/style.css'))
-                        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
-                        ->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
-    </head>
-    <body><div id="ncontent">
-        <div ng-view class="col-md-12"><?php echo $this->content; ?></div>
+<body ng-app="NutrifamiWeb">
+    <div id="ncontent">
+        <div class="col-md-12">
+            <ng-view>
+                <?php echo $this->content; ?>
+            </ng-view>
+        </div>
     </div>
-        <!-- Scripts -->
-        <?php echo $this->headScript()
-            ->prependFile($this->basePath('js/main.js'))
-            ->prependFile($this->basePath('modules/authentication/services.js'))
-            ->prependFile($this->basePath('modules/authentication/controllers.js'))
-            ->prependFile($this->basePath('modules/authentication/services.js'))
-            ->prependFile($this->basePath('js/app.js'))
-            ->prependFile($this->basePath('js/nutrifami.js'))
-            ->prependFile($this->basePath('js/angular-cookies.min.js'))
-            ->prependFile($this->basePath('js/angular-route.min.js'))
-            ->prependFile($this->basePath('js/angular.min.js'))
-            ->prependFile($this->basePath('js/bootstrap.min.js'))
-            ->prependFile($this->basePath('js/jquery.min.js'))
-            ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
-            ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
-        ; ?>
-    </body>
+</body>
 </html>
