@@ -12,16 +12,25 @@ angular.module('NutrifamiWeb', dependencies)
 .config(['$routeProvider', function($routeProvider) {
     'use strict';
 
-    $routeProvider
-        .when('/login', {
+    $routeProvider.when('/login', {
             controller: 'LoginController',
             templateUrl: 'modules/authentication/views/login.html',
             hideMenus: true
-        })
+        });
 
-    .when('/', {
+    $routeProvider.when('/', {
         controller: 'HomeController',
         templateUrl: 'views/home.tpl.html'
+    });
+    
+    $routeProvider.when('/perfil', {
+        controller: 'PerfilController',
+        templateUrl: 'views/perfil.tpl.html'
+    });
+    
+    $routeProvider.when('/editar-perfil', {
+        controller: 'EditarPerfilController',
+        templateUrl: 'views/editar-perfil.tpl.html'
     })
 
     .otherwise({ redirectTo: '/login' });

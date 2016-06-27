@@ -23,6 +23,8 @@
     ->prependFile($this->basePath('js/jquery.min.js'))
     ->prependFile($this->basePath('modules/authentication/services.js'))
     ->prependFile($this->basePath('modules/authentication/controllers.js'))
+    ->prependFile($this->basePath('js/controller/editarPerfilController.js'))
+    ->prependFile($this->basePath('js/controller/perfilController.js'))
     ->prependFile($this->basePath('js/controller/homeController.js'))
     ->prependFile($this->basePath('js/mainController.js'))
     ->prependFile($this->basePath('js/angular-cookies.min.js'))
@@ -34,12 +36,10 @@
 </head>
 
 <body ng-app="NutrifamiWeb">
-    <div id="ncontent">
-        <div class="col-md-12">
+
             <ng-view>
                 <?php echo $this->content; ?>
             </ng-view>
-        </div>
-    </div>
+
 </body>
 </html>
