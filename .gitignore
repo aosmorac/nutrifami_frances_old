@@ -1,4 +1,4 @@
-nbproject
+/nbproject
 ._*
 .vagrant
 .~lock.*
@@ -9,3 +9,6 @@ nbproject
 .settings
 vendor
 composer.phar
+/node_modules
+/app
+/public/lib
