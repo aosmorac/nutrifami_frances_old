@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Desarrollo/nutrifami/nutrifamiapp/module/App/src/App/Controller/IndexController.php</file>
-            <file>file:/C:/Desarrollo/nutrifami/nutrifamiapp/README.md</file>
-            <file>file:/C:/Desarrollo/nutrifami/nutrifamiapp/public/js/nutrifami.js</file>
-            <file>file:/C:/Desarrollo/nutrifami/nutrifamiapp/module/Application/view/layout/layout_app.phtml</file>
-            <file>file:/C:/Desarrollo/nutrifami/nutrifamiapp/module/Application/view/layout/layout.phtml</file>
-            <file>file:/C:/Desarrollo/nutrifami/nutrifamiapp/module/App/view/app/index/index.phtml</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/js/controller/homeController.js</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/module/App/src/App/Model/Tables/FampersonasTable.php</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/views/perfil.tpl.html</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/js/controller/perfilController.js</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/views/home.tpl.html</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/module/App/src/App/Controller/ApiController.php</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/js/nutrifami.js</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/module/App/src/App/Controller/IndexController.php</file>
         </group>
     </open-files>
 </project-private>
