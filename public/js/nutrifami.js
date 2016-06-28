@@ -103,13 +103,13 @@ var nutrifami = {
                     usuarioActivo.movil = objServ.movil;
                     usuarioActivo.email = objServ.email;
                     usuarioActivo.avatar = objServ.avatar;
-                    usuarioActivo.rango_0a2 = objServ.rango_0a2;
-                    usuarioActivo.rango_2a5 = objServ.rango_2a5;
-                    usuarioActivo.rango_6a17 = objServ.rango_6a17;
-                    usuarioActivo.rango_18a60 = objServ.rango_18a60;
-                    usuarioActivo.rango_60mas = objServ.rango_60mas;
-
-                    console.log(usuarioActivo);
+                    usuarioActivo.rango_0a2 = parseInt(objServ.rango_0a2) || 0;
+                    usuarioActivo.rango_2a5 = parseInt(objServ.rango_2a5) || 0;
+                    usuarioActivo.rango_6a17 = parseInt(objServ.rango_6a17) || 0;
+                    usuarioActivo.rango_18a60 = parseInt(objServ.rango_18a60) || 0;
+                    usuarioActivo.rango_60mas = parseInt(objServ.rango_60mas) || 0;
+                    
+                    localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
 
                     familiaObj.codigo = '123456';
                     familiaObj.personas = Array();
