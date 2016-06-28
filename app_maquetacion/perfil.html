@@ -1,4 +1,17 @@
-<div ng-controller="PerfilController">
+<!DOCTYPE html>
+<html>
+
+<head lang="es-Es">
+    <title>Mi información - Nutrifami</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../public/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/style.css">
+    <script src="../public/js/jquery.min.js" type="text/javascript"></script>
+    <script src="../public/js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+
+<body>
     <header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -10,16 +23,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="../img/nutrifami_logo.png"></a>
+                    <a class="navbar-brand" href="index.html"><img src="../public/img/nutrifami_logo.png"></a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="#/">Inicio <span class="sr-only">(current)</span></a></li>
-                        <li class="active"><a href="#/perfil">Más Información</a></li>
+                        <li><a href="index.html">Inicio <span class="sr-only">(current)</span></a></li>
+                        <li class="active"><a href="perfil.html">Más Información</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#/perfil">{{ nombre | capitalize }} {{ apellido | capitalize}}</a></li>
+                        <li><a href="perfil.html">Camila Pereira</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -32,10 +45,10 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel">
                     <div class="boton-flotante">
-                        <a class="btn btn-default" href="#/editar-perfil" role="button">Editar Info<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                        <a class="btn btn-default" href="editar.html" role="button">Editar Info<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                     </div>
                     <div class="panel-header">
-                        <img src="../img/ico-{{genero}}.png">
+                        <img src="../public/img/ico-femenino.png">
                         <h1>Mi información</h1>
                     </div>
                     <div class="panel-body">
@@ -43,55 +56,55 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nombres</label>
-                                    <p class="{{ nombre | estilo }}">{{ nombre | capitalize:true | esVacio }}</p>
+                                    <p>Camilia Patricia</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Apellidos</label>
-                                    <p class="{{ apellido | estilo }}">{{ apellido | capitalize:true | esVacio }}</p>
+                                    <p>Zarate Pereira</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Docuemnto de Identidad</label>
-                                    <p class="{{ apellido | estilo }}">{{ documento }}</p>
+                                    <p>56.890.005</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Genero</label>
-                                    <p class="{{ apellido | estilo }}">{{ genero | capitalize:true | esVacio}}</p>
+                                    <p>Femenino</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Etnia</label>
-                                    <p class="{{ etnia | estilo }}">{{ etnia | capitalize:true | esVacio}}</p>
+                                    <p class="sin-registro">Sin Etnia</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Fecha de Nacimiento</label>
-                                    <p class="{{ nacimiento | estilo }}">{{ nacimiento | capitalize:true | esVacio }}</p>
+                                    <p class="sin-registro">10 - Junio - 1986/p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Departamento</label>
-                                    <p class="{{ departamento | estilo }}">{{ departamento | capitalize:true | esVacio }}</p>
+                                    <p class="sin-registro">Sin Departamento</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Municipio</label>
-                                    <p class="{{ municipio | estilo }}">{{ municipio | capitalize:true | esVacio }}</p>
+                                    <p class="sin-registro">Sin Municipio</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Comunidad</label>
-                                    <p class="{{ comunidad | estilo }}">{{ comunidad | capitalize:true | esVacio }}</p>
+                                    <p class="sin-registro">Sin Comunidad</p>
                                 </div>
                             </div>
                         </form>
@@ -106,9 +119,9 @@
                         <a class="btn btn-default" href="#" role="button">Agregar<span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
                     </div>
                     <div class="panel-header">
-                        <img src="../img/ico-familia.png">
+                        <img src="../public/img/ico-familia.png">
                         <h1>Mi familia</h1>
-                        <h3>{{ miembrosFamilia }}</h3>
+                        <h3>5 miembros</h3>
                     </div>
                     <div class="panel-body">
                         <div class="col-md-12">
@@ -121,29 +134,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-if="rango_0a2 !== 0">
-                                        <td>{{ rango_0a2 }}</td>
+                                    <tr>
+                                        <td>1</td>
                                         <td>0 a 2 años</td>
                                         <td><a href="#">Editar</a></td>
                                     </tr>
-                                    <tr ng-if="rango_2a5 !== 0">
-                                        <td>{{ rango_2a5 }}</td>
-                                        <td>2 a 5 años</td>
-                                        <td><a href="#">Editar</a></td>
-                                    </tr>
-                                    <tr ng-if="rango_6a17 !== 0">
-                                        <td>{{ rango_6a17 }}</td>
+                                    <tr>
+                                        <td>1</td>
                                         <td>6 a 17 años</td>
                                         <td><a href="#">Editar</a></td>
                                     </tr>
-                                    <tr ng-if="rango_18a60 !== 0">
-                                        <td>{{ rango_18a60 }}</td>
+                                    <tr>
+                                        <td>2</td>
                                         <td>18 a 60 años</td>
-                                        <td><a href="#">Editar</a></td>
-                                    </tr>
-                                    <tr ng-if="rango_60mas !== 0">
-                                        <td>{{ rango_60mas }}</td>
-                                        <td>60 o más años</td>
                                         <td><a href="#">Editar</a></td>
                                     </tr>
                                     <tr>
@@ -161,10 +164,11 @@
         <footer>
             <div class="row text-center">
                 <div class="col-md-12">
-                    <img src="../img/wfp_blue.png">
+                    <img src="../public/img/wfp_blue.png">
                 </div>
             </div>
         </footer>
     </div>
-    
-</div>
+</body>
+
+</html>
