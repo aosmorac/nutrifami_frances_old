@@ -28,7 +28,9 @@ body {
     margin: 0 auto;
 }
 
-#nlogin {}
+#nlogin {
+    background-color: #1863dc;
+}
 
 #nlogin .lbox {
     background: #3dc0fd;

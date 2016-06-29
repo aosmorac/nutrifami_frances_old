@@ -1,6 +1,6 @@
+<body>
 <div ng-controller="EditarPerfilController">
-    
-        <header>
+    <header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -11,7 +11,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="../img/nutrifami_logo.png"></a>
+                    <a class="navbar-brand" href="#/"><img src="../img/nutrifami_logo.png"></a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -20,7 +20,7 @@
                         <li class="active"><a href="#/perfil">Más Información</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#/perfil">Camila Pereira</a></li>
+                        <li><a href="#/perfil">{{ usuario.nombre | capitalize:true }} {{ usuario.apellido | capitalize:true}}</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -33,140 +33,100 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel">
                     <div class="panel-header">
-                        <img src="../img/ico-femenino.png" alt="Genero Femenino">
+                        <img src="../img/ico-{{genero}}.png" alt="Genero Femenino">
                         <h1>Mi información</h1>
                     </div>
                     <div class="panel-body">
-                        <form action="perfil.html">
+                        <form name="userForm" novalidate>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Nombres</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Ingresa tu nombre" value="Camilia Patricia">
+                                    <label for="nombre">Nombres</label>
+                                    <input type="text" class="form-control" placeholder="Ingresa tu nombre" ng-model="usuario.nombre" ng-model-options="{ updateOn: 'blur' }" requiered>
+                                    <span class="messages" ng-show="userForm.$submitted || userForm.nombre.$touched">
+                                        <span ng-show="userForm.nombre.$error.required">El campo es obligatorio.</span>
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Apellidos</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingresa tu apellido" value="Zarate Pereira">
+                                    <label for="apellido">Apellidos</label>
+                                    <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingresa tu apellido" ng-model="usuario.apellido" ng-model-options="{ updateOn: 'blur' }">
+                                    <span class="messages" ng-show="userForm.$submitted || userForm.apellido.$touched">
+                                        <span ng-show="userForm.apellido.$error.required">El campo es obligatorio.</span>
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Docuemnto de Identidad</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Ingresa tu documento de identidad" value="56.890.005">
+                                    <label for="documento">Docuemnto de Identidad</label>
+                                    <input type="text" class="form-control" id="documento" name="documento" ng-value="usuario.documento" disabled>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Genero</label>
-                                    <select class="form-control">
+                                    <label for="genero">Genero</label>
+                                    <select class="form-control" ng-options="option.name for option in usuario.generos.availableOptions track by option.id"
+                                            ng-model="usuario.generos.selectedOption">
                                         <option disabled value> -- Elige una opción -- </option>
-                                        <option value="F" selected>Femenino</option>
-                                        <option value="M">Masculino</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Etnia</label>
-                                    <select class="form-control" disabled="">
+                                    <label for="etnia">Etnia</label>
+                                    <select class="form-control" ng-options="option.name for option in usuario.etnias.availableOptions track by option.id"
+                                            ng-model="usuario.etnias.selectedOption">
                                         <option disabled value> -- Elige una opción -- </option>
-                                        <option value="afrocolombiano" selected>Afrocolombiano</option>
-                                        <option value="indigena">Indigena</option>
-                                        <option value="mestizo">Mestizo</option>
-                                        <option value="otros">Otros</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Fecha de Nacimiento</label>
-                                    <input type="date" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <label for="nacimiento">Fecha de Nacimiento</label>  
+                                    <input type="date" class="form-control" id="nacimiento" name="nacimiento" ng-model="usuario.nacimiento" ng-model-options="{ updateOn: 'blur' }" required>
+                                    <span class="messages" ng-show="userForm.$submitted || userForm.nacimiento.$touched">
+                                        <span ng-show="userForm.nacimiento.$error.required">La fecha de nacimiento es obligatoria</span>
+                                    </span>
                                 </div>
                             </div>
+                            <!-- <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="exampleInputEmail1">Departamento</label>
+                                  <select class="form-control">
+                                      <option disabled value> -- Elige una opción -- </option>
+                                      <option value="" selected>Cundinamarca</option>
+                                      <option value="">Antioquia</option>
+                                      <option value="">Cordoba</option>
+                                      <option value="">Bolivar</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="exampleInputPassword1">Municipio</label>
+                                  <select class="form-control">
+                                      <option disabled value> -- Elige una opción -- </option>
+                                      <option value="" selected>Bogotá</option>
+                                      <option value="">Medellín</option>
+                                      <option value="">Cali</option>
+                                      <option value="">Barranquilla</option>
+                                  </select>
+                              </div>
+                          </div>-->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Departamento</label>
-                                    <select class="form-control">
-                                        <option disabled value> -- Elige una opción -- </option>
-                                        <option value="" selected>Cundinamarca</option>
-                                        <option value="">Antioquia</option>
-                                        <option value="">Cordoba</option>
-                                        <option value="">Bolivar</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Municipio</label>
-                                    <select class="form-control">
-                                        <option disabled value> -- Elige una opción -- </option>
-                                        <option value="" selected>Bogotá</option>
-                                        <option value="">Medellín</option>
-                                        <option value="">Cali</option>
-                                        <option value="">Barranquilla</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Comunidad</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Escrbir comunidad">
+                                    <label for="comunidad">Comunidad</label>
+                                    <input type="text" class="form-control" id="comunidad" name="comunidad" placeholder="Escrba la comunidad a la que pertenece" ng-model="usuario.comunidad" ng-model-options="{ updateOn: 'blur' }" required>
+                                    <span class="messages" ng-show="userForm.$submitted || userForm.comunidad.$touched">
+                                        <span ng-show="userForm.comunidad.$error.required">La comunidad es obligatoria</span>
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-default center-block">Guardar Cambios</button>
+                                <input type="submit" class="btn btn-default center-block" ng-click="update()" value="Guardar Cambios" ng-disabled="userForm.$invalid" >
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel">
-                    <div class="boton-flotante">
-                        <a class="btn btn-default" href="#" role="button">Agregar<span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
-                    </div>
-                    <div class="panel-header">
-                        <img src="../img/ico-familia.png" alt="Mi familia">
-                        <h1>Mi familia</h1>
-                        <h3>5 miembros</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="col-md-12">
-                            <table class="table text-center">
-                                <thead>
-                                    <tr>
-                                        <th>Cantidad</th>
-                                        <th>Rango edad</th>
-                                        <th>Editar info</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>0 a 2 años</td>
-                                        <td><a href="#">Editar</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>6 a 17 años</td>
-                                        <td><a href="#">Editar</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>18 a 60 años</td>
-                                        <td><a href="#">Editar</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -179,5 +139,6 @@
             </div>
         </footer>
     </div>
-    
+
 </div>
+</body>
