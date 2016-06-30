@@ -37,6 +37,7 @@ angular.module('NutrifamiWeb').controller('EditarPerfilController', ['$scope','$
         $scope.usuario.comunidad = usuarioActivo.comunidad;
 
         $scope.update = function () {
+            console.log('Click');
             $scope.dataLoading = true;
             usuarioActivo.nombre =  $scope.usuario.nombre;
             usuarioActivo.apellido =  $scope.usuario.apellido;
@@ -52,8 +53,6 @@ angular.module('NutrifamiWeb').controller('EditarPerfilController', ['$scope','$
             PerfilService.editarUsuario(usuarioActivo,function(response){
                 
                 if(response.success){
-                    alert(response.message);
-                    $rootScope.message.text = "Los datos se han guardado con éxito";
                     $location.path('/perfil');
                 }
                 $scope.dataLoading = false;
