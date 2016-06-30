@@ -11,13 +11,14 @@
 namespace App\Controller;
 
 use App\Model\Personas;
+use App\Model\Capacitacion;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Debug\Debug;
 
 class ApiController extends AbstractActionController {
 
     public function getSessionIdAction() {
-        //print_r(\Util\UserSession::getCurrentSessionID());
         $data = array();
         $data['sid'] = \Util\UserSession::getCurrentSessionID();
         echo json_encode($data);
@@ -67,5 +68,101 @@ class ApiController extends AbstractActionController {
         $viewModel->setTerminal(true);
         return $viewModel;
     }
+    
+    
+    
+    
+    
+    /*
+     * Llamado desde cliente con la funcion nutrifami.training.downloadCapacitacion(cid, callback);
+     * 
+     */
+    public function getCapacitacionesAction() {
+        
+        $params = $this->params()->fromQuery();
+        if (isset($params['cid'])){
+            $cid = $params['cid'];
+        }else {
+            $cid = 0;
+        }
+        
+        $capacitacionObj = new Capacitacion();
+        $data = $capacitacionObj->getCapacitacion();
+        /*
+        $data = Array(
+            'capacitaciones' => Array(
+                '3' => Array(
+                    'id'=> 3,
+                    'tipo'=> Array(
+                        'id'=> 1,
+                        'alias'=> 'general',
+                        'nombre'=> 'General',
+                        'descripcion'=> 'Capacitación para el publico en general'
+                    ),
+                    'titulo'=> 'Participantes PMA',
+                    'descripcion'=> 'Capacitacion inicial, para participantes del PMA',
+                    'fecha'=> '', 
+                    'activo'=> true, 
+                    'modulos'=> Array( 
+                        1=> 5
+                    ) 
+                )
+            )
+        );
+        */
+        echo json_encode($data);
+        
+        $viewModel = new \Zend\View\Model\ViewModel();
+        $viewModel->setTerminal(true);
+        return $viewModel;
+    }
+    
+    
+    /*
+     * Llamado desde cliente con la funcion nutrifami.training.downloadCapacitacion(mid, callback);
+     * 
+     */
+    public function getModuloAction() {
+        
+        $params = $this->params()->fromQuery();
+        if (isset($params['mid'])){
+            $mid = $params['mid'];
+        }else {
+            $mid = 0;
+        }
+        
+        $capacitacionObj = new Capacitacion();
+        $data = $capacitacionObj->getModulo($mid);
+        //Debug::dump($data);
+        /*
+        $data = Array(
+            'capacitaciones' => Array(
+                '3' => Array(
+                    'id'=> 3,
+                    'tipo'=> Array(
+                        'id'=> 1,
+                        'alias'=> 'general',
+                        'nombre'=> 'General',
+                        'descripcion'=> 'Capacitación para el publico en general'
+                    ),
+                    'titulo'=> 'Participantes PMA',
+                    'descripcion'=> 'Capacitacion inicial, para participantes del PMA',
+                    'fecha'=> '', 
+                    'activo'=> true, 
+                    'modulos'=> Array( 
+                        1=> 5
+                    ) 
+                )
+            )
+        );
+        */
+        echo json_encode($data);
+        
+        $viewModel = new \Zend\View\Model\ViewModel();
+        $viewModel->setTerminal(true);
+        return $viewModel;
+    }
+    
+    
 
 }
