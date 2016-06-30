@@ -1,24 +1,24 @@
 /*global angular*/
-angular.module('NutrifamiWeb').controller('EditarPerfilController', ['$scope', function ($scope) {
+angular.module('NutrifamiWeb').controller('EditarPerfilController', ['$scope','$location', 'PerfilService', '$rootScope' ,function ($scope,$location,PerfilService,$rootScope) {
         'use strict';
 
-        var usuarioA = JSON.parse(localStorage.getItem('usuarioActivo'));
-
-        if (usuarioA.genero === 'F') {
+        var usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+        if (usuarioActivo.genero === 'F') {
             $scope.genero = 'femenino';
         } else {
             $scope.genero = 'masculino';
         }
         $scope.usuario = {};
-        $scope.usuario.nombre = usuarioA.nombre;
-        $scope.usuario.apellido = usuarioA.apellido;
-        $scope.usuario.documento = usuarioA.login_documento;
+        $scope.usuario.nombre = usuarioActivo.nombre;
+        $scope.usuario.apellido = usuarioActivo.apellido;
+        $scope.usuario.documento = usuarioActivo.login_documento;
+        $scope.usuario.edad = usuarioActivo.edad;
         $scope.usuario.generos = {
             availableOptions: [
                 {id: 'F', name: 'Femenino'},
                 {id: 'M', name: 'Masculino'},
             ],
-            selectedOption: {id: usuarioA.genero, name: $scope.genero}
+            selectedOption: {id: usuarioActivo.genero, name: $scope.genero}
         };
         $scope.usuario.etnias = {
             availableOptions: [
@@ -28,18 +28,37 @@ angular.module('NutrifamiWeb').controller('EditarPerfilController', ['$scope', f
                 {id: 'OTROS', name: 'Otros'},
                 {id: 'NINGUNO', name: 'Ninguno'}
             ],
-            selectedOption: {id: usuarioA.etnia, name: usuarioA.etnia} //This sets the default value of the select in the ui
+            selectedOption: {id: usuarioActivo.etnia, name: usuarioActivo.etnia} //This sets the default value of the select in the ui
         };
 
         $scope.usuario.nacimiento = new Date(); //Verificar por el valor real de la base de datos.
-
-        /* Falta incluir en los valores de departamento y municipio de la base de datos*/
-
-        $scope.usuario.comunidad = usuarioA.comunidad;
+        $scope.usuario.departamento = usuarioActivo.departamento;
+        $scope.usuario.municipio = usuarioActivo.municipio;
+        $scope.usuario.comunidad = usuarioActivo.comunidad;
 
         $scope.update = function () {
-            console.log($scope.usuario);
-            console.log("Enviar a la API para actualizar la base de datos");
+            $scope.dataLoading = true;
+            usuarioActivo.nombre =  $scope.usuario.nombre;
+            usuarioActivo.apellido =  $scope.usuario.apellido;
+            usuarioActivo.edad =  $scope.usuario.edad;
+            usuarioActivo.birthdate =  $scope.usuario.birthdate;
+            usuarioActivo.genero =  $scope.usuario.generos.selectedOption.id;
+            usuarioActivo.etnia =  $scope.usuario.etnias.selectedOption.id;
+            usuarioActivo.departamento =  $scope.usuario.departamento;
+            usuarioActivo.municipio =  $scope.usuario.municipio;
+            usuarioActivo.comunidad =  $scope.usuario.comunidad;
+            usuarioActivo.edad = $scope.usuario.edad;
+            localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
+            PerfilService.editarUsuario(usuarioActivo,function(response){
+                
+                if(response.success){
+                    alert(response.message);
+                    $rootScope.message.text = "Los datos se han guardado con éxito";
+                    $location.path('/perfil');
+                }
+                $scope.dataLoading = false;
+            });
+            
         };
     }]).filter('capitalize', function () {
     'use strict';

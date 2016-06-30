@@ -14,7 +14,7 @@ angular.module('NutrifamiWeb', dependencies)
 
     $routeProvider.when('/login', {
             controller: 'LoginController',
-            templateUrl: 'modules/authentication/views/login.html',
+            templateUrl: 'views/login.tpl.html',
             hideMenus: true
         });
 

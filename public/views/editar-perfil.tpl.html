@@ -1,144 +1,139 @@
 <body>
-<div ng-controller="EditarPerfilController">
-    <header>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#/"><img src="../img/nutrifami_logo.png"></a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#/">Inicio <span class="sr-only">(current)</span></a></li>
-                        <li class="active"><a href="#/perfil">Más Información</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#/perfil">{{ usuario.nombre | capitalize:true }} {{ usuario.apellido | capitalize:true}}</a></li>
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
-        </nav>
-    </header>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel">
-                    <div class="panel-header">
-                        <img src="../img/ico-{{genero}}.png" alt="Genero Femenino">
-                        <h1>Mi información</h1>
+    <div ng-controller="EditarPerfilController">
+        <header>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#/"><img src="../img/nutrifami_logo.png"></a>
                     </div>
-                    <div class="panel-body">
-                        <form name="userForm" novalidate>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="nombre">Nombres</label>
-                                    <input type="text" class="form-control" placeholder="Ingresa tu nombre" ng-model="usuario.nombre" ng-model-options="{ updateOn: 'blur' }" requiered>
-                                    <span class="messages" ng-show="userForm.$submitted || userForm.nombre.$touched">
-                                        <span ng-show="userForm.nombre.$error.required">El campo es obligatorio.</span>
-                                    </span>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#/">Inicio <span class="sr-only">(current)</span></a></li>
+                            <li class="active"><a href="#/perfil">Más Información</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#/perfil">{{ usuario.nombre | capitalize:true }} {{ usuario.apellido | capitalize:true}}</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+        </header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <img src="../img/ico-{{genero}}.png" alt="Genero Femenino">
+                            <h1>Mi información</h1>
+                        </div>
+                        <div class="panel-body">
+                            <form name="userForm" novalidate>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombres</label>
+                                        <input type="text" class="form-control" placeholder="Ingresa tu nombre" ng-model="usuario.nombre" ng-model-options="{ updateOn: 'blur' }" requiered>
+                                        <span class="messages" ng-show="userForm.$submitted || userForm.nombre.$touched">
+                                            <span ng-show="userForm.nombre.$error.required">El campo es obligatorio.</span>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="apellido">Apellidos</label>
-                                    <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingresa tu apellido" ng-model="usuario.apellido" ng-model-options="{ updateOn: 'blur' }">
-                                    <span class="messages" ng-show="userForm.$submitted || userForm.apellido.$touched">
-                                        <span ng-show="userForm.apellido.$error.required">El campo es obligatorio.</span>
-                                    </span>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="apellido">Apellidos</label>
+                                        <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingresa tu apellido" ng-model="usuario.apellido" ng-model-options="{ updateOn: 'blur' }">
+                                        <span class="messages" ng-show="userForm.$submitted || userForm.apellido.$touched">
+                                            <span ng-show="userForm.apellido.$error.required">El campo es obligatorio.</span>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="documento">Docuemnto de Identidad</label>
-                                    <input type="text" class="form-control" id="documento" name="documento" ng-value="usuario.documento" disabled>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="documento">Documento de Identidad</label>
+                                        <input type="text" class="form-control" id="documento" name="documento" ng-value="usuario.documento" disabled>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="genero">Genero</label>
-                                    <select class="form-control" ng-options="option.name for option in usuario.generos.availableOptions track by option.id"
-                                            ng-model="usuario.generos.selectedOption">
-                                        <option disabled value> -- Elige una opción -- </option>
-                                    </select>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="genero">Genero</label>
+                                        <select class="form-control" ng-options="option.name for option in usuario.generos.availableOptions track by option.id"
+                                                ng-model="usuario.generos.selectedOption">
+                                            <option disabled value> -- Elige una opción -- </option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="etnia">Etnia</label>
-                                    <select class="form-control" ng-options="option.name for option in usuario.etnias.availableOptions track by option.id"
-                                            ng-model="usuario.etnias.selectedOption">
-                                        <option disabled value> -- Elige una opción -- </option>
-                                    </select>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="etnia">Etnia</label>
+                                        <select class="form-control" ng-options="option.name for option in usuario.etnias.availableOptions track by option.id"
+                                                ng-model="usuario.etnias.selectedOption">
+                                            <option disabled value> -- Elige una opción -- </option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="nacimiento">Fecha de Nacimiento</label>  
-                                    <input type="date" class="form-control" id="nacimiento" name="nacimiento" ng-model="usuario.nacimiento" ng-model-options="{ updateOn: 'blur' }" required>
-                                    <span class="messages" ng-show="userForm.$submitted || userForm.nacimiento.$touched">
-                                        <span ng-show="userForm.nacimiento.$error.required">La fecha de nacimiento es obligatoria</span>
-                                    </span>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nacimiento">Fecha de Nacimiento</label>  
+                                        <input type="date" class="form-control" id="nacimiento" name="nacimiento" ng-model="usuario.nacimiento" ng-model-options="{ updateOn: 'blur' }" required>
+                                        <span class="messages" ng-show="userForm.$submitted || userForm.nacimiento.$touched">
+                                            <span ng-show="userForm.nacimiento.$error.required">La fecha de nacimiento es obligatoria</span>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- <div class="col-md-6">
-                              <div class="form-group">
-                                  <label for="exampleInputEmail1">Departamento</label>
-                                  <select class="form-control">
-                                      <option disabled value> -- Elige una opción -- </option>
-                                      <option value="" selected>Cundinamarca</option>
-                                      <option value="">Antioquia</option>
-                                      <option value="">Cordoba</option>
-                                      <option value="">Bolivar</option>
-                                  </select>
-                              </div>
-                          </div>
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                  <label for="exampleInputPassword1">Municipio</label>
-                                  <select class="form-control">
-                                      <option disabled value> -- Elige una opción -- </option>
-                                      <option value="" selected>Bogotá</option>
-                                      <option value="">Medellín</option>
-                                      <option value="">Cali</option>
-                                      <option value="">Barranquilla</option>
-                                  </select>
-                              </div>
-                          </div>-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="comunidad">Comunidad</label>
-                                    <input type="text" class="form-control" id="comunidad" name="comunidad" placeholder="Escrba la comunidad a la que pertenece" ng-model="usuario.comunidad" ng-model-options="{ updateOn: 'blur' }" required>
-                                    <span class="messages" ng-show="userForm.$submitted || userForm.comunidad.$touched">
-                                        <span ng-show="userForm.comunidad.$error.required">La comunidad es obligatoria</span>
-                                    </span>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="departamento">Departamento</label>
+                                        <input type="text" class="form-control" id="departamento" name="departamento" ng-value="usuario.departamento" ng-model-options="{ updateOn: 'blur' }" required>
+                                        <span class="messages" ng-show="userForm.$submitted || userForm.departamento.$touched">
+                                            <span ng-show="userForm.departamento.$error.required">El departamento es obligatorio</span>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <input type="submit" class="btn btn-default center-block" ng-click="update()" value="Guardar Cambios" ng-disabled="userForm.$invalid" >
-                            </div>
-                        </form>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="municipio">Muncipio</label>
+                                        <input type="text" class="form-control" id="municipio" name="municipio" ng-value="usuario.municipio" ng-model-options="{ updateOn: 'blur' }" required>
+                                        <span class="messages" ng-show="userForm.$submitted || userForm.municipio.$touched">
+                                            <span ng-show="userForm.municipio.$error.required">El municipio es obligatorio</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="comunidad">Comunidad</label>
+                                        <input type="text" class="form-control" id="comunidad" name="comunidad" placeholder="Escrba la comunidad a la que pertenece" ng-model="usuario.comunidad" ng-model-options="{ updateOn: 'blur' }" required>
+                                        <span class="messages" ng-show="userForm.$submitted || userForm.comunidad.$touched">
+                                            <span ng-show="userForm.comunidad.$error.required">La comunidad es obligatoria</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="submit" class="btn btn-default center-block" ng-click="update()" value="Guardar Cambios" ng-disabled="userForm.$invalid || dataLoading" >
+                                    <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                </div>
+                            </form>
                         
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <footer>
-            <div class="row text-center">
-                <div class="col-md-12">
-                    <img src="../img/wfp_blue.png" alt="Programa Mundial de Alimentos">
+            <footer>
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        <img src="../img/wfp_blue.png" alt="Programa Mundial de Alimentos">
+                    </div>
                 </div>
-            </div>
-        </footer>
-    </div>
+            </footer>
+        </div>
 
-</div>
+    </div>
 </body>

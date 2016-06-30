@@ -40,8 +40,8 @@ class Personas
          */
         return $this->personaTable->getPersona($cedula, $codigo);
     }
-   
     
+   
 }
 
 ?>

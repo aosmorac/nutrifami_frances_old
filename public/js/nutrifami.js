@@ -149,9 +149,6 @@ var nutrifami = {
                     familiaObj.personas.otros[1].comunidad = '';
                     familiaObj.personas.otros[1].avatar = '';
                     familiaObj.personas.otros[1].parentezco = 'hijo';
-
-
-
                     this.isloginFlag = true;
                     callback(true, usuarioActivo.token);
 
@@ -173,27 +170,37 @@ var nutrifami = {
      * nutrifami.editarUsuarioActivo(data, callback);
      * @param {type} data
      * @param {type} callback
-     * @returns {undefined}
      */
     editarUsuarioActivo: function(data, callback) {
-        /*
-         * data.nombres = 'Abel Oswaldo';
-         * data.apellidos = 'Moreno Acevedo';
-         * data.documeto = '999999';
-         * data.genero = 'Masculino';
-         * data.etnia = 'Mestizo';
-         * data.edad = '31';
-         * data.nacimiento = '10/12/1984';
-         * data.departamento = 'Bogotá';
-         * data.municipio = 'Bogotá';
-         * data.comunidad = '';
-         * data.avatar = '';
-         * data.sesionId = 'xxxxx';
-         * data.token = 'xxxxxx';
-         */
-        nutrifami.usuarioActivoServerInfo = usuarioActivo;
-        usuarioActivo = data;
-        callback = callback || function() {};
+        callback = callback || function () {};
+        //  app/api/editar-usuario?t='token'
+        var serv = base_url + "app/api/editar-usuario";
+        response = {
+            success:false,
+            message:''
+        };
+        $.ajax({
+            url: serv,
+            type: 'GET',
+            async: false,
+            data: data,
+            success: function (data) {
+                var objServ = JSON.parse(data);
+                if (objServ.response === 1) {
+                    response.success = true;
+                    response.message = 'El usuario se ha actualizado con éxito';
+                } else {
+                    response.success = false;
+                    response.message = 'Los datos son errados';
+                }
+            },
+            error: function () {
+                 response.success = true;
+                 response.message = 'Ha ocurrido un error durante la ejecución';
+            }
+        });
+        
+        callback(response);
     },
 
     /*
