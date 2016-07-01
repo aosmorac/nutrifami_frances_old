@@ -104,13 +104,13 @@ var nutrifami = {
                     usuarioActivo.movil = objServ.movil;
                     usuarioActivo.email = objServ.email;
                     usuarioActivo.avatar = objServ.avatar;
-                    usuarioActivo.rango_0a2 = objServ.rango_0a2;
-                    usuarioActivo.rango_2a5 = objServ.rango_2a5;
-                    usuarioActivo.rango_6a17 = objServ.rango_6a17;
-                    usuarioActivo.rango_18a60 = objServ.rango_18a60;
-                    usuarioActivo.rango_60mas = objServ.rango_60mas;
-
-                    console.log(usuarioActivo);
+                    usuarioActivo.rango_0a2 = parseInt(objServ.rango_0a2) || 0;
+                    usuarioActivo.rango_2a5 = parseInt(objServ.rango_2a5) || 0;
+                    usuarioActivo.rango_6a17 = parseInt(objServ.rango_6a17) || 0;
+                    usuarioActivo.rango_18a60 = parseInt(objServ.rango_18a60) || 0;
+                    usuarioActivo.rango_60mas = parseInt(objServ.rango_60mas) || 0;
+                    
+                    localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
 
                     familiaObj.codigo = '123456';
                     familiaObj.personas = Array();
@@ -337,9 +337,8 @@ var nutrifami = {
                         objServ.completo = false;
                         if (typeof nutrifami.training.cap_modulos[objServ.id] === 'undefined' || nutrifami.training.cap_modulos[objServ.id] === null) {
                             nutrifami.training.cap_modulos[objServ.id] = objServ;
-                            nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_modulos[objServ.id].imagen, 'content', function(){
+                            nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_modulos[objServ.id].imagen, 'content', 'completo', function(){
                                callback();
-                                alert('ok');
                             });
                             /* Cargar imgagen desde s3*/
                         }else {
@@ -358,28 +357,48 @@ var nutrifami = {
             callback = callback || function() {};
             
             /* Ajax */
-                var leccionObj = {
-                    id: 16,
-                    titulo: 'Alimentación saludable',
-                    descripcion: 'Alimentación saludable',
-                    imagen: {
-                        nombre: '201651175223151.jpg',
-                        content: Object, /* Cargar con otra funcion */ 
-                        loaded: false
-                    },
-                    fecha: '', 
-                    activo: true, 
-                    unidades: {  /* Cargar de cap_leccion_elemento */
-                        0100: 1,
-                        0200: 2,
-                        0300: 3,
-                        0301: 6, /* Es explicacion de la anterior*/
-                        0400: 4,
-                        0500: 5
-                    }, 
-                    completo: false
-                } ;
-                this.cap_lecciones[16] = leccionObj; /* Informacion del modulo */
+            var serv = base_url + "app/api/get-leccion?lid="+lid;
+            $.ajax({
+                url: serv,
+                async: false,
+                success: function(data) {
+                    var objServ = JSON.parse(data);
+                    /*var leccionObj = {
+                        id: 16,
+                        titulo: 'Alimentación saludable',
+                        descripcion: 'Alimentación saludable',
+                        imagen: {
+                            nombre: '201651175223151.jpg',
+                            content: Object, 
+                            loaded: false
+                        },
+                        fecha: '', 
+                        activo: true, 
+                        unidades: {  
+                            0100: 1,
+                            0200: 2,
+                            0300: 3,
+                            0301: 6,
+                            0400: 4,
+                            0500: 5
+                        }, 
+                        completo: false
+                    } ;
+                    this.cap_lecciones[16] = leccionObj; 
+                     */
+                        objServ.completo = false;
+                        if (typeof nutrifami.training.cap_lecciones[objServ.id] === 'undefined' || nutrifami.training.cap_lecciones[objServ.id] === null) {
+                            nutrifami.training.cap_lecciones[objServ.id] = objServ;
+                            nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_lecciones[objServ.id].imagen, 'content', 'completo', function(){
+                                callback();
+                                alert('ok');
+                            });
+                            /* Cargar imgagen desde s3*/
+                        }else {
+                            nutrifami.training.cap_modulos[objServ.id] = nutrifami.training.cap_capacitaciones[objServ.id];
+                        }
+                }
+            });
             /* Fin Ajax */
         }, 
         
@@ -391,6 +410,40 @@ var nutrifami = {
             callback = callback || function() {};
             
             /* Ajax */
+            var serv = base_url + "app/api/get-unidadinformacion?uid="+uid;
+            $.ajax({
+                url: serv,
+                async: false,
+                success: function(data) {
+                    var objServ = JSON.parse(data);
+                        objServ.completo = false;
+                        if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id] === 'undefined' || nutrifami.training.cap_unidadesinformacion[objServ.id] === null) {
+                            nutrifami.training.cap_unidadesinformacion[objServ.id] = objServ;
+                            if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].imagen !== 'undefined') {
+                                nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].imagen, 'content', 'completo', function(){
+                                    alert('imagen');
+                                    callback();
+                                });
+                            }
+                            if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].audio !== 'undefined') {
+                                nutrifami_aws.s3.downloadFile(objServ.audio.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].audio, 'content', 'completo', function(){
+                                    alert('audio');
+                                });
+                            }
+                            if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].media !== 'undefined') {
+                                nutrifami_aws.s3.downloadFile(objServ.media.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].media, 'content', 'completo', function(){
+                                    alert('media');
+                                });
+                            }
+                            /* Cargar imgagen desde s3*/
+                        }else {
+                            nutrifami.training.cap_modulos[objServ.id] = nutrifami.training.cap_capacitaciones[objServ.id];
+                        }
+                }
+            });
+            /* Fin Ajax */
+            
+            /* Ajax */
                 var unidadObj = {
                     id: 3,
                     tipo: {
@@ -400,6 +453,7 @@ var nutrifami = {
                         descripcion: 'Seleccionar una opcion, entre 6, de acuerdo a la pregunta y a la imagen que se muestra.'
                     },
                     titulo: 'Lorem ipsum dolor sit amet',
+                    instruccion: 'Lorem ipsum dolor sit amet',
                     audio: {
                         nombre: '194813__unfa__hello-nerds-inspired-by-animaniacs-hello-nurse-6-takes.flac',
                         content: Object, /* Cargar con otra funcion */ 
@@ -531,7 +585,6 @@ var nutrifami = {
                     }, 
                     completo: false
                 } ;
-                this.cap_unidadesinformacion[3] = unidadObj; /* Informacion del modulo */
             /* Fin Ajax */
         } 
         

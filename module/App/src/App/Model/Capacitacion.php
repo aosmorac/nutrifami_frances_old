@@ -15,7 +15,11 @@ use App\Model\Tables\CapCapacitacionTipoTable;
 use App\Model\Tables\CapCapacitacionElementoTable;
 use App\Model\Tables\CapModuloTable;
 use App\Model\Tables\CapModuloElementoTable;
-use Doctrine\Common\Util\Debug;
+use App\Model\Tables\CapLeccionTable;
+use App\Model\Tables\CapLeccionElementoTable;
+use App\Model\Tables\CapUnidadinformacionTable;
+use App\Model\Tables\CapUnidadinformacionTipoTable;
+
     /**********************************************************
     * MODELO Module
     * =======================================================
@@ -87,6 +91,59 @@ class Capacitacion
            foreach ( $elementos AS $elemento ){ 
                 $data['lecciones'][$elemento['order']] = $elemento['id'];
            }
+        }
+        return $data;
+    }
+    
+    
+    public function getLeccion ($lid = 0) {
+        $leccionTable = new CapLeccionTable();
+        $leccion = $leccionTable->getLeccion($lid);
+        $data = Array();
+        if ( isset($leccion) && isset($leccion['lec_id']) ){
+            $data['id'] = $leccion['lec_id']; 
+            $data['titulo'] = $leccion['lec_titulo']; 
+            $data['descripcion'] = $leccion['lec_descripcion']; 
+            $data['imagen'] = Array('nombre' => $leccion['lec_imagen'], 'loaded'=>false);
+            $data['fecha'] = $leccion['lec_fecha']; 
+            $data['activo'] = $leccion['lec_activo']; 
+            $elementosObj = new CapLeccionElementoTable();
+            $elementos = $elementosObj->getIdListByLeccion($leccion['lec_id']);
+            foreach ( $elementos AS $elemento ) {
+                $orderU = substr('0'.$elemento['order'], -2).substr('0'.$elemento['father'], -2);
+                $data['lecciones'][$orderU] = $elemento['id'];
+            }
+        }
+        return $data;
+    }
+    
+    
+    
+    public function getUnidad ($uid = 0) {
+        $unidadTable = new CapUnidadinformacionTable();
+        $unidad = $unidadTable->getUnidadinformacion($uid);
+        $data = Array();
+        if ( isset($unidad) && isset($unidad['uni_inf_id']) ){
+            $data['id'] = $unidad['uni_inf_id'];
+            $tipoObj = new CapUnidadinformacionTipoTable();
+            $tipoU = $tipoObj->getTipo($unidad['uni_inf_tip_id']);
+            $data['tipo'] = Array('id'=>$tipoU['uni_inf_tip_id'], 'nombre'=>$tipoU['uni_inf_tip_nombre'], 'alias'=>$tipoU['uni_inf_tip_alias'], 'descripcion'=>$tipoU['uni_inf_tip_descripcion']); /* Obtenerlo de tipo */ 
+            $data['titulo'] =$unidad['uni_inf_titulo'];
+            $data['instruccion'] = $unidad['uni_inf_instruccion'];
+            $data['texto'] = $unidad['uni_inf_texto'];
+            if ( isset($unidad['uni_inf_imagen']) || $unidad['uni_inf_imagen'] != null ){
+                $data['imagen'] = Array('nombre' => $unidad['uni_inf_imagen'], 'loaded'=>false);
+            }
+            if ( isset($unidad['uni_inf_audio']) || $unidad['uni_inf_audio'] != null ){
+                $data['audio'] = Array('nombre' => $unidad['uni_inf_audio'], 'loaded'=>false);
+            }
+            if ( isset($unidad['uni_inf_media']) || $unidad['uni_inf_media'] != null ){
+                $data['media'] = Array('nombre' => $unidad['uni_inf_media'], 'loaded'=>false);
+            }
+            $data['fecha'] = $unidad['uni_inf_fecha'];
+            $data['activo'] = $unidad['uni_inf_activo'];
+            $data['padre'] = $unidad['uni_inf_from'];
+            $data['opciones'] = Array(); /* OPciones tabla */ 
         }
         return $data;
     }

@@ -96,13 +96,15 @@ nutrifami_aws = {
          * @param {type} callback
          * @returns {undefined}
          */
-        downloadFile: function(file, vGlobal, indexGlobal, callback){
+        downloadFile: function(file, vGlobal, indexGlobal, flagGlobal, callback){
             callback = callback || function(){};
             var params = {Key: file, Bucket:AWS_credentials.defaultBucket};
             nutrifamiS3.getObject(params, function (err, data) {
                 msj = 'error_2'; /* Excepcion en la carga a AWS */
                 if ( err == null ){
                     vGlobal[indexGlobal] = encode(data.Body);
+                    vGlobal[flagGlobal] = true;
+                    vGlobal.ContentType = data.ContentType;
                     callback();
                 }else {
                     alert(err);  

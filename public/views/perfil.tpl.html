@@ -19,7 +19,7 @@
                         <li class="active"><a href="#/perfil">Más Información</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#/perfil">Camila Pereira</a></li>
+                        <li><a href="#/perfil">{{ nombre | capitalize }} {{ apellido | capitalize}}</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -35,7 +35,7 @@
                         <a class="btn btn-default" href="#/editar-perfil" role="button">Editar Info<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                     </div>
                     <div class="panel-header">
-                        <img src="../img/ico-femenino.png">
+                        <img src="../img/ico-{{genero}}.png">
                         <h1>Mi información</h1>
                     </div>
                     <div class="panel-body">
@@ -43,55 +43,55 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nombres</label>
-                                    <p>Camilia Patricia</p>
+                                    <p class="{{ nombre | estilo }}">{{ nombre | capitalize:true | esVacio }}</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Apellidos</label>
-                                    <p>Zarate Pereira</p>
+                                    <p class="{{ apellido | estilo }}">{{ apellido | capitalize:true | esVacio }}</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Docuemnto de Identidad</label>
-                                    <p>56.890.005</p>
+                                    <p class="{{ apellido | estilo }}">{{ documento }}</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Genero</label>
-                                    <p>Femenino</p>
+                                    <p class="{{ apellido | estilo }}">{{ genero | capitalize:true | esVacio}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Etnia</label>
-                                    <p class="sin-registro">Sin Etnia</p>
+                                    <p class="{{ etnia | estilo }}">{{ etnia | capitalize:true | esVacio}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Fecha de Nacimiento</label>
-                                    <p class="sin-registro">10 - Junio - 1986/p>
+                                    <p class="{{ nacimiento | estilo }}">{{ nacimiento | capitalize:true | esVacio }}</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Departamento</label>
-                                    <p class="sin-registro">Sin Departamento</p>
+                                    <p class="{{ departamento | estilo }}">{{ departamento | capitalize:true | esVacio }}</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Municipio</label>
-                                    <p class="sin-registro">Sin Municipio</p>
+                                    <p class="{{ municipio | estilo }}">{{ municipio | capitalize:true | esVacio }}</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Comunidad</label>
-                                    <p class="sin-registro">Sin Comunidad</p>
+                                    <p class="{{ comunidad | estilo }}">{{ comunidad | capitalize:true | esVacio }}</p>
                                 </div>
                             </div>
                         </form>
@@ -108,7 +108,7 @@
                     <div class="panel-header">
                         <img src="../img/ico-familia.png">
                         <h1>Mi familia</h1>
-                        <h3>5 miembros</h3>
+                        <h3>{{ miembrosFamilia }}</h3>
                     </div>
                     <div class="panel-body">
                         <div class="col-md-12">
@@ -121,19 +121,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
+                                    <tr ng-if="rango_0a2 !== 0">
+                                        <td>{{ rango_0a2 }}</td>
                                         <td>0 a 2 años</td>
                                         <td><a href="#">Editar</a></td>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
+                                    <tr ng-if="rango_2a5 !== 0">
+                                        <td>{{ rango_2a5 }}</td>
+                                        <td>2 a 5 años</td>
+                                        <td><a href="#">Editar</a></td>
+                                    </tr>
+                                    <tr ng-if="rango_6a17 !== 0">
+                                        <td>{{ rango_6a17 }}</td>
                                         <td>6 a 17 años</td>
                                         <td><a href="#">Editar</a></td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
+                                    <tr ng-if="rango_18a60 !== 0">
+                                        <td>{{ rango_18a60 }}</td>
                                         <td>18 a 60 años</td>
+                                        <td><a href="#">Editar</a></td>
+                                    </tr>
+                                    <tr ng-if="rango_60mas !== 0">
+                                        <td>{{ rango_60mas }}</td>
+                                        <td>60 o más años</td>
                                         <td><a href="#">Editar</a></td>
                                     </tr>
                                     <tr>

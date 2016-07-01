@@ -134,28 +134,56 @@ class ApiController extends AbstractActionController {
         $capacitacionObj = new Capacitacion();
         $data = $capacitacionObj->getModulo($mid);
         //Debug::dump($data);
-        /*
-        $data = Array(
-            'capacitaciones' => Array(
-                '3' => Array(
-                    'id'=> 3,
-                    'tipo'=> Array(
-                        'id'=> 1,
-                        'alias'=> 'general',
-                        'nombre'=> 'General',
-                        'descripcion'=> 'Capacitación para el publico en general'
-                    ),
-                    'titulo'=> 'Participantes PMA',
-                    'descripcion'=> 'Capacitacion inicial, para participantes del PMA',
-                    'fecha'=> '', 
-                    'activo'=> true, 
-                    'modulos'=> Array( 
-                        1=> 5
-                    ) 
-                )
-            )
-        );
-        */
+        
+        echo json_encode($data);
+        
+        $viewModel = new \Zend\View\Model\ViewModel();
+        $viewModel->setTerminal(true);
+        return $viewModel;
+    }
+    
+    
+    /*
+     * Llamado desde cliente con la funcion nutrifami.training.downloadLeccion(lid, callback);
+     * 
+     */
+    public function getLeccionAction() {
+        
+        $params = $this->params()->fromQuery();
+        if (isset($params['lid'])){
+            $lid = $params['lid'];
+        }else {
+            $lid = 0;
+        }
+        
+        $capacitacionObj = new Capacitacion();
+        $data = $capacitacionObj->getLeccion($lid);
+        //Debug::dump($data);
+        
+        echo json_encode($data);
+        
+        $viewModel = new \Zend\View\Model\ViewModel();
+        $viewModel->setTerminal(true);
+        return $viewModel;
+    }
+    
+    /*
+     * Llamado desde cliente con la funcion nutrifami.training.downloadUnidad(uid, callback);
+     * 
+     */
+    public function getUnidadinformacionAction() {
+        
+        $params = $this->params()->fromQuery();
+        if (isset($params['uid'])){
+            $uid = $params['uid'];
+        }else {
+            $uid = 0;
+        }
+        
+        $capacitacionObj = new Capacitacion();
+        $data = $capacitacionObj->getUnidad($uid);
+        //Debug::dump($data);
+        
         echo json_encode($data);
         
         $viewModel = new \Zend\View\Model\ViewModel();
