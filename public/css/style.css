@@ -19,6 +19,10 @@ body {
     font-family: 'Muli', sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Muli', sans-serif;
+}
+
 #ncontent {
     max-width: 1280px;
     margin: 0 auto;
@@ -192,6 +196,7 @@ header .navbar-right {
     padding-right: 35px;
 }
 
+/*  PANELES GENERALES */
 .panel {
     margin-top: 73px;
     border: solid 1px #dcdcdc;
@@ -243,6 +248,207 @@ header .navbar-right {
     font-weight: normal;
     margin-top: 9px;
 }
+
+/* END PANELES GENERALES */
+
+/* MODULOS */
+
+.modulos .panel .panel-header {
+    margin-top: 50px ;
+    color: #3dc0fd;
+}
+
+.modulos .panel-body  {
+    margin-top: 75px;
+
+}
+
+.modulos .panel-body .modulo  {
+    margin: 0 28px 50px 28px;
+    background-color: #0dcd71;
+    border-radius: 10px;
+    padding-bottom: 8px;
+
+}
+
+.modulos .panel-body .modulo > img,
+.modulos .panel-body .modulo a > img {
+    height: auto;
+    max-width: 100%;
+    border-radius: 10px 10px 0 0 ;
+}
+
+.modulos .panel-body a.modulo-link{
+    text-decoration: none;
+}
+
+.modulos .panel-body .modulo h3,
+.modulos .panel-body .modulo h4{
+    color: #ffffff;
+    text-align: center;
+    font-size: 15pt;
+    margin-top: 32px;
+    margin-bottom: 36px;
+}
+
+.modulos .panel-body .modulo h4 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.modulos .panel-body .modulo .progress,
+.panel-header .modulo-avance .progress{
+    height: 11px;
+    margin-bottom: 0px; 
+    border-radius: 4px;
+    width: auto;
+    margin: 0 8px 0 8px;
+    background-color: #ffffff;
+    background-image: none;
+}
+.panel-header .modulo-avance .progress{
+    background-color: #f2f1f1;
+}
+
+.modulos .panel-body .modulo .progress .progress-bar,
+.panel-header .modulo-avance .progress .progress-bar{
+    background-color: #feea45;
+    background-image: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+
+
+.modulos .panel-body .modulo-no-disponible{
+    -webkit-filter: grayscale(100%) opacity(40%); /* Chrome, Safari, Opera */
+    filter: grayscale(100%) opacity(40%);
+}
+.modulos .panel-body .modulo-no-disponible h3,
+.modulos .panel-body .modulo-no-disponible h4{
+    color: #000000;
+}
+
+/* END MODULOS */
+
+/* LECCIONES */
+
+.lecciones .panel .panel-header .modulo-descripcion{
+    padding: 0 45px;
+}
+
+.lecciones .panel .panel-header .modulo-avance{
+    margin-top: 45px;
+    padding: 0 45px;
+}
+
+.lecciones .panel-header h1{
+    font-size: 19pt;
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.lecciones .panel-header h3{
+    font-family: 'Raleway', sans-serif;
+    font-size: 12pt;
+    margin-bottom: 25px;
+    color: #ababab;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.lecciones .panel-header p{
+    color: #959b9e;
+    font-size: 11pt;
+    text-align: left;
+}
+
+
+.lecciones .panel-body a.leccion-link{
+    text-decoration: none;
+}
+
+.lecciones .panel-body .leccion  {
+    margin: 0 28px 50px 28px;
+    background-color:  #f5f5f5;
+    border-radius: 10px;
+    padding-top: 28px;
+    height: 295px;
+    border: solid 1px #dcdcdc;
+}
+
+
+
+.lecciones .panel-body .leccion h3 {
+    font-family: 'Raleway', sans-serif;
+    color: #818181;
+    text-align: center;
+    font-size: 11pt;
+    text-transform: uppercase;
+}
+
+.lecciones .panel-body .leccion h4 {
+    margin-top: 52px;
+    color: #2f3e47;
+    text-align: center;
+    font-size: 15pt;
+}
+
+.lecciones .panel-body .leccion .boton{
+    width: 100%;
+    position: absolute;
+    bottom: 35px;
+    left: 0px;
+    
+}
+
+.lecciones .panel-body .leccion .btn-default{
+    font-family: 'Raleway', sans-serif;
+    background-color: #09df78;
+    width: 250px;
+    letter-spacing: 5px;
+}
+
+
+
+.lecciones .panel-body .leccion-terminada  {
+    background-color: #fdbb3d;
+    border: none;
+}
+
+.lecciones .panel-body .leccion-terminada h3 {
+    color: #ae7b1a;
+    font-weight: bold;
+}
+
+.lecciones .panel-body .leccion-terminada .leccion-ok {
+    color: #ffffff;
+    background-color: #09df78;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: -15px;
+    right: 25px;
+    border-radius: 25px;
+    border: solid 3px #ffffff;
+    font-size: 17pt;
+    text-align: center;
+    padding-top: 7px;
+    font-weight: normal;
+}
+.lecciones .panel-body .leccion-terminada h4 {
+    color: #ffffff;
+}
+
+.lecciones .panel-body .leccion-terminada .btn-default{
+    background-color: #ffffff;
+    color: #fdbb3d;
+}
+
+/* END LECCIONES */
+
+/* PERFIL Y EDITAR PERFIL */
 
 .panel-body .form-group {
     margin-bottom: 20px;
@@ -327,6 +533,8 @@ header .navbar-right {
     color: #fc4cab;
     text-decoration: underline;
 }
+
+/* END PERFIL Y EDITAR PERFIL */
 
 footer {
     margin-top: 7px;
