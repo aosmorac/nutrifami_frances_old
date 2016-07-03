@@ -400,7 +400,7 @@ header .navbar-right {
     position: absolute;
     bottom: 35px;
     left: 0px;
-    
+
 }
 
 .lecciones .panel-body .leccion .btn-default{
@@ -447,6 +447,175 @@ header .navbar-right {
 }
 
 /* END LECCIONES */
+
+/* UNIDADES */
+
+.unidad .panel-header .unidad-sonido {
+    color: #ffffff;
+    background-color: #09df78;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: -25px;
+    right: 35px;
+    border-radius: 32px;
+    font-size: 27pt;
+    text-align: center;
+    padding-top: 12px;
+    font-weight: normal;
+}
+
+.unidad .panel-header .leccion-avance .progress{
+    height: 26px;
+    margin-bottom: 0px; 
+    border-radius: 11px;
+    width: auto;
+    margin: 0 30px 0 30px;
+    background-color: #f2f1f1;
+    background-image: none;
+    box-shadow: none;
+
+}
+.unidad .panel-header .modulo-avance .progress{
+    background-color: #f2f1f1;
+}
+
+.unidad .panel-header .leccion-avance .leccion-ok {
+    color: #ffffff;
+    background-color: #f2f1f1;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: -12px;
+    right: 5px;
+    border-radius: 25px;
+    border: solid 3px #ffffff;
+    font-size: 17pt;
+    text-align: center;
+    padding-top: 7px;
+    font-weight: normal;
+}
+.unidad .panel-header .leccion-avance .progress .progress-bar{
+    background-color: #feea45;
+    background-image: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.unidad .panel-header .unidad-descripcion h2{
+    font-size: 20pt;
+    margin-top: 77px;
+}
+
+.unidad .panel-header .unidad-descripcion h3{
+    font-size: 30pt;
+    margin-top: 40px;
+    color: #2f3e47;
+}
+
+.unidad .panel-body a.unidad-link{
+    text-decoration: none;
+}
+
+.unidad .panel-body .opcion  {
+    margin: 0 28px 50px 28px;
+    background-color:  #ffffff;
+    border-radius: 10px;
+    height: 295px;
+    border: solid 1px #dcdcdc;
+}
+
+.unidad .panel-body .opcion p {
+    margin: 63px auto 0 auto;
+    color: #2f3e47;
+    text-align: center;
+    font-size: 14pt;
+    width: 75%;
+}
+
+.unidad .panel-body .opcion .boton{
+    width: 100%;
+    position: absolute;
+    bottom: 35px;
+    left: 0px;
+}
+
+.unidad .panel-body .opcion .btn-default{
+    font-family: 'Raleway', sans-serif;
+    background-color: #ffffff;
+    color: #09df78;
+    width: 250px;
+    letter-spacing: 5px;
+    padding-left: 49px;
+    border: 1px solid #dcdcdc;
+    box-shadow: none;
+}
+
+.unidad .panel-body .selected,
+.unidad .panel-body .selected .btn-default{
+    border: solid 3px #09df78;
+}
+
+.unidad .panel-body .selected p {
+    color: #09df78;
+}
+
+.unidad .panel-body .evaluated,
+.unidad .panel-body .evaluated .btn-default{
+    border: solid 3px #09df78;
+    background-color: #09df78;
+}
+
+.unidad .panel-body .evaluated p {
+    color: #ffffff;
+}
+
+.unidad .panel-body .calificacion .glyphicon {
+    color: #ffffff;
+    width: 84px;
+    height: 84px;
+    border-radius: 42px;
+    font-size: 30pt;
+    text-align: center;
+    padding-top: 22px;
+    font-weight: normal;
+    position: relative;
+    top: -18px;
+}
+
+.unidad .panel-body .calificacion .bien {
+    background-color: #09df78;
+
+}
+.unidad .panel-body .calificacion .mal {
+    background-color: #ff1244;
+}
+
+.unidad .panel-body .calificacion .mensaje{
+    color: #2f3e47;
+    font-size: 20pt;
+}
+
+.unidad .panel-body .calificacion .feedback{
+    color: #2f3e47;
+    font-size: 13pt;
+}
+
+.unidad .panel-body .calificacion .calificar .btn-default,
+.unidad .panel-body .calificacion .continuar .btn-default{
+    background-color: #d0d0d0;
+    margin: 0px 28px 0 28px;
+    letter-spacing: 5px;
+}
+
+.unidad .panel-body .calificacion .continuar .btn-default{
+    background-color: #09df78;
+}
+
+.unidad .panel-body .calificacion .continuar .intentar-nuevo{
+    font-size: 10pt;
+    letter-spacing: 3px;
+}
+/* END UNIDADES */
 
 /* PERFIL Y EDITAR PERFIL */
 
