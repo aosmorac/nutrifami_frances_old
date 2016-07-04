@@ -337,12 +337,12 @@ var nutrifami = {
                         objServ.completo = false;
                         if (typeof nutrifami.training.cap_modulos[objServ.id] === 'undefined' || nutrifami.training.cap_modulos[objServ.id] === null) {
                             nutrifami.training.cap_modulos[objServ.id] = objServ;
-                            nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_modulos[objServ.id].imagen, 'content', 'completo', function(){
-                               callback();
-                            });
-                            /* Cargar imgagen desde s3*/
+                            if (typeof nutrifami.training.cap_modulos[objServ.id].imagen !== 'undefined') {/* Cargar imgagen desde s3*/
+                                nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_modulos[objServ.id].imagen, 'content', 'loaded');
+                            }
+                            callback();
                         }else {
-                            nutrifami.training.cap_modulos[objServ.id] = nutrifami.training.cap_capacitaciones[objServ.id];
+                            callback();
                         }
                 }
             });
@@ -389,13 +389,13 @@ var nutrifami = {
                         objServ.completo = false;
                         if (typeof nutrifami.training.cap_lecciones[objServ.id] === 'undefined' || nutrifami.training.cap_lecciones[objServ.id] === null) {
                             nutrifami.training.cap_lecciones[objServ.id] = objServ;
-                            nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_lecciones[objServ.id].imagen, 'content', 'completo', function(){
-                                callback();
-                                alert('ok');
-                            });
+                            if (typeof nutrifami.training.cap_lecciones[objServ.id].imagen !== 'undefined') {/* Cargar imgagen desde s3*/
+                                nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_lecciones[objServ.id].imagen, 'content', 'loaded');
+                            }
+                            callback();
                             /* Cargar imgagen desde s3*/
                         }else {
-                            nutrifami.training.cap_modulos[objServ.id] = nutrifami.training.cap_capacitaciones[objServ.id];
+                            callback();
                         }
                 }
             });
@@ -473,29 +473,66 @@ var nutrifami = {
                         if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id] === 'undefined' || nutrifami.training.cap_unidadesinformacion[objServ.id] === null) {
                             nutrifami.training.cap_unidadesinformacion[objServ.id] = objServ;
                             if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].imagen !== 'undefined') {
-                                nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].imagen, 'content', 'completo', function(){
-                                    alert('imagen');
-                                });
+                                nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].imagen, 'content', 'loaded');
                             }
                             if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].audio !== 'undefined') {
-                                nutrifami_aws.s3.downloadFile(objServ.audio.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].audio, 'content', 'completo', function(){
-                                    alert('audio');
-                                    callback();
-                                });
+                                nutrifami_aws.s3.downloadFile(objServ.audio.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].audio, 'content', 'loaded');
                             }
                             if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].media !== 'undefined') {
-                                nutrifami_aws.s3.downloadFile(objServ.media.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].media, 'content', 'completo', function(){
-                                    alert('media');
-                                });
+                                nutrifami_aws.s3.downloadFile(objServ.media.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].media, 'content', 'loaded');
                             }
-                            /* Cargar imgagen desd e s3*/
+                            $.each(nutrifami.training.cap_unidadesinformacion[objServ.id].opciones, function(indexopc, opcionun) {
+                                if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].opciones[opcionun.id].audio !== 'undefined') {
+                                nutrifami_aws.s3.downloadFile(opcionun.audio.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].opciones[opcionun.id].audio, 'content', 'loaded');
+                                }
+                                if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].opciones[opcionun.id].media !== 'undefined') {
+                                nutrifami_aws.s3.downloadFile(opcionun.media.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].opciones[opcionun.id].media, 'content', 'loaded');
+                                }
+                            }); 
+                            callback();
                         }else {
-                            nutrifami.training.cap_modulos[objServ.id] = nutrifami.training.cap_capacitaciones[objServ.id];
+                            callback();
                         }
                 }
             });
             /* Fin Ajax */
-        } 
+        },
+        
+        /*
+         * nutrifami.training.setCapacitacion(callback);
+         */
+        loadCapacitacion: function(callback){
+            callback = callback || function() {};
+            nutrifami.training.downloadCapacitacion(0, function(){
+                $.each(nutrifami.training.cap_capacitaciones, function(indexcap, capacitaciones) {
+                    $.each(capacitaciones.modulos, function(indexmod, id_modulo) {
+                        nutrifami.training.downloadModulo(id_modulo, function(){
+                            callback();
+                        });
+                    }); 
+                }); 
+            });
+        },
+        
+        /*
+         * nutrifami.training.loadModulo(mid, callback);
+         */
+        loadModulo: function(mid, callback) {
+            mid = mid || 0;
+            callback = callback || function() {};   
+            $.each(nutrifami.training.cap_modulos[mid].lecciones, function(indexlec, id_leccion) {
+                nutrifami.training.downloadLeccion(id_leccion, function(){
+                    if (nutrifami.training.cap_lecciones[id_leccion].unidades) {
+                        $.each(nutrifami.training.cap_lecciones[id_leccion].unidades, function(indexuni, id_unidad) {
+                            nutrifami.training.downloadUnidad(id_unidad, function(){
+                                console.log('Carga unidad '+id_unidad);
+                            });
+                        }); 
+                    }
+                });
+            }); 
+            callback();
+        }
         
         
         

@@ -85,7 +85,7 @@ class Capacitacion
            $data['id'] = $modulo['mod_id']; 
            $data['titulo'] = $modulo['mod_titulo']; 
            $data['descripcion'] = $modulo['mod_descripcion']; 
-           $data['imagen'] = Array('nombre' => $modulo['mod_imagen'], 'loaded'=>false);
+           $data['imagen'] = Array('nombre' => $modulo['mod_imagen'], 'loaded'=>'empty');
            $data['fecha'] = $modulo['mod_fecha']; 
            $data['activo'] = $modulo['mod_activo']; 
            $elementosObj = new CapModuloElementoTable();
@@ -106,7 +106,7 @@ class Capacitacion
             $data['id'] = $leccion['lec_id']; 
             $data['titulo'] = $leccion['lec_titulo']; 
             $data['descripcion'] = $leccion['lec_descripcion']; 
-            $data['imagen'] = Array('nombre' => $leccion['lec_imagen'], 'loaded'=>false);
+            $data['imagen'] = Array('nombre' => $leccion['lec_imagen'], 'loaded'=>'empty');
             $data['fecha'] = $leccion['lec_fecha']; 
             $data['activo'] = $leccion['lec_activo']; 
             $elementosObj = new CapLeccionElementoTable();
@@ -134,13 +134,13 @@ class Capacitacion
             $data['instruccion'] = $unidad['uni_inf_instruccion'];
             $data['texto'] = $unidad['uni_inf_texto'];
             if ( isset($unidad['uni_inf_imagen']) || $unidad['uni_inf_imagen'] != null ){
-                $data['imagen'] = Array('nombre' => $unidad['uni_inf_imagen'], 'loaded'=>false);
+                $data['imagen'] = Array('nombre' => $unidad['uni_inf_imagen'], 'loaded'=>'empty');
             }
             if ( isset($unidad['uni_inf_audio']) || $unidad['uni_inf_audio'] != null ){
-                $data['audio'] = Array('nombre' => $unidad['uni_inf_audio'], 'loaded'=>false);
+                $data['audio'] = Array('nombre' => $unidad['uni_inf_audio'], 'loaded'=>'empty');
             }
             if ( isset($unidad['uni_inf_media']) || $unidad['uni_inf_media'] != null ){
-                $data['media'] = Array('nombre' => $unidad['uni_inf_media'], 'loaded'=>false);
+                $data['media'] = Array('nombre' => $unidad['uni_inf_media'], 'loaded'=>'empty');
             }
             
             $data['fecha'] = $unidad['uni_inf_fecha'];
@@ -151,22 +151,24 @@ class Capacitacion
             $opcionXUnidadTable = new CapUnidadinformacionXOpcionTable();
             $opciones = $opcionXUnidadTable->getOptionsByUnidad($unidad['uni_inf_id']);
             
-            foreach ($opciones AS $opcion) {
-                $opcionTable = new CapUnidadinformacionOpcionTable();
-                $opcionInfo = $opcionTable->getOpcion($opcion['uni_inf_opc_id']);
-                $data['opciones'][$opcion['uni_inf_opc_id']] = Array(
-                          'id' => $opcionInfo['uni_inf_opc_id']
-                        , 'correcta' => $opcion['uni_inf_x_opc_correcta']
-                        , 'orden' => $opcion['uni_inf_x_opc_orden']
-                        , 'fecha' => $opcion['uni_inf_x_opc_fecha']
-                        , 'visible' => $opcion['uni_inf_x_opc_visible']
-                        , 'texto' => $opcionInfo['uni_inf_opc_texto']
-                );
-                if ( isset($opcionInfo['uni_inf_opc_audio']) || $opcionInfo['uni_inf_opc_audio'] != null ){
-                $data['opciones'][$opcion['uni_inf_opc_id']]['audio'] = Array('nombre' => $opcionInfo['uni_inf_opc_audio'], 'loaded'=>false);
-                }
-                if ( isset($opcionInfo['uni_inf_opc_media']) || $opcionInfo['uni_inf_opc_media'] != null ){
-                    $data['opciones'][$opcion['uni_inf_opc_id']]['media'] = Array('nombre' => $opcionInfo['uni_inf_opc_media'], 'loaded'=>false);
+            if (count($opciones)>0){
+                foreach ($opciones AS $opcion) {
+                    $opcionTable = new CapUnidadinformacionOpcionTable();
+                    $opcionInfo = $opcionTable->getOpcion($opcion['uni_inf_opc_id']);
+                    $data['opciones'][$opcion['uni_inf_opc_id']] = Array(
+                              'id' => $opcionInfo['uni_inf_opc_id']
+                            , 'correcta' => $opcion['uni_inf_x_opc_correcta']
+                            , 'orden' => $opcion['uni_inf_x_opc_orden']
+                            , 'fecha' => $opcion['uni_inf_x_opc_fecha']
+                            , 'visible' => $opcion['uni_inf_x_opc_visible']
+                            , 'texto' => $opcionInfo['uni_inf_opc_texto']
+                    );
+                    if ( isset($opcionInfo['uni_inf_opc_audio']) || $opcionInfo['uni_inf_opc_audio'] != null ){
+                    $data['opciones'][$opcion['uni_inf_opc_id']]['audio'] = Array('nombre' => $opcionInfo['uni_inf_opc_audio'], 'loaded'=>'empty');
+                    }
+                    if ( isset($opcionInfo['uni_inf_opc_media']) || $opcionInfo['uni_inf_opc_media'] != null ){
+                        $data['opciones'][$opcion['uni_inf_opc_id']]['media'] = Array('nombre' => $opcionInfo['uni_inf_opc_media'], 'loaded'=>'empty');
+                    }
                 }
             }
         }

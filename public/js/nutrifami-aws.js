@@ -71,12 +71,12 @@ nutrifami_aws = {
                   if ( err == null ){
                       callback();
                   }else {
-                      alert(err);  
+                      return err;  
                   }           
               });
             } else {
                 msj = 'error_3';  /* No hay archivo que cargar*/
-                alert(msj);
+                return msj;  
             }
         },
         
@@ -99,15 +99,18 @@ nutrifami_aws = {
         downloadFile: function(file, vGlobal, indexGlobal, flagGlobal, callback){
             callback = callback || function(){};
             var params = {Key: file, Bucket:AWS_credentials.defaultBucket};
+            vGlobal[flagGlobal] = 'loading';
             nutrifamiS3.getObject(params, function (err, data) {
                 msj = 'error_2'; /* Excepcion en la carga a AWS */
                 if ( err == null ){
                     vGlobal[indexGlobal] = encode(data.Body);
-                    vGlobal[flagGlobal] = true;
+                    vGlobal[flagGlobal] = 'loaded';
                     vGlobal.ContentType = data.ContentType;
+                    console.log(data.ContentType+' id: '+indexGlobal); /* Log, borrar. */
                     callback();
                 }else {
-                    alert(err);  
+                    vGlobal[flagGlobal] = 'empty';
+                    return err;  
                 }           
             });
         }

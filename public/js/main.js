@@ -7,7 +7,11 @@
 $(function(){
     
     nutrifami_aws.s3.load(function(){
-        nutrifami.training.downloadCapacitacion(0, function(){
+        
+        nutrifami.training.loadCapacitacion(function(){
+            $('#cargarModulo').show();
+        });
+        /*nutrifami.training.downloadCapacitacion(0, function(){
             nutrifami.training.downloadModulo(5, function(){
                  nutrifami.training.downloadLeccion(16, function(){
                      nutrifami.training.downloadUnidad(3, function(){
@@ -16,10 +20,15 @@ $(function(){
                      });
                  });
             });
-        });
+        });*/
+        
     });
     
-
+    $('#cargarModulo').click(function(){
+        nutrifami.training.loadModulo(5, function(){
+            alert('Carga Modulo 5');
+        });
+    });
     
     
 });

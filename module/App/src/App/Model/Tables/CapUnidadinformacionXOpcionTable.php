@@ -50,7 +50,7 @@ class CapUnidadinformacionXOpcionTable extends AbstractTableGateway
             }
             return $data;
         }else {
-            return '';
+            return Array();
         }
     }
     
