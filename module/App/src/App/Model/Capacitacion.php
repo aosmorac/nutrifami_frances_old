@@ -19,6 +19,8 @@ use App\Model\Tables\CapLeccionTable;
 use App\Model\Tables\CapLeccionElementoTable;
 use App\Model\Tables\CapUnidadinformacionTable;
 use App\Model\Tables\CapUnidadinformacionTipoTable;
+use App\Model\Tables\CapUnidadinformacionXOpcionTable;
+use App\Model\Tables\CapUnidadinformacionOpcionTable;
 
     /**********************************************************
     * MODELO Module
@@ -108,10 +110,10 @@ class Capacitacion
             $data['fecha'] = $leccion['lec_fecha']; 
             $data['activo'] = $leccion['lec_activo']; 
             $elementosObj = new CapLeccionElementoTable();
-            $elementos = $elementosObj->getIdListByLeccion($leccion['lec_id']);
+            $elementos = $elementosObj->getIdListByLeccion($leccion['lec_id']);           
             foreach ( $elementos AS $elemento ) {
                 $orderU = substr('0'.$elemento['order'], -2).substr('0'.$elemento['father'], -2);
-                $data['lecciones'][$orderU] = $elemento['id'];
+                $data['unidades'][$orderU] = $elemento['id'];
             }
         }
         return $data;
@@ -140,10 +142,33 @@ class Capacitacion
             if ( isset($unidad['uni_inf_media']) || $unidad['uni_inf_media'] != null ){
                 $data['media'] = Array('nombre' => $unidad['uni_inf_media'], 'loaded'=>false);
             }
+            
             $data['fecha'] = $unidad['uni_inf_fecha'];
             $data['activo'] = $unidad['uni_inf_activo'];
             $data['padre'] = $unidad['uni_inf_from'];
             $data['opciones'] = Array(); /* OPciones tabla */ 
+            
+            $opcionXUnidadTable = new CapUnidadinformacionXOpcionTable();
+            $opciones = $opcionXUnidadTable->getOptionsByUnidad($unidad['uni_inf_id']);
+            
+            foreach ($opciones AS $opcion) {
+                $opcionTable = new CapUnidadinformacionOpcionTable();
+                $opcionInfo = $opcionTable->getOpcion($opcion['uni_inf_opc_id']);
+                $data['opciones'][$opcion['uni_inf_opc_id']] = Array(
+                          'id' => $opcionInfo['uni_inf_opc_id']
+                        , 'correcta' => $opcion['uni_inf_x_opc_correcta']
+                        , 'orden' => $opcion['uni_inf_x_opc_orden']
+                        , 'fecha' => $opcion['uni_inf_x_opc_fecha']
+                        , 'visible' => $opcion['uni_inf_x_opc_visible']
+                        , 'texto' => $opcionInfo['uni_inf_opc_texto']
+                );
+                if ( isset($opcionInfo['uni_inf_opc_audio']) || $opcionInfo['uni_inf_opc_audio'] != null ){
+                $data['opciones'][$opcion['uni_inf_opc_id']]['audio'] = Array('nombre' => $opcionInfo['uni_inf_opc_audio'], 'loaded'=>false);
+                }
+                if ( isset($opcionInfo['uni_inf_opc_media']) || $opcionInfo['uni_inf_opc_media'] != null ){
+                    $data['opciones'][$opcion['uni_inf_opc_id']]['media'] = Array('nombre' => $opcionInfo['uni_inf_opc_media'], 'loaded'=>false);
+                }
+            }
         }
         return $data;
     }

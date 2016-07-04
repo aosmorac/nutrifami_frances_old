@@ -416,18 +416,71 @@ var nutrifami = {
                 async: false,
                 success: function(data) {
                     var objServ = JSON.parse(data);
+                    /*
+                        var unidadObj = {
+                            id: 3,
+                            tipo: {
+                                id: 3,
+                                nombre: 'Quiz imagen',
+                                alias: 'tipo3', 
+                                descripcion: 'Seleccionar una opcion, entre 6, de acuerdo a la pregunta y a la imagen que se muestra.'
+                            },
+                            titulo: 'Lorem ipsum dolor sit amet',
+                            instruccion: 'Lorem ipsum dolor sit amet',
+                            audio: {
+                                nombre: '194813__unfa__hello-nerds-inspired-by-animaniacs-hello-nurse-6-takes.flac',
+                                content: Object, 
+                                loaded: false
+                            },
+                            texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac ante a lorem laoreet facilisis.',
+                            imagen: {
+                                nombre: '201651175223151.jpg',
+                                content: Object, 
+                                loaded: false
+                            },
+                            media: {
+                                nombre: '',
+                                content: Object, 
+                                loaded: false
+                            },
+                            fecha: '', 
+                            activo: true, 
+                            from: 0, 
+                            opciones: {  
+                                9: {
+                                    id: 9,
+                                    correcta: false,
+                                    orden: 0,
+                                    fecha: '',
+                                    visible: true,
+                                    texto: 'Nam',
+                                    audio: {
+                                        nombre: '',
+                                        content: Object, 
+                                        loaded: false
+                                    },
+                                    media: {
+                                        nombre: '',
+                                        content: Object,
+                                        loaded: false
+                                    }
+                                }
+                            }, 
+                            completo: false
+                        } ; 
+                    */
                         objServ.completo = false;
                         if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id] === 'undefined' || nutrifami.training.cap_unidadesinformacion[objServ.id] === null) {
                             nutrifami.training.cap_unidadesinformacion[objServ.id] = objServ;
                             if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].imagen !== 'undefined') {
                                 nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].imagen, 'content', 'completo', function(){
                                     alert('imagen');
-                                    callback();
                                 });
                             }
                             if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].audio !== 'undefined') {
                                 nutrifami_aws.s3.downloadFile(objServ.audio.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].audio, 'content', 'completo', function(){
                                     alert('audio');
+                                    callback();
                                 });
                             }
                             if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].media !== 'undefined') {
@@ -435,156 +488,12 @@ var nutrifami = {
                                     alert('media');
                                 });
                             }
-                            /* Cargar imgagen desde s3*/
+                            /* Cargar imgagen desd e s3*/
                         }else {
                             nutrifami.training.cap_modulos[objServ.id] = nutrifami.training.cap_capacitaciones[objServ.id];
                         }
                 }
             });
-            /* Fin Ajax */
-            
-            /* Ajax */
-                var unidadObj = {
-                    id: 3,
-                    tipo: {
-                        id: 3,
-                        nombre: 'Quiz imagen',
-                        alias: 'tipo3', 
-                        descripcion: 'Seleccionar una opcion, entre 6, de acuerdo a la pregunta y a la imagen que se muestra.'
-                    },
-                    titulo: 'Lorem ipsum dolor sit amet',
-                    instruccion: 'Lorem ipsum dolor sit amet',
-                    audio: {
-                        nombre: '194813__unfa__hello-nerds-inspired-by-animaniacs-hello-nurse-6-takes.flac',
-                        content: Object, /* Cargar con otra funcion */ 
-                        loaded: false
-                    },
-                    texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac ante a lorem laoreet facilisis.',
-                    imagen: {
-                        nombre: '201651175223151.jpg',
-                        content: Object, /* Cargar con otra funcion */ 
-                        loaded: false
-                    },
-                    media: {
-                        nombre: '',
-                        content: Object, /* Cargar con otra funcion */ 
-                        loaded: false
-                    },
-                    fecha: '', 
-                    activo: true, 
-                    from: 0, 
-                    opciones: {  /* Cargar de cap_leccion_elemento */
-                        9: {
-                            id: 9,
-                            correcta: false,
-                            orden: 0,
-                            fecha: '',
-                            visible: true,
-                            texto: 'Nam',
-                            audio: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            },
-                            media: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            }
-                        },
-                        10: {
-                            id: 10,
-                            correcta: false,
-                            orden: 0,
-                            fecha: '',
-                            visible: true,
-                            texto: 'Quisque',
-                            audio: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            },
-                            media: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            }
-                        },
-                        11: {
-                            id: 11,
-                            correcta: false,
-                            orden: 0,
-                            fecha: '',
-                            visible: true,
-                            texto: 'Morbi ',
-                            audio: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            },
-                            media: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            }
-                        },
-                        12: {
-                            id: 12,
-                            correcta: true,
-                            orden: 0,
-                            fecha: '',
-                            visible: true,
-                            texto: 'ProinC',
-                            audio: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            },
-                            media: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            }
-                        },
-                        13: {
-                            id: 13,
-                            correcta: false,
-                            orden: 0,
-                            fecha: '',
-                            visible: true,
-                            texto: 'Aenean',
-                            audio: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            },
-                            media: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            }
-                        },
-                        14: {
-                            id: 14,
-                            correcta: false,
-                            orden: 0,
-                            fecha: '',
-                            visible: true,
-                            texto: 'Lorem',
-                            audio: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            },
-                            media: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            }
-                        }
-                    }, 
-                    completo: false
-                } ;
             /* Fin Ajax */
         } 
         
