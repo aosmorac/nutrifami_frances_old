@@ -495,6 +495,10 @@ header .navbar-right {
     padding-top: 7px;
     font-weight: normal;
 }
+
+.unidad .panel-header .leccion-avance .ok {
+    background-color: #feea45;
+}
 .unidad .panel-header .leccion-avance .progress .progress-bar{
     background-color: #feea45;
     background-image: none;
@@ -524,6 +528,10 @@ header .navbar-right {
     border: solid 1px #dcdcdc;
 }
 
+.unidad .panel-body .col-md-3 .opcion  {
+    margin: 0 0 50px 0;
+}
+
 .unidad .panel-body .opcion p {
     margin: 63px auto 0 auto;
     color: #2f3e47;
@@ -550,8 +558,17 @@ header .navbar-right {
     box-shadow: none;
 }
 
+.unidad .panel-body .col-md-3 .opcion .btn-default{
+    width: 200px;
+    letter-spacing: 5px;
+    padding-left: 18px;
+    padding-top:13px;
+    border: 1px solid #dcdcdc;
+}
+
 .unidad .panel-body .selected,
-.unidad .panel-body .selected .btn-default{
+.unidad .panel-body .selected .btn-default,
+.unidad .panel-body .col-md-3 .selected .btn-default{
     border: solid 3px #09df78;
 }
 
@@ -560,9 +577,36 @@ header .navbar-right {
 }
 
 .unidad .panel-body .evaluated,
-.unidad .panel-body .evaluated .btn-default{
+.unidad .panel-body .evaluated .btn-default,
+.unidad .panel-body .col-md-3 .evaluated .btn-default{
     border: solid 3px #09df78;
     background-color: #09df78;
+}
+
+.unidad .panel-body .opcion .sticker{
+    width: 100%;
+    position: absolute;
+    bottom: 95px;
+    left: 0px;
+}
+
+.unidad .panel-body .evaluated .sticker .glyphicon {
+    background-color: #ffffff;
+    width: 66px;
+    height: 66px;
+    border-radius: 33px;
+    font-size: 30pt;
+    text-align: center;
+    padding-top: 13px;
+    font-weight: normal;
+}
+
+.unidad .panel-body .evaluated .sticker .bien {
+    color: #09df78;
+}
+
+.unidad .panel-body .evaluated .sticker .mal {
+    color: #ff1244;
 }
 
 .unidad .panel-body .evaluated p {
@@ -615,6 +659,76 @@ header .navbar-right {
     font-size: 10pt;
     letter-spacing: 3px;
 }
+
+.unidad .panel-body .unidad-parejas{
+    margin-bottom: 100px;
+}
+
+.unidad-parejas .opciones .pareja .btn-default{
+    background-color: #ffffff;
+    font-size: 13pt;
+    color: #2f3e47;
+    width: 200px;
+    border: 1px solid #dcdcdc;
+    box-shadow: none;
+    text-transform: capitalize;
+    font-weight: normal;
+    padding-top: 13px;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.unidad-parejas .opciones .pareja .btn-default:hover{
+    color: #09df78;
+    border: 3px solid #09df78;
+}
+
+.unidad-parejas .opciones .match .btn-default{
+    -webkit-filter: opacity(30%); /* Chrome, Safari, Opera */
+    filter:  opacity(30%);
+}
+
+.unidad-parejas .opciones .pareja-1 .btn-default,
+.unidad-parejas .opciones .pareja-1 .btn-default:hover{
+    color: #ffffff;
+    background-color: #09df78; 
+    border: 1px solid #09df78;
+}
+
+.unidad-parejas .opciones .pareja-2 .btn-default,
+.unidad-parejas .opciones .pareja-2 .btn-default:hover{
+    color: #ffffff;
+    background-color: #feea45; 
+    border: 1px solid #feea45;
+}
+
+.unidad-parejas .opciones .pareja-3 .btn-default,
+.unidad-parejas .opciones .pareja-3 .btn-default:hover{
+    color: #ffffff;
+    background-color: #3096fc; 
+    border: 1px solid #3096fc;
+}
+
+
+.unidad  .panel-body .leccion-completada .sticker .glyphicon {
+    background-color: #09df78;
+    color: #ffffff;
+    width: 176px;
+    height: 176px;
+    border-radius: 88px;
+    font-size: 61pt;
+    text-align: center;
+    padding-top: 47px;
+    font-weight: normal;
+}
+
+.unidad  .panel-body .leccion-completada .btn-default{
+    background-color: #09df78;
+    font-size: 12pt;
+    letter-spacing: 5px;
+    margin: 90px 40px 0px 40px;
+}
+
 /* END UNIDADES */
 
 /* PERFIL Y EDITAR PERFIL */

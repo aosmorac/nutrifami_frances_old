@@ -16,6 +16,7 @@ Instalación de librerias con Bower.
 -----------------------------------
 
 Una vez instalados los modulos con node, se debe ejecutar:
+
 1. Instalar bower globalmente con "npm install -g bower"
 2. Instalar las librerias usadas en el prouecto con el comando "bower install"
 
