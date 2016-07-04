@@ -516,6 +516,19 @@ header .navbar-right {
     color: #2f3e47;
 }
 
+.unidad .panel-header .unidad-descripcion p{
+    font-size: 17pt;
+    margin-top: 25px;
+    color: #2f3e47;
+    padding: 0 100px;
+}
+
+.unidad .panel-header .unidad-descripcion img{
+    margin-top: 30px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+}
+
 .unidad .panel-body a.unidad-link{
     text-decoration: none;
 }
@@ -528,8 +541,23 @@ header .navbar-right {
     border: solid 1px #dcdcdc;
 }
 
+.unidad .panel-body .opcion-con-imagen  {
+    height: 350px;
+}
+
 .unidad .panel-body .col-md-3 .opcion  {
     margin: 0 0 50px 0;
+}
+
+.unidad .panel-body .opcion .sonido{
+    float: right;
+    margin: 13px 13px 0 0;
+}
+
+.unidad .panel-body .opcion .sonido .glyphicon{
+    color: #84efbb;
+    font-size: 15pt;
+    text-align: center;
 }
 
 .unidad .panel-body .opcion p {
@@ -538,6 +566,14 @@ header .navbar-right {
     text-align: center;
     font-size: 14pt;
     width: 75%;
+}
+.unidad .panel-body .opcion-con-imagen img{
+    width: 100%;
+    border-radius: 7px 7px 0 0;
+}
+
+.unidad .panel-body .opcion-con-imagen p{
+    margin-top: 35px;
 }
 
 .unidad .panel-body .opcion .boton{
@@ -587,6 +623,13 @@ header .navbar-right {
     width: 100%;
     position: absolute;
     bottom: 95px;
+    left: 0px;
+}
+
+.unidad .panel-body .opcion-con-imagen .sticker{
+    width: 100%;
+    position: absolute;
+    bottom: 80px;
     left: 0px;
 }
 
