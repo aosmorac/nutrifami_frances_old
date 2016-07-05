@@ -344,12 +344,12 @@ var nutrifami = {
                         objServ.completo = false;
                         if (typeof nutrifami.training.cap_modulos[objServ.id] === 'undefined' || nutrifami.training.cap_modulos[objServ.id] === null) {
                             nutrifami.training.cap_modulos[objServ.id] = objServ;
-                            nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_modulos[objServ.id].imagen, 'content', 'completo', function(){
-                               callback();
-                            });
-                            /* Cargar imgagen desde s3*/
+                            if (typeof nutrifami.training.cap_modulos[objServ.id].imagen !== 'undefined') {/* Cargar imgagen desde s3*/
+                                nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_modulos[objServ.id].imagen, 'content', 'loaded');
+                            }
+                            callback();
                         }else {
-                            nutrifami.training.cap_modulos[objServ.id] = nutrifami.training.cap_capacitaciones[objServ.id];
+                            callback();
                         }
                 }
             });
@@ -396,13 +396,13 @@ var nutrifami = {
                         objServ.completo = false;
                         if (typeof nutrifami.training.cap_lecciones[objServ.id] === 'undefined' || nutrifami.training.cap_lecciones[objServ.id] === null) {
                             nutrifami.training.cap_lecciones[objServ.id] = objServ;
-                            nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_lecciones[objServ.id].imagen, 'content', 'completo', function(){
-                                callback();
-                                alert('ok');
-                            });
+                            if (typeof nutrifami.training.cap_lecciones[objServ.id].imagen !== 'undefined') {/* Cargar imgagen desde s3*/
+                                nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_lecciones[objServ.id].imagen, 'content', 'loaded');
+                            }
+                            callback();
                             /* Cargar imgagen desde s3*/
                         }else {
-                            nutrifami.training.cap_modulos[objServ.id] = nutrifami.training.cap_capacitaciones[objServ.id];
+                            callback();
                         }
                 }
             });
@@ -423,177 +423,123 @@ var nutrifami = {
                 async: false,
                 success: function(data) {
                     var objServ = JSON.parse(data);
+                    /*
+                        var unidadObj = {
+                            id: 3,
+                            tipo: {
+                                id: 3,
+                                nombre: 'Quiz imagen',
+                                alias: 'tipo3', 
+                                descripcion: 'Seleccionar una opcion, entre 6, de acuerdo a la pregunta y a la imagen que se muestra.'
+                            },
+                            titulo: 'Lorem ipsum dolor sit amet',
+                            instruccion: 'Lorem ipsum dolor sit amet',
+                            audio: {
+                                nombre: '194813__unfa__hello-nerds-inspired-by-animaniacs-hello-nurse-6-takes.flac',
+                                content: Object, 
+                                loaded: false
+                            },
+                            texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac ante a lorem laoreet facilisis.',
+                            imagen: {
+                                nombre: '201651175223151.jpg',
+                                content: Object, 
+                                loaded: false
+                            },
+                            media: {
+                                nombre: '',
+                                content: Object, 
+                                loaded: false
+                            },
+                            fecha: '', 
+                            activo: true, 
+                            from: 0, 
+                            opciones: {  
+                                9: {
+                                    id: 9,
+                                    correcta: false,
+                                    orden: 0,
+                                    fecha: '',
+                                    visible: true,
+                                    texto: 'Nam',
+                                    audio: {
+                                        nombre: '',
+                                        content: Object, 
+                                        loaded: false
+                                    },
+                                    media: {
+                                        nombre: '',
+                                        content: Object,
+                                        loaded: false
+                                    }
+                                }
+                            }, 
+                            completo: false
+                        } ; 
+                    */
                         objServ.completo = false;
                         if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id] === 'undefined' || nutrifami.training.cap_unidadesinformacion[objServ.id] === null) {
                             nutrifami.training.cap_unidadesinformacion[objServ.id] = objServ;
                             if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].imagen !== 'undefined') {
-                                nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].imagen, 'content', 'completo', function(){
-                                    alert('imagen');
-                                    callback();
-                                });
+                                nutrifami_aws.s3.downloadFile(objServ.imagen.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].imagen, 'content', 'loaded');
                             }
                             if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].audio !== 'undefined') {
-                                nutrifami_aws.s3.downloadFile(objServ.audio.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].audio, 'content', 'completo', function(){
-                                    alert('audio');
-                                });
+                                nutrifami_aws.s3.downloadFile(objServ.audio.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].audio, 'content', 'loaded');
                             }
                             if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].media !== 'undefined') {
-                                nutrifami_aws.s3.downloadFile(objServ.media.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].media, 'content', 'completo', function(){
-                                    alert('media');
-                                });
+                                nutrifami_aws.s3.downloadFile(objServ.media.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].media, 'content', 'loaded');
                             }
-                            /* Cargar imgagen desde s3*/
+                            $.each(nutrifami.training.cap_unidadesinformacion[objServ.id].opciones, function(indexopc, opcionun) {
+                                if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].opciones[opcionun.id].audio !== 'undefined') {
+                                nutrifami_aws.s3.downloadFile(opcionun.audio.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].opciones[opcionun.id].audio, 'content', 'loaded');
+                                }
+                                if (typeof nutrifami.training.cap_unidadesinformacion[objServ.id].opciones[opcionun.id].media !== 'undefined') {
+                                nutrifami_aws.s3.downloadFile(opcionun.media.nombre, nutrifami.training.cap_unidadesinformacion[objServ.id].opciones[opcionun.id].media, 'content', 'loaded');
+                                }
+                            }); 
+                            callback();
                         }else {
-                            nutrifami.training.cap_modulos[objServ.id] = nutrifami.training.cap_capacitaciones[objServ.id];
+                            callback();
                         }
                 }
             });
             /* Fin Ajax */
-            
-            /* Ajax */
-                var unidadObj = {
-                    id: 3,
-                    tipo: {
-                        id: 3,
-                        nombre: 'Quiz imagen',
-                        alias: 'tipo3', 
-                        descripcion: 'Seleccionar una opcion, entre 6, de acuerdo a la pregunta y a la imagen que se muestra.'
-                    },
-                    titulo: 'Lorem ipsum dolor sit amet',
-                    instruccion: 'Lorem ipsum dolor sit amet',
-                    audio: {
-                        nombre: '194813__unfa__hello-nerds-inspired-by-animaniacs-hello-nurse-6-takes.flac',
-                        content: Object, /* Cargar con otra funcion */ 
-                        loaded: false
-                    },
-                    texto: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac ante a lorem laoreet facilisis.',
-                    imagen: {
-                        nombre: '201651175223151.jpg',
-                        content: Object, /* Cargar con otra funcion */ 
-                        loaded: false
-                    },
-                    media: {
-                        nombre: '',
-                        content: Object, /* Cargar con otra funcion */ 
-                        loaded: false
-                    },
-                    fecha: '', 
-                    activo: true, 
-                    from: 0, 
-                    opciones: {  /* Cargar de cap_leccion_elemento */
-                        9: {
-                            id: 9,
-                            correcta: false,
-                            orden: 0,
-                            fecha: '',
-                            visible: true,
-                            texto: 'Nam',
-                            audio: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            },
-                            media: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            }
-                        },
-                        10: {
-                            id: 10,
-                            correcta: false,
-                            orden: 0,
-                            fecha: '',
-                            visible: true,
-                            texto: 'Quisque',
-                            audio: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            },
-                            media: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            }
-                        },
-                        11: {
-                            id: 11,
-                            correcta: false,
-                            orden: 0,
-                            fecha: '',
-                            visible: true,
-                            texto: 'Morbi ',
-                            audio: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            },
-                            media: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            }
-                        },
-                        12: {
-                            id: 12,
-                            correcta: true,
-                            orden: 0,
-                            fecha: '',
-                            visible: true,
-                            texto: 'ProinC',
-                            audio: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            },
-                            media: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            }
-                        },
-                        13: {
-                            id: 13,
-                            correcta: false,
-                            orden: 0,
-                            fecha: '',
-                            visible: true,
-                            texto: 'Aenean',
-                            audio: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            },
-                            media: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            }
-                        },
-                        14: {
-                            id: 14,
-                            correcta: false,
-                            orden: 0,
-                            fecha: '',
-                            visible: true,
-                            texto: 'Lorem',
-                            audio: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            },
-                            media: {
-                                nombre: '',
-                                content: Object, /* Cargar con otra funcion */ 
-                                loaded: false
-                            }
-                        }
-                    }, 
-                    completo: false
-                } ;
-            /* Fin Ajax */
-        } 
+        },
+        
+        /*
+         * nutrifami.training.setCapacitacion(callback);
+         */
+        loadCapacitacion: function(callback){
+            callback = callback || function() {};
+            nutrifami.training.downloadCapacitacion(0, function(){
+                $.each(nutrifami.training.cap_capacitaciones, function(indexcap, capacitaciones) {
+                    $.each(capacitaciones.modulos, function(indexmod, id_modulo) {
+                        nutrifami.training.downloadModulo(id_modulo, function(){
+                            callback();
+                        });
+                    }); 
+                }); 
+            });
+        },
+        
+        /*
+         * nutrifami.training.loadModulo(mid, callback);
+         */
+        loadModulo: function(mid, callback) {
+            mid = mid || 0;
+            callback = callback || function() {};   
+            $.each(nutrifami.training.cap_modulos[mid].lecciones, function(indexlec, id_leccion) {
+                nutrifami.training.downloadLeccion(id_leccion, function(){
+                    if (nutrifami.training.cap_lecciones[id_leccion].unidades) {
+                        $.each(nutrifami.training.cap_lecciones[id_leccion].unidades, function(indexuni, id_unidad) {
+                            nutrifami.training.downloadUnidad(id_unidad, function(){
+                                console.log('Carga unidad '+id_unidad);
+                            });
+                        }); 
+                    }
+                });
+            }); 
+            callback();
+        }
         
         
         
