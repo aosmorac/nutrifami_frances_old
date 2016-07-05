@@ -14,6 +14,7 @@
     ->prependStylesheet($this->basePath('css/style.css'))
     ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
     ->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
     <!-- Scripts -->
     <?php echo $this->headScript()
     ->prependFile($this->basePath('js/main.js'))
@@ -23,8 +24,9 @@
     ->prependFile($this->basePath('js/bootstrap.min.js'))
     ->prependFile($this->basePath('js/md5.js'))
     ->prependFile($this->basePath('js/jquery.min.js'))
-    ->prependFile($this->basePath('modules/authentication/services.js'))
-    ->prependFile($this->basePath('modules/authentication/controllers.js'))
+    ->prependFile($this->basePath('js/service/services.js'))
+    ->prependFile($this->basePath('js/service/perfilService.js'))
+    ->prependFile($this->basePath('js/controller/loginController.js'))
     ->prependFile($this->basePath('js/controller/editarPerfilController.js'))
     ->prependFile($this->basePath('js/controller/perfilController.js'))
     ->prependFile($this->basePath('js/controller/homeController.js'))
@@ -38,7 +40,7 @@
 </head>
 
 <body ng-app="NutrifamiWeb">
-
+    
             <ng-view>
                 <?php echo $this->content; ?>
             </ng-view>

@@ -23,7 +23,7 @@ class ApiController extends AbstractActionController {
         $data['sid'] = \Util\UserSession::getCurrentSessionID();
         echo json_encode($data);
 
-        $viewModel = new \Zend\View\Model\ViewModel();
+        $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
         return $viewModel;
     }
@@ -64,10 +64,31 @@ class ApiController extends AbstractActionController {
 
         echo json_encode($personaInfo);
 
-        $viewModel = new \Zend\View\Model\ViewModel();
+        $viewModel = new ViewModel();
         $viewModel->setTerminal(true);
         return $viewModel;
     }
+
+    public function editarUsuarioAction() {
+        $params = $this->params()->fromQuery(); 
+        
+        $personasObj = new Personas();
+        $data = $personasObj->updateUsuario($params);
+        
+        /*Prepara la respusta -> Debe retornar  $response['response'] = 1 si la actualización se hizo con éxito
+         * y $response['response'] = 0; si hubo algún error 
+         */
+        $response = array();
+        $response['response'] = $data;
+        
+        
+        echo json_encode($response);
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        return $viewModel;
+        
+    }
+
     
     
     
@@ -192,5 +213,6 @@ class ApiController extends AbstractActionController {
     }
     
     
+
 
 }
