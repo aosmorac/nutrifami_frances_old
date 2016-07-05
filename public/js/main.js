@@ -7,18 +7,28 @@
 $(function(){
     
     nutrifami_aws.s3.load(function(){
-        nutrifami.training.downloadCapacitacion(0, function(){
+        
+        nutrifami.training.loadCapacitacion(function(){
+            $('#cargarModulo').show();
+        });
+        /*nutrifami.training.downloadCapacitacion(0, function(){
             nutrifami.training.downloadModulo(5, function(){
-                 nutrifami.training.downloadLeccion(17, function(){
+                 nutrifami.training.downloadLeccion(16, function(){
                      nutrifami.training.downloadUnidad(3, function(){
                         $('#imagenS3').html('<img width="600" src="data:image/png;base64,'+nutrifami.training.cap_unidadesinformacion[3].imagen.content+'">'); 
+                        $('#audioS3').html('<audio src="data:audio/mpeg;base64,'+nutrifami.training.cap_unidadesinformacion[3].audio.content+'" preload="auto" controls></audio>'); 
                      });
                  });
             });
-        });
+        });*/
+        
     });
     
-
+    $('#cargarModulo').click(function(){
+        nutrifami.training.loadModulo(5, function(){
+            alert('Carga Modulo 5');
+        });
+    });
     
     
 });
