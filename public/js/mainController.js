@@ -14,7 +14,7 @@ angular.module('NutrifamiWeb', dependencies)
 
     $routeProvider.when('/login', {
             controller: 'LoginController',
-            templateUrl: 'modules/authentication/views/login.html',
+            templateUrl: 'views/login.tpl.html',
             hideMenus: true
         });
 
@@ -42,8 +42,7 @@ angular.module('NutrifamiWeb', dependencies)
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
         nutrifami.getSessionId();
-        console.log($rootScope.globals.currentUser);
-
+        
         if ($rootScope.globals.currentUser) {
             //$http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
 

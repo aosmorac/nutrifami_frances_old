@@ -15,7 +15,10 @@ Instalación de de modulos con Node
 Instalación de librerias con Bower.
 -----------------------------------
 
-1. Una vez instalados los modulos con node, se debe ejecutar el comando "bower install" para instalar todas las libreas (Por ejemplo Angular)
+Una vez instalados los modulos con node, se debe ejecutar:
+
+1. Instalar bower globalmente con "npm install -g bower"
+2. Instalar las librerias usadas en el prouecto con el comando "bower install"
 
 VirtualHost
 --------------
