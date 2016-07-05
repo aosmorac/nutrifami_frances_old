@@ -3,28 +3,15 @@ angular.module('NutrifamiWeb').controller('PerfilController', ['$scope','$rootSc
     'use strict';
     
     var usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
-    $scope.nombre = usuarioActivo.nombre;
-    $scope.apellido = usuarioActivo.apellido;
-    $scope.documento = usuarioActivo.login_documento;
-    if (usuarioActivo.genero === 'F') {
-        $scope.genero = 'femenino';
+    $scope.usuarioActivo = usuarioActivo;
+    $scope.informacion="active";
+   console.log(usuarioActivo.genero);
+    if (usuarioActivo.genero === 'F' || usuarioActivo.genero === 'f') {
+        $scope.usuarioActivo.genero = 'femenino';
     } else {
-        $scope.genero = 'masculino';
+        $scope.usuarioActivo.genero = 'masculino';
     }
-    $scope.etnia = usuarioActivo.etnia;
-    $scope.nacimiento = usuarioActivo.nacimiento;
-    $scope.departamento = usuarioActivo.departamento;
-    $scope.municipio = usuarioActivo.municipio;
-    $scope.comunidad = usuarioActivo.comunidad;
-
-   $scope.miembrosFamilia = (usuarioActivo.rango_0a2 + usuarioActivo.rango_2a5 + usuarioActivo.rango_6a17 + usuarioActivo.rango_18a60 + usuarioActivo.rango_60mas) + " miembros";
-   
-   $scope.rango_0a2 = usuarioActivo.rango_0a2;
-   $scope.rango_2a5 = usuarioActivo.rango_2a5;
-   $scope.rango_6a17 = usuarioActivo.rango_6a17;
-   $scope.rango_18a60 = usuarioActivo.rango_18a60;
-   $scope.rango_60mas = usuarioActivo.rango_60mas;
-
+    $scope.usuarioActivo.miembrosFamilia = (usuarioActivo.rango_0a2 + usuarioActivo.rango_2a5 + usuarioActivo.rango_6a17 + usuarioActivo.rango_18a60 + usuarioActivo.rango_60mas) + " miembros";
 }]).filter('capitalize', function () {
     'use strict';
     return function (input, all) {
