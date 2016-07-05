@@ -10,5 +10,4 @@
 vendor
 composer.phar
 /node_modules
-app
 /public/lib

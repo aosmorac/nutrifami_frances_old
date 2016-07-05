@@ -2,5 +2,8 @@
 angular.module('NutrifamiWeb')
     .controller('HomeController', ['$rootScope', '$scope', '$location', function($rootScope, $scope, $location) {
         'use strict';
-        $scope.mensaje = "Mensaje enviado desde el controlador"
+        var usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+        $scope.usuarioActivo = usuarioActivo;
+        $scope.home="active";
+        $scope.mensaje = "Mensaje enviado desde el controlador";
     }]);
