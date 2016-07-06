@@ -1,0 +1,90 @@
+<div ng-controller="HomeController"> 
+    <header ng-include="'views/header.tpl.html'"></header>
+    <div class="container">
+        <div class="modulos unidad">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="row"> 
+                            <div class="col-md-12">
+                                <div class="unidad-sonido">
+                                    <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-9">
+                                <div class="leccion-avance">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+
+                                        </div>
+                                        <div class="leccion-ok"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="unidad-descripcion">
+                                    <h2>Lea y seleccione la respuesta correcta</h2>
+                                    <h3>La alimentación es...</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                <a class="unidad-link" href="#">
+                                    <div class="opcion">
+                                        <div class="caption">
+                                            <p>Una actividad básica de todos los seres vivos para vivir.</p>
+                                            <div class="boton"> 
+                                                <span class="btn btn-default center-block" role="button">Seleccionar</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                <a class="unidad-link" href="#">
+                                    <div class="opcion">
+                                        <div class="caption">
+                                            <p>Un alimento para crecer y estar sano.</p>
+                                            <div class="boton"> 
+                                                <span class="btn btn-default center-block" role="button">Seleccionar</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                <a class="unidad-link" href="#">
+                                    <div class="opcion">
+                                        <div class="caption">
+                                            <p>Comprar alimentos</p>
+                                            <div class="boton"> 
+                                                <span class="btn btn-default center-block" role="button">Seleccionar</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="calificacion">
+                                <div class="col-md-8">
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="calificar"> 
+                                        <a href="#" class="btn btn-default center-block" role="button">Calificar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <footer ng-include="'views/footer.tpl.html'"></footer>
+    </div>
+</div>
