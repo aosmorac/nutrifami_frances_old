@@ -23,6 +23,16 @@ angular.module('NutrifamiWeb', dependencies)
         templateUrl: 'views/home.tpl.html'
     });
     
+    $routeProvider.when('/m/:modulo', {
+        controller: 'ModuloController',
+        templateUrl: 'views/modulo.tpl.html'
+    });
+    
+    $routeProvider.when('/m/:modulo/:leccion/:unidad', {
+        controller: 'UnidadController',
+        templateUrl: 'views/unidad.tpl.html'
+    });
+    
     $routeProvider.when('/perfil', {
         controller: 'PerfilController',
         templateUrl: 'views/perfil.tpl.html'

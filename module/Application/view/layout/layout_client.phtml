@@ -15,28 +15,7 @@
     ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
     ->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
-    <!-- Scripts -->
-    <?php echo $this->headScript()
-    ->prependFile($this->basePath('js/main.js'))
-    ->prependFile($this->basePath('js/nutrifami.js'))
-    ->prependFile($this->basePath('js/nutrifami-aws.js'))
-    ->prependFile($this->basePath() . 'https://sdk.amazonaws.com/js/aws-sdk-2.3.15.min.js')
-    ->prependFile($this->basePath('js/bootstrap.min.js'))
-    ->prependFile($this->basePath('js/md5.js'))
-    ->prependFile($this->basePath('js/jquery.min.js'))
-    ->prependFile($this->basePath('js/service/services.js'))
-    ->prependFile($this->basePath('js/service/perfilService.js'))
-    ->prependFile($this->basePath('js/controller/loginController.js'))
-    ->prependFile($this->basePath('js/controller/editarPerfilController.js'))
-    ->prependFile($this->basePath('js/controller/perfilController.js'))
-    ->prependFile($this->basePath('js/controller/homeController.js'))
-    ->prependFile($this->basePath('js/mainController.js'))
-    ->prependFile($this->basePath('js/angular-cookies.min.js'))
-    ->prependFile($this->basePath('js/angular-route.min.js'))
-    ->prependFile($this->basePath('lib/angular/angular.js'))
-    ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
-    ->prependFile($this->basePath('js/html5shiv.min.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
-; ?>
+    
 </head>
 
 <body ng-app="NutrifamiWeb">
@@ -46,5 +25,29 @@
             </ng-view>
 <div id="audioS3"></div>
 <div id="imagenS3"></div>
+<!-- Scripts -->
+    <?php echo $this->headScript()
+    ->prependFile($this->basePath('js/main.js'))
+    ->prependFile($this->basePath('js/nutrifami.js'))
+    ->prependFile($this->basePath('js/nutrifami-aws.js'))
+    ->prependFile($this->basePath() . 'https://sdk.amazonaws.com/js/aws-sdk-2.3.15.min.js')
+    ->prependFile($this->basePath('js/bootstrap.min.js'))
+    ->prependFile($this->basePath('js/md5.js'))
+    ->prependFile($this->basePath('js/jquery.min.js'))
+    ->prependFile($this->basePath('js/services/services.js'))
+    ->prependFile($this->basePath('js/services/perfilService.js'))
+    ->prependFile($this->basePath('js/controllers/unidadController.js'))
+    ->prependFile($this->basePath('js/controllers/moduloController.js'))
+    ->prependFile($this->basePath('js/controllers/loginController.js'))
+    ->prependFile($this->basePath('js/controllers/editarPerfilController.js'))
+    ->prependFile($this->basePath('js/controllers/perfilController.js'))
+    ->prependFile($this->basePath('js/controllers/homeController.js'))
+    ->prependFile($this->basePath('js/mainController.js'))
+    ->prependFile($this->basePath('lib/angular-cookies/angular-cookies.js'))
+    ->prependFile($this->basePath('lib/angular-route/angular-route.js'))
+    ->prependFile($this->basePath('lib/angular/angular.js'))
+    ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
+    ->prependFile($this->basePath('js/html5shiv.min.js'), 'text/javascript', array('conditional' => 'lt IE 9'))
+; ?>
 </body>
 </html>

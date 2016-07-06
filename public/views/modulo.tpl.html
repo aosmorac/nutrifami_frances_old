@@ -1,0 +1,36 @@
+<div ng-controller="HomeController"> 
+    <header ng-include="'views/header.tpl.html'"></header>
+    <div class="container">
+        <div class="modulos lecciones">
+                <div class="panel">
+                    <div class="row"> 
+                        <div class="panel-header">
+                            <div class="col-md-6">
+                                <div class="modulo-descripcion">
+                                    <h1>Alimentación Saludable</h1>
+                                    <p>Bienvenidos al módulo de  Alimentación Saludable y Agua Segura. Aquí, identificaremos conceptos básicos sobre alimentación y cómo lograr una alimentación saludable </p>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-md-offset-1">
+                                <div class="modulo-avance">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                        </div>
+                                    </div>
+                                    <h3>0/6 Lecciones completadas</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <ng-repeat ng-repeat="leccion in lecciones">
+                                <lecciones-info info="leccion"></lecciones-info>
+                            </ng-repeat>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <footer ng-include="'views/footer.tpl.html'"></footer>
+    </div>
+</div>
