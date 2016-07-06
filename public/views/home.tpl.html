@@ -12,64 +12,9 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-4">
-                            <a class="modulo-link" href="#/m/alimentacion-saludable">
-                                <div class="modulo">
-                                    <img src="../img/modulos/01-alimentacion-saludable/01-alimentacion-saludable.png" alt="Alimentación Saludable">
-                                    <div class="caption">
-                                        <h3> Alimentación <br> Saludable</h3>  
-                                        <h4>0 / 6</h4>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4">
-                                <div class="modulo modulo-no-disponible">
-                                    <img src="../img/modulos/01-alimentacion-saludable/02-beneficios-propiedades-alimentos.png" alt="Alimentación Saludable">
-                                    <div class="caption">
-                                        <h3>Beneficios y propiedades de los alimentos</h3>  
-                                        <h4>0 / 9</h4>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4">
-                            <div class="modulo modulo-no-disponible">
-                                <img src="../img/modulos/01-alimentacion-saludable/03-alimentacion-balanceada-saludable.png" alt="Alimentación Saludable">
-                                <div class="caption">
-                                    <h3>Alimentación balanceada y saludable</h3>  
-                                    <h4>0 / 6</h4>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-4">
-                            <div class="modulo modulo-no-disponible">
-                                <img src="../img/modulos/01-alimentacion-saludable/04-colores-alimentos.png" alt="Alimentación Saludable">
-                                <div class="caption">
-                                    <h3>Alimentación balanceada y saludable</h3>  
-                                    <h4>0 / 6</h4>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <ng-repeat ng-repeat="modulo in modulos">
+                            <modulos-info info="modulo"></modulos-info>
+                        </ng-repeat>
                     </div>
                 </div>
             </div>

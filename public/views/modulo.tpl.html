@@ -22,98 +22,12 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="panel-body">
-
                         <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-4">
-                                <a class="leccion-link" href="#/m/alimentacion-saludable/1/1">
-                                    <div class="leccion leccion-terminada">
-                                        <div class="leccion-ok"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></div>
-                                        <div class="caption">
-                                            <h3>lección 1</h3>  
-                                            <h4>¿Qué es Alimentación?</h4>
-                                            <div class="boton"> 
-                                                <span class="btn btn-default center-block" role="button">Repetir</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-6 col-md-4">
-                                <a class="leccion-link" href="#/m/alimentacion-saludable/1/2">
-                                    <div class="leccion leccion-terminada">
-                                        <div class="leccion-ok"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></div>
-                                        <div class="caption">
-                                            <h3>lección 2</h3>  
-                                            <h4>¿Para qué sirve la alimentación?</h4>
-                                            <div class="boton"> 
-                                                <span class="btn btn-default center-block" role="button">Repetir</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4">
-                                <a class="leccion-link" href="#/m/alimentacion-saludable/1/3">
-                                    <div class="leccion">
-                                        <div class="caption">
-                                            <h3>lección 3</h3>  
-                                            <h4>¿Qué es alimentación saludable?</h4>
-                                            <div class="boton"> 
-                                                <span  class="btn btn-default center-block" role="button">Comenzar</span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </a>
-                            </div>
+                            <ng-repeat ng-repeat="leccion in lecciones">
+                                <lecciones-info info="leccion"></lecciones-info>
+                            </ng-repeat>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-4">
-                                <a class="leccion-link" href="#/m/alimentacion-saludable/1/4">
-                                    <div class="leccion">
-                                        <div class="caption">
-                                            <h3>lección 4</h3>  
-                                            <h4>¿Para qué tener una alimentación saludable?</h4>
-                                            <div class="boton"> 
-                                                <span  class="btn btn-default center-block" role="button">Comenzar</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-6 col-md-4">
-                                <a class="leccion-link" href="#/m/alimentacion-saludable/1/5">
-                                    <div class="leccion">
-                                        <div class="caption">
-                                            <h3>lección 5</h3>  
-                                            <h4>¿Cuáles son los principios de una alimentación saludable?</h4>
-                                            <div class="boton"> 
-                                                <span class="btn btn-default center-block" role="button">Repetir</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4">
-                                <a class="leccion-link" href="#/m/alimentacion-saludable/1/6">
-                                    <div class="leccion">
-                                        <div class="caption">
-                                            <h3>lección 6</h3>  
-                                            <h4>¿Por qué una alimentación variada?</h4>
-                                            <div class="boton"> 
-                                                <span class="btn btn-default center-block" role="button">Repetir</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
