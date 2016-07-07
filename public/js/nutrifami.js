@@ -234,6 +234,7 @@ var nutrifami = {
      */
     training: {
         
+        cap_capacitacionesId: new Array(),
         cap_capacitaciones: new Object(),         /* this.cap_capacitacion */
         cap_modulos: new Object(),              /* this.cap_modulos */
         cap_lecciones: new Object(),            /* this.cap_lecciones */
@@ -291,6 +292,7 @@ var nutrifami = {
                         var capObj = value;
                         capObj.completo = false;
                         nutrifami.training.cap_capacitaciones[index] = nutrifami.training.cap_capacitaciones[index] || capObj;
+                        nutrifami.training.cap_capacitacionesId.push(nutrifami.training.cap_capacitaciones[index].id);
                     }); 
                     callback();
                 }
@@ -506,7 +508,7 @@ var nutrifami = {
         },
         
         /*
-         * nutrifami.training.setCapacitacion(callback);
+         * nutrifami.training.loadCapacitacion(callback);
          */
         loadCapacitacion: function(callback){
             callback = callback || function() {};
@@ -539,7 +541,98 @@ var nutrifami = {
                 });
             }); 
             callback();
+        },
+        
+        /*
+         * nutrifami.training.getCapacitacionesId();
+         */
+        getCapacitacionesId: function(){
+            if (typeof nutrifami.training.cap_capacitacionesId !== 'undefined') {
+                return nutrifami.training.cap_capacitacionesId;
+            }else{
+                return false;
+            }            
+        },
+        
+        /*
+         * nutrifami.training.getCapacitacion(cid);
+         */
+        getCapacitacion: function(cid){
+            cid = cid || 3;
+            if (typeof nutrifami.training.cap_capacitaciones[cid] !== 'undefined') {
+                return nutrifami.training.cap_capacitaciones[cid]
+            }else{
+                return false;
+            }   
+        },
+        
+        /*
+         * nutrifami.training.getModulosId(cid);
+         */
+        getModulosId: function(cid){
+            cid = cid || 3;
+            if (typeof nutrifami.training.cap_capacitaciones[cid].modulos !== 'undefined') {
+                return nutrifami.training.cap_capacitaciones[cid].modulos;
+            }else{
+                return false;
+            }  
+        },
+        
+        /*
+         * nutrifami.training.getModulo(mid);
+         */
+        getModulo: function(mid){
+            if (typeof nutrifami.training.cap_modulos[mid] !== 'undefined') {
+                return nutrifami.training.cap_modulos[mid];
+            }else{
+                return false;
+            }  
+        },
+        
+        /*
+         * nutrifami.training.getLeccionesId(mid);
+         */
+        getLeccionesId: function(mid){
+            if (typeof nutrifami.training.cap_modulos[mid].lecciones !== 'undefined') {
+                return nutrifami.training.cap_modulos[mid].lecciones;
+            }else{
+                return false;
+            }  
+        },
+        
+        /*
+         * nutrifami.training.getLeccion(lid);
+         */
+        getLeccion: function(lid){
+            if (typeof nutrifami.training.cap_lecciones[lid] !== 'undefined') {
+                return nutrifami.training.cap_lecciones[lid];
+            }else{
+                return false;
+            }  
+        },
+        
+        /*
+         * nutrifami.training.getUnidadesId(lid);
+         */
+        getUnidadesId: function(lid){
+            if (typeof nutrifami.training.cap_lecciones[lid].unidades !== 'undefined') {
+                return nutrifami.training.cap_lecciones[lid].unidades;
+            }else{
+                return false;
+            }  
+        },
+        
+        /*
+         * nutrifami.training.getUnidad(uid);
+         */
+        getUnidad: function(uid){
+            if (typeof nutrifami.training.cap_unidadesinformacion[uid] !== 'undefined') {
+                return nutrifami.training.cap_unidadesinformacion[uid];
+            }else{
+                return false;
+            }  
         }
+        
         
         
         
