@@ -146,6 +146,7 @@ class Capacitacion
             $data['fecha'] = $unidad['uni_inf_fecha'];
             $data['activo'] = $unidad['uni_inf_activo'];
             $data['padre'] = $unidad['uni_inf_from'];
+            $data['hijo'] = $unidad['uni_inf_feedback'];
             $data['opciones'] = Array(); /* OPciones tabla */ 
             
             $opcionXUnidadTable = new CapUnidadinformacionXOpcionTable();
