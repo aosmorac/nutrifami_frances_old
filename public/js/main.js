@@ -27,6 +27,8 @@ $(function(){
     $('#cargarModulo').click(function(){
         nutrifami.training.loadModulo(5, function(){
             alert('Carga Modulo 5');
+            $('#imagenS3').html('<img width="600" src="data:image/png;base64,'+nutrifami.training.cap_unidadesinformacion[3].imagen.content+'">'); 
+            $('#audioS3').html('<audio src="data:audio/mpeg;base64,'+nutrifami.training.cap_unidadesinformacion[3].audio.content+'" preload="auto" controls></audio>');
         });
     });
     
