@@ -27,13 +27,15 @@
                             <div class="unidad-descripcion">
                                 <h2>{{ unidad.tipo.descripcion}}</h2>
                                 <h3>{{ unidad.titulo}}</h3>
+                                <img src="../img/modulos/01-alimentacion-saludable/unidad-01-la-alimentacion.png" alt="La alimentación es ..."/>
+                                <p>{{ unidad.texto}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <opciones-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" colspan="unidad.colspan()" ng-click="validar()"></opciones-unidad-info>
+                        <opciones-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" colspan="unidad.colspan" ng-click="validar()"></opciones-unidad-info>
                     </div>
                     
                     <calificar-unidad data="botonCalificar" ng-show="estadoUnidad=='espera'"></calificar-unidad>
@@ -41,6 +43,8 @@
                     <siguiente-unidad ng-show="estadoUnidad=='acierto'"></siguiente-unidad>
                     
                     <reiniciar-unidad ng-show="estadoUnidad=='fallo'"></reiniciar-unidad>
+                    
+                    <!--<pre>{{ unidad | json : unidad}}</pre>-->
                 </div>
             </div>
         </div>

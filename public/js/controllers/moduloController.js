@@ -9,8 +9,13 @@ angular.module('NutrifamiWeb')
                 $scope.lids = {};
                 $scope.lecciones = [];
 
+                /* Verificamos si los modulos están guardados en el local estorage */
                 if (JSON.parse(localStorage.getItem('modulo'+$routeParams.modulo)) === null) {
-                    $scope.modulo = nutrifami.training.getModulo($routeParams.modulo);
+                    var temp = nutrifami.training.getModulo($routeParams.modulo);
+                    $scope.modulo.id = temp.id;
+                    $scope.modulo.titulo = temp.titulo;
+                    $scope.modulo.descripcion = temp.descripcion;
+                    $scope.modulo.totalLecciones = Object.keys(temp.lecciones).length;
                     $scope.lids = nutrifami.training.getLeccionesId($routeParams.modulo);
                     var lid;
                     for (lid in $scope.lids) {
@@ -37,11 +42,8 @@ angular.module('NutrifamiWeb')
                         $scope.lecciones[i].terminada = false;
                     }
                 }
-                $scope.totalLecciones = function () {
-                    return (Object.keys($scope.modulo.lecciones).length);
-                };
                 $scope.porcentajeAvance = function () {
-                    return(100 / $scope.totalLecciones() * $scope.avanceUsuario.leccionesTerminadas);
+                    return(100 / $scope.modulo.totalLecciones * $scope.avanceUsuario.leccionesTerminadas);
                 };
             }]).directive('leccionesInfo', function () {
     return {
