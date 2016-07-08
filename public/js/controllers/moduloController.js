@@ -72,6 +72,6 @@ angular.module('NutrifamiWeb')
         scope: {
             info: '='
         },
-        templateUrl: 'js/directives/leccionesInfo.html'
+        templateUrl: 'views/directives/leccionesInfo.html'
     };
 });

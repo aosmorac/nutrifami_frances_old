@@ -602,19 +602,19 @@ header .navbar-right {
     border: 1px solid #dcdcdc;
 }
 
-.unidad .panel-body .selected,
-.unidad .panel-body .selected .btn-default,
-.unidad .panel-body .col-md-3 .selected .btn-default{
+.unidad .panel-body .rollover,
+.unidad .panel-body .rollover .btn-default,
+.unidad .panel-body .col-md-3 .rollover .btn-default{
     border: solid 3px #09df78;
 }
 
-.unidad .panel-body .selected p {
+.unidad .panel-body .rollover p {
     color: #09df78;
 }
 
-.unidad .panel-body .evaluated,
-.unidad .panel-body .evaluated .btn-default,
-.unidad .panel-body .col-md-3 .evaluated .btn-default{
+.unidad .panel-body .selected,
+.unidad .panel-body .selected .btn-default,
+.unidad .panel-body .col-md-3 .selected .btn-default{
     border: solid 3px #09df78;
     background-color: #09df78;
 }
@@ -633,7 +633,7 @@ header .navbar-right {
     left: 0px;
 }
 
-.unidad .panel-body .evaluated .sticker .glyphicon {
+.unidad .panel-body .selected .sticker .glyphicon {
     background-color: #ffffff;
     width: 66px;
     height: 66px;
@@ -644,15 +644,15 @@ header .navbar-right {
     font-weight: normal;
 }
 
-.unidad .panel-body .evaluated .sticker .bien {
+.unidad .panel-body .selected .sticker .bien {
     color: #09df78;
 }
 
-.unidad .panel-body .evaluated .sticker .mal {
+.unidad .panel-body .selected .sticker .mal {
     color: #ff1244;
 }
 
-.unidad .panel-body .evaluated p {
+.unidad .panel-body .selected p {
     color: #ffffff;
 }
 
@@ -687,18 +687,18 @@ header .navbar-right {
     font-size: 13pt;
 }
 
-.unidad .panel-body .calificacion .calificar .btn-default,
-.unidad .panel-body .calificacion .continuar .btn-default{
+.unidad .panel-body .calificacion .no-activo .btn-default,
+.unidad .panel-body .calificacion .activo .btn-default{
     background-color: #d0d0d0;
     margin: 0px 28px 0 28px;
     letter-spacing: 5px;
 }
 
-.unidad .panel-body .calificacion .continuar .btn-default{
+.unidad .panel-body .calificacion .activo .btn-default{
     background-color: #09df78;
 }
 
-.unidad .panel-body .calificacion .continuar .intentar-nuevo{
+.unidad .panel-body .calificacion .activo .intentar-nuevo{
     font-size: 10pt;
     letter-spacing: 3px;
 }

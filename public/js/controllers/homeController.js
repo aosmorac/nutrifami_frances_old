@@ -64,6 +64,6 @@ angular.module('NutrifamiWeb')
         scope: {
             info: '='
         },
-        templateUrl: 'js/directives/modulosInfo.html'
+        templateUrl: 'views/directives/modulosInfo.html'
     };
 });

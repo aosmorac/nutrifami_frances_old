@@ -43,7 +43,7 @@ angular.module('NutrifamiWeb', dependencies)
         templateUrl: 'views/editar-perfil.tpl.html'
     })
 
-    .otherwise({ redirectTo: '/login' });
+    .otherwise({ redirectTo: '/' });
 }])
 
 
