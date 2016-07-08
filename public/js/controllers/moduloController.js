@@ -2,76 +2,54 @@
 angular.module('NutrifamiWeb')
         .controller('ModuloController', ['$rootScope', '$scope', '$location', '$routeParams', function ($rootScope, $scope, $location, $routeParams) {
                 'use strict';
-                var usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
-                $scope.usuarioActivo = usuarioActivo;
-                $scope.modulo = $routeParams.modulo;
 
-                $scope.lecciones = [{
-                        id: 1,
-                        titulo: '¿Qué es Alimentación?',
-                        completo: true,
-                        completado: function(){
-                            if (this.completo){
-                                return ('leccion-terminada');
-                            }
-                        }
-                    },
-                    {
-                        id: 2,
-                        titulo: '¿Para qué sirve la alimentación?',
-                        completo: true,
-                        completado: function(){
-                            if (this.completo){
-                                return ('leccion-terminada');
-                            }
-                        }
-                    },
-                    {
-                        id: 3,
-                        titulo: '¿Qué es alimentación saludable?',
-                        completo: false,
-                        completado: function(){
-                            if (this.completo){
-                                return ('leccion-terminada');
-                            }
-                        }
-                    },
-                    {
-                        id: 4,
-                        titulo: '¿Para qué tener una alimentación saludable?',
-                        completo: false,
-                        completado: function(){
-                            if (this.completo){
-                                return ('leccion-terminada');
-                            }
-                        }
-                    },
-                    {
-                        id: 5,
-                        titulo: '¿Cuáles son los principios de una alimentación saludable?',
-                        completo: false,
-                        completado: function(){
-                            if (this.completo){
-                                return ('leccion-terminada');
-                            }
-                        }
-                    },
-                    {
-                        id: 6,
-                        titulo: '¿Por qué una alimentación variada?',
-                        completo: false,
-                        completado: function(){
-                            if (this.completo){
-                                return ('leccion-terminada');
-                            }
-                        }
-                    }];
+                $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+                $scope.avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
+
+                if (!nutrifami.training.getModulo($routeParams.modulo)) {
+                    $location.path('/');
+                }
+
+                $scope.modulo = nutrifami.training.getModulo($routeParams.modulo);
+                var lids = nutrifami.training.getLeccionesId($routeParams.modulo);
+                $scope.lecciones = [];
+
+                var lid;
+                for (lid in lids) {
+                    $scope.lecciones.push(nutrifami.training.getLeccion(lids[lid]));
+                }
+                
+
+                for (var i = 0; i<$scope.avanceUsuario.lecciones.length; i++){
+                    if ($scope.avanceUsuario.lecciones[i] == 1){
+                        $scope.lecciones[i].class = 'leccion-terminada';
+                        $scope.lecciones[i].terminada = true;
+                    }else{
+                        $scope.lecciones[i].terminada = false;
+                    }
+                }
+                
+                console.log($scope.lecciones);
+                
+                $scope.totalLecciones = function () {
+                    return (Object.keys($scope.modulo.lecciones).length);
+                };
+                $scope.porcentajeAvance = function () {
+                    return(100 / $scope.totalLecciones() * $scope.avanceUsuario.leccionesTerminadas);
+                };
             }]).directive('leccionesInfo', function () {
     return {
         restrict: 'E',
         scope: {
-            info: '='
+            leccion: '=',
+            modulo: '=',
+            index: '@'
         },
-        templateUrl: 'views/directives/leccionesInfo.html'
+        templateUrl: 'views/directives/leccionesInfo.html',
+        link: function ($scope, $element, $attrs) {
+            $scope.porcentajeAvance = function () {
+                return(100 / $scope.totalLecciones() * $scope.avance.leccionesTerminadas);
+            };
+        }
     };
 });

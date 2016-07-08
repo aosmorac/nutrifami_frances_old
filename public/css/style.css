@@ -278,6 +278,13 @@ header .navbar-right {
     border-radius: 10px 10px 0 0 ;
 }
 
+.cargando {
+    background-color: #ffffff;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+}
+
 .modulos .panel-body a.modulo-link{
     text-decoration: none;
 }
