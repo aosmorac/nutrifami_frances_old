@@ -624,6 +624,8 @@ var nutrifami = {
          * nutrifami.training.getUnidadesId(lid);
          */
         getUnidadesId: function(lid){
+            console.log(lid);
+            console.log(nutrifami.training.cap_lecciones);
             if (typeof nutrifami.training.cap_lecciones[lid].unidades !== 'undefined') {
                 return nutrifami.training.cap_lecciones[lid].unidades;
             }else{

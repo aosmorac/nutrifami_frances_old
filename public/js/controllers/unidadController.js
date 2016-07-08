@@ -5,6 +5,17 @@ angular.module('NutrifamiWeb')
                 var usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
                 $scope.usuarioActivo = usuarioActivo;
                 $scope.estadoUnidad = 'espera';
+                
+                
+                /*Verifica que el enruamiento este bien, si no redirecciona a la pagina principal del modulo*/
+                /*if (unidades[$routeParams.unidad - 1] == null || $routeParams.leccion != 1) {
+                    //$location.path('/m/' + $routeParams.modulo);
+                }*/
+                console.log(nutrifami.training.getModulosId(3));
+                console.log(nutrifami.training.getLeccionesId(5));
+                console.log(nutrifami.training.getUnidadesId(16));
+                
+                
                 $scope.botonCalificar = {
                     estilo: 'no-activo',
                     disabled: 'disabled'
@@ -113,10 +124,7 @@ angular.module('NutrifamiWeb')
                                 texto: 'Comer cantidades de comida acorde a la edad y necesidades '
                             }]
                     }];
-                /*Verifica que el enruamiento este bien, si no redirecciona a la pagina principal del modulo*/
-                if (unidades[$routeParams.unidad - 1] == null || $routeParams.leccion != 1) {
-                    $location.path('/m/' + $routeParams.modulo);
-                }
+
 
                 $scope.unidad = unidades[$routeParams.unidad - 1];
             }])
