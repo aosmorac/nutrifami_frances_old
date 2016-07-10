@@ -26,7 +26,8 @@ angular.module('NutrifamiWeb')
                             temp.push($scope.uids[i]);
                         }
                         $scope.unidad = nutrifami.training.getUnidad(temp[$routeParams.unidad - 1]);
-                        //$scope.unidad = nutrifami.training.getUnidad(2);
+                        $scope.unidad.avanceLeccion = (100 / temp.length) * (parseInt($routeParams.unidad) - 1);
+                        $scope.unidad.totalUnidades = temp.length;
                         var tempOpciones = [];
                         for (var i in $scope.unidad.opciones) {
                             tempOpciones.push($scope.unidad.opciones[i]);
@@ -39,13 +40,8 @@ angular.module('NutrifamiWeb')
                             $scope.unidad.imagen.mostrar = false;
                         }
 
-
-
-
-
                         localStorage.setItem("uids" + $routeParams.leccion, JSON.stringify(temp));
                         localStorage.setItem("unidad", JSON.stringify($scope.unidad));
-                        console.log($scope.unidad);
                     } catch (err) {
                         alert("Error");
                         $location.path('/');
@@ -79,7 +75,6 @@ angular.module('NutrifamiWeb')
 
 
                 for (var i in $scope.unidad.opciones) {
-                    console.log($scope.unidad.opciones[i].correcta);
                     if ($scope.unidad.opciones[i].correcta == 1) {
                         respuestasCorrectas++;
                     }
@@ -152,8 +147,33 @@ angular.module('NutrifamiWeb')
 
                 $scope.irASiguienteUnidad = function () {
                     $scope.siguienteUnidad = parseInt($routeParams.unidad) + 1;
-                    if (false) {
-                        /* Validar si es la ultima función para enviar la pagina de exito */
+                    console.log(parseInt($routeParams.unidad) + 1);
+                    console.log($scope.unidad.totalUnidades);
+                    console.log($scope.siguienteUnidad > $scope.unidad.totalUnidades);
+                    if ($scope.siguienteUnidad > $scope.unidad.totalUnidades) {
+                        var avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
+                        var lids = JSON.parse(localStorage.getItem('lids' + $routeParams.modulo));
+                        var indice = 0;
+                        
+                        /*Busca el indice basado en el id de la lección para actualizar e avance*/
+                        for (var i in lids) {
+                            if (lids[i] == $routeParams.leccion) {
+                                indice = i;
+                            }
+                        }
+                        avanceUsuario.lecciones[indice - 1] = 1;
+                        
+                        /* Mira cuantas lecciones se han terminaddo para dar un resultado final */
+                        var contador = 0;
+                        for (var i in avanceUsuario.lecciones) {
+                            if (avanceUsuario.lecciones[i] == 1) {
+                                contador++;
+                            }
+                        }
+                        avanceUsuario.leccionesTerminadas = contador;
+                        localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));
+
+                        $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $routeParams.unidad + "/leccion-terminada");
                     } else {
                         $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $scope.siguienteUnidad);
                     }
