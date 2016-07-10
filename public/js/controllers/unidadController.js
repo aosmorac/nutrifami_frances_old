@@ -8,84 +8,148 @@ angular.module('NutrifamiWeb')
                 $scope.uids = {};
                 $scope.unidades = [];
 
-                if (JSON.parse(localStorage.getItem('uids' + $routeParams.leccion)) === null) {
-                    $scope.uids = nutrifami.training.getUnidadesId($routeParams.leccion);
-                    var temp = [];
-                    for (var i in $scope.uids) {
-                        temp.push($scope.uids[i]);
+                var tempUnidad = JSON.parse(localStorage.getItem('unidad'));
+                var cargarUnidad = true;
+                if (tempUnidad !== null) {
+                    if (tempUnidad.id === $routeParams.unidad) {
+                        cargarUnidad = false;
                     }
-                    $scope.unidad = nutrifami.training.getUnidad(temp[$routeParams.unidad - 1]);
-                    localStorage.setItem("uids" + $routeParams.leccion, JSON.stringify(temp));
-                    localStorage.setItem("unidad" + $routeParams.unidad, JSON.stringify($scope.unidad));
-                    console.log($scope.unidad);
-                } else {
-                    $scope.uids = JSON.parse(localStorage.getItem('uids' + $routeParams.leccion));
-                    $scope.unidad = JSON.parse(localStorage.getItem('unidad' + $routeParams.unidad));
                 }
 
-                var opciones = [{
-                        id: 9,
-                        correcta: false,
-                        orden: 0,
-                        fecha: '',
-                        visible: true,
-                        texto: 'Consumir los alimentos con los nutrientes y la energía necesarios para',
-                        audio: {
-                            nombre: '',
-                            content: Object,
-                            loaded: false
-                        },
-                        media: {
-                            nombre: '',
-                            content: Object,
-                            loaded: false
+                if (cargarUnidad) {
+
+                    try {
+
+                        $scope.uids = nutrifami.training.getUnidadesId($routeParams.leccion);
+                        var temp = [];
+                        for (var i in $scope.uids) {
+                            temp.push($scope.uids[i]);
+                        }
+                        $scope.unidad = nutrifami.training.getUnidad(temp[$routeParams.unidad - 1]);
+                        //$scope.unidad = nutrifami.training.getUnidad(2);
+                        var tempOpciones = [];
+                        for (var i in $scope.unidad.opciones) {
+                            tempOpciones.push($scope.unidad.opciones[i]);
+                        }
+                        $scope.unidad.opciones = tempOpciones;
+
+                        if ($scope.unidad.imagen.loaded === "loaded") {
+                            $scope.unidad.imagen.mostrar = true;
+                        } else {
+                            $scope.unidad.imagen.mostrar = false;
                         }
 
-                    },{
-                        id: 10,
-                        correcta: false,
-                        orden: 0,
-                        fecha: '',
-                        visible: true,
-                        texto: 'Consumir los texto 2',
-                        audio: {
-                            nombre: '',
-                            content: Object,
-                            loaded: false
-                        },
-                        media: {
-                            nombre: '',
-                            content: Object,
-                            loaded: false
-                        }
 
-                    },{
-                        id: 11,
-                        correcta: false,
-                        orden: 0,
-                        fecha: '',
-                        visible: true,
-                        texto: 'Consumir los alimentos texto 3',
-                        audio: {
-                            nombre: '',
-                            content: Object,
-                            loaded: false
-                        },
-                        media: {
-                            nombre: '',
-                            content: Object,
-                            loaded: false
-                        }
 
-                    },
-                ];
-                
-                $scope.unidad.opciones = opciones;                
-                $scope.unidad.colspan = 12/$scope.unidad.opciones.length;
+
+
+                        localStorage.setItem("uids" + $routeParams.leccion, JSON.stringify(temp));
+                        localStorage.setItem("unidad", JSON.stringify($scope.unidad));
+                        console.log($scope.unidad);
+                    } catch (err) {
+                        alert("Error");
+                        $location.path('/');
+                    }
+                } else {
+                    $scope.uids = JSON.parse(localStorage.getItem('uids' + $routeParams.leccion));
+                    $scope.unidad = JSON.parse(localStorage.getItem('unidad'));
+                }
+
+                if ($scope.unidad.opciones.length == 3 || $scope.unidad.opciones.length == 6) {
+                    $scope.unidad.colspan = 4;
+                } else if ($scope.unidad.opciones.length == 2) {
+                    $scope.unidad.opciones.colspan == 6;
+                } else {
+                    $scope.unidad.colspan = 3;
+                }
+
+                /*
+                 * Se define el tipo de pregunta para adaptar el funcionamiento
+                 * id = 1; Opción multiple con única respuesta, y verdadero o falso.
+                 * id = 2; Opción multiple con multiple respuesta
+                 * id = 3; Parejas
+                 * 
+                 */
+                var tipoPregunta = $scope.unidad.tipo.id;
+
+                /* Obtenemos la cantidad de preguntas correctas*/
+                var respuestasCorrectas = 0;
+                var respuestasSeleccionadas = 0;
+
+
+
+                for (var i in $scope.unidad.opciones) {
+                    console.log($scope.unidad.opciones[i].correcta);
+                    if ($scope.unidad.opciones[i].correcta == 1) {
+                        respuestasCorrectas++;
+                    }
+                    $scope.unidad.opciones[i].estilo = '';
+                    $scope.unidad.opciones[i].selected = false;
+                    $scope.unidad.opciones[i].evaluacion = false;
+                    $scope.unidad.opciones[i].sticker = 'remove mal';
+                }
+
+
+
                 $scope.botonCalificar = {
                     estilo: 'no-activo',
                     disabled: 'disabled'
                 };
+
+
+                $scope.seleccionarOpcion = function (index) {
+                    if ($scope.unidad.opciones[index].selected) {
+                        $scope.unidad.opciones[index].estilo = '';
+                        $scope.unidad.opciones[index].selected = false;
+                        respuestasSeleccionadas--;
+                    } else {
+                        $scope.unidad.opciones[index].estilo = 'selected';
+                        $scope.unidad.opciones[index].selected = true;
+                        respuestasSeleccionadas++;
+                    }
+
+                    if (respuestasCorrectas === 1) {
+                        for (var i in $scope.unidad.opciones) {
+                            if (i !== index) {
+                                if ($scope.unidad.opciones[i].selected) {
+                                    $scope.unidad.opciones[i].estilo = '';
+                                    $scope.unidad.opciones[i].selected = false;
+                                    respuestasSeleccionadas--;
+                                }
+                            }
+                        }
+                    }
+
+                    if (respuestasSeleccionadas === respuestasCorrectas) {
+                        $scope.botonCalificar.estilo = 'activo';
+                        $scope.botonCalificar.disabled = '';
+                    } else {
+                        $scope.botonCalificar.estilo = 'no-activo';
+                        $scope.botonCalificar.disabled = 'disabled';
+                    }
+
+                };
+
+                $scope.calificarUnidad = function () {
+                    /* Validar si acerto o fallo*/
+                    var respuestasAcertadas = 0;
+                    for (var i in $scope.unidad.opciones) {
+                        if ($scope.unidad.opciones[i].selected) {
+                            $scope.unidad.opciones[i].evaluacion = true;
+                            if ($scope.unidad.opciones[i].selected == $scope.unidad.opciones[i].correcta) {
+                                $scope.unidad.opciones[i].sticker = 'ok bien';
+                                respuestasAcertadas++;
+                            }
+                        }
+
+                    }
+                    if (respuestasAcertadas === respuestasCorrectas) {
+                        $scope.estadoUnidad = 'acierto';
+                    } else {
+                        $scope.estadoUnidad = 'fallo';
+                    }
+                };
+
                 $scope.irASiguienteUnidad = function () {
                     $scope.siguienteUnidad = parseInt($routeParams.unidad) + 1;
                     if (false) {
@@ -94,29 +158,21 @@ angular.module('NutrifamiWeb')
                         $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $scope.siguienteUnidad);
                     }
                 };
-                $scope.reiniciarLeccion = function () {
+
+                $scope.reiniciarUnidad = function () {
+                    for (var i in $scope.unidad.opciones) {
+                        if ($scope.unidad.opciones[i].selected) {
+                            $scope.unidad.opciones[i].estilo = '';
+                            $scope.unidad.opciones[i].selected = false;
+                            $scope.unidad.opciones[i].evaluacion = false;
+                            $scope.unidad.opciones[i].sticker = 'remove mal';
+                            respuestasSeleccionadas = 0;
+                        }
+                    }
+
                     $scope.estadoUnidad = 'espera';
                     $scope.botonCalificar.estilo = 'no-activo';
                     $scope.botonCalificar.disabled = 'disabled';
-                };
-
-                $scope.seleccionarOpcion = function (estado) {
-                    if (estado) {
-                        $scope.botonCalificar.estilo = 'activo';
-                        $scope.botonCalificar.disabled = '';
-                    } else {
-                        $scope.botonCalificar.estilo = 'no-activo';
-                        $scope.botonCalificar.disabled = 'disabled';
-                    }
-                };
-
-                $scope.calificarUnidad = function () {
-                    /* Validar si acerto o fallo*/
-                    if (false) {
-                        $scope.estadoUnidad = 'acierto';
-                    } else {
-                        $scope.estadoUnidad = 'fallo';
-                    }
                 };
             }])
         .directive('opcionesUnidadInfo', function () {
@@ -124,23 +180,13 @@ angular.module('NutrifamiWeb')
                 restrict: 'E',
                 scope: {
                     info: '=',
-                    colspan: '='
+                    colspan: '=',
+                    index: '@'
                 },
                 templateUrl: 'views/directives/opcionesUnidadInfo.html',
                 link: function ($scope, $element, $attrs) {
-                    $scope.estilo = '';
-                    $scope.selected = false;
                     $scope.click = function () {
-                        if ($scope.selected) {
-                            $scope.estilo = '';
-                            $scope.selected = false;
-                            $scope.$parent.seleccionarOpcion(false);
-                        } else {
-                            $scope.estilo = 'selected';
-                            $scope.selected = true;
-                            $scope.$parent.seleccionarOpcion(true);
-                        }
-
+                        $scope.$parent.seleccionarOpcion($scope.index);
                     };
                 }
 
@@ -167,7 +213,7 @@ angular.module('NutrifamiWeb')
                 templateUrl: 'views/directives/reiniciarUnidad.html',
                 link: function ($scope, $element, $attrs) {
                     $scope.reiniciar = function () {
-                        $scope.$parent.reiniciarLeccion();
+                        $scope.$parent.reiniciarUnidad();
                     };
                 }
             };
@@ -178,7 +224,7 @@ angular.module('NutrifamiWeb')
                 scope: {},
                 templateUrl: 'views/directives/siguienteUnidad.html',
                 link: function ($scope, $element, $attrs) {
-                    $scope.click = function () {
+                    $scope.siguienteUnidad = function () {
                         $scope.$parent.irASiguienteUnidad();
                     };
                 }

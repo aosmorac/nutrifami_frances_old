@@ -534,9 +534,10 @@ header .navbar-right {
     margin-top: 30px;
     border: 1px solid #dcdcdc;
     border-radius: 10px;
+    max-width: 100%;
 }
 
-.unidad .panel-body a.unidad-link{
+.unidad .panel-body a.opcion-link{
     text-decoration: none;
 }
 

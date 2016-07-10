@@ -116,8 +116,8 @@ var nutrifami = {
                     
                     /* Información Dummy de avance de usuario */
                     avanceUsuario = {
-                        lecciones:[1,1,1,0,0],
-                        leccionesTerminadas: 3
+                        lecciones:[0,0,0,0,0],
+                        leccionesTerminadas: 0
                     };
                     localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));
 

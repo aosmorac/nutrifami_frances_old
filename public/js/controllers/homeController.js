@@ -16,7 +16,7 @@ angular.module('NutrifamiWeb')
                     }
                     localStorage.setItem("mids", JSON.stringify($scope.mids));
                     localStorage.setItem("modulos", JSON.stringify($scope.modulos));
-                    
+
                 } else {
                     $scope.mids = JSON.parse(localStorage.getItem('mids'));
                     $scope.modulos = JSON.parse(localStorage.getItem('modulos'));
@@ -41,10 +41,10 @@ angular.module('NutrifamiWeb')
                         };
                         $scope.irAlModulo = function () {
                             $scope.cargando = true;
-                            nutrifami.training.loadModulo($scope.info.id, function () {
-                                $scope.cargando = false;
-                                $location.path('/m/' + $scope.info.id);
-                            });
+                                nutrifami.training.loadModulo($scope.info.id, function () {
+                                    $scope.cargando = false;
+                                    $location.path('/m/' + $scope.info.id);
+                                });
                         };
                     }
                 };
