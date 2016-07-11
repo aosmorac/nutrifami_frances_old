@@ -33,6 +33,11 @@ angular.module('NutrifamiWeb', dependencies)
         templateUrl: 'views/unidad.tpl.html'
     });
     
+    $routeProvider.when('/m/:modulo/:leccion/:unidad/leccion-terminada/', {
+        controller: 'LeccionTerminadaController',
+        templateUrl: 'views/leccionTerminada.tpl.html'
+    });
+    
     $routeProvider.when('/perfil', {
         controller: 'PerfilController',
         templateUrl: 'views/perfil.tpl.html'
@@ -43,7 +48,7 @@ angular.module('NutrifamiWeb', dependencies)
         templateUrl: 'views/editar-perfil.tpl.html'
     })
 
-    .otherwise({ redirectTo: '/login' });
+    .otherwise({ redirectTo: '/' });
 }])
 
 
