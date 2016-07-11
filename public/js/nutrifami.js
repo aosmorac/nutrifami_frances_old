@@ -1,4 +1,5 @@
 var usuarioActivo = new Object();   /* Información del usuario logueado */
+var avanceUsuario = new Object();   /* Información de avance del usuario*/
 var familiaObj = new Object();      /* Datos de la familia del usuario logueado, incluidos miembros de la familia*/
 
 
@@ -111,6 +112,14 @@ var nutrifami = {
                     usuarioActivo.rango_60mas = parseInt(objServ.rango_60mas) || 0;
                     
                     localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
+                    
+                    
+                    /* Información Dummy de avance de usuario */
+                    avanceUsuario = {
+                        lecciones:[0,0,0,0,0],
+                        leccionesTerminadas: 0
+                    };
+                    localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));
 
                     familiaObj.codigo = '123456';
                     familiaObj.personas = Array();

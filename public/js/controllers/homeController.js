@@ -2,68 +2,50 @@
 angular.module('NutrifamiWeb')
         .controller('HomeController', ['$rootScope', '$scope', '$location', function ($rootScope, $scope, $location) {
                 'use strict';
-                var usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
-                $scope.usuarioActivo = usuarioActivo;
+                $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+                $scope.avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
                 $scope.home = "active";
+                $scope.mids = {};
+                $scope.modulos = [];
+                /* Verificamos si los modulos están guardados en el local estorage */
+                if (JSON.parse(localStorage.getItem('mids')) === null) {
+                    $scope.mids = nutrifami.training.getModulosId(3);
+                    var mid;
+                    for (mid in $scope.mids) {
+                        $scope.modulos.push(nutrifami.training.getModulo($scope.mids[mid]));
+                    }
+                    localStorage.setItem("mids", JSON.stringify($scope.mids));
+                    localStorage.setItem("modulos", JSON.stringify($scope.modulos));
 
-                $scope.modulos = [{
-                        id: 1,
-                        url:'alimentacion-saludable',
-                        titulo: 'Alimentación Saludable',
-                        imagen: '01-alimentacion-saludable/01-alimentacion-saludable.png',
-                        activo: true,
-                        lecciones: 6,
-                        completadas: 2,
-                        porcentaje: function(){
-                            return (100/this.lecciones*this.completadas);
-                        },
-                        completo: false
+                } else {
+                    $scope.mids = JSON.parse(localStorage.getItem('mids'));
+                    $scope.modulos = JSON.parse(localStorage.getItem('modulos'));
+                }
+
+            }])
+        .directive('modulosInfo', ['$location', function ($location) {
+                return {
+                    restrict: 'E',
+                    scope: {
+                        info: '=',
+                        avance: '='
                     },
-                    {
-                        id: 2,
-                        url:'beneficios-y-propiedades-de-los-alimentos',
-                        titulo: 'Benificios y propiedades de los alimentos',
-                        imagen: '01-alimentacion-saludable/02-beneficios-propiedades-alimentos.png',
-                        activo: false,
-                        lecciones: 9,
-                        completadas: 0,
-                        porcentaje: function(){
-                            return (100/this.lecciones*this.completadas);
-                        },
-                        completo: false
-                    },
-                    {
-                        id: 3,
-                        url:'alimentacion-balanceada-saludable',
-                        titulo: 'Alimentación balanceada y saludable',
-                        imagen: '01-alimentacion-saludable/03-alimentacion-balanceada-saludable.png',
-                        activo: false,
-                        lecciones: 6,
-                        completadas: 0,
-                        porcentaje: function(){
-                            return (100/this.lecciones*this.completadas);
-                        },
-                        completo: false
-                    },
-                    {
-                        id: 4,
-                        url:'los-colores-alimenticios',
-                        titulo: 'Los colores alimenticios',
-                        imagen: '01-alimentacion-saludable/04-colores-alimentos.png',
-                        activo: false,
-                        lecciones: 6,
-                        completadas: 0,
-                        porcentaje: function(){
-                            return (100/this.lecciones*this.completadas);
-                        },
-                        completo: false
-                    }];
-            }]).directive('modulosInfo', function () {
-    return {
-        restrict: 'E',
-        scope: {
-            info: '='
-        },
-        templateUrl: 'js/directives/modulosInfo.html'
-    };
-});
+                    templateUrl: 'views/directives/modulosInfo.html',
+                    link: function ($scope, $element, $attrs) {
+                        $scope.cargando = false;
+                        $scope.totalLecciones = function () {
+                            return (Object.keys($scope.info.lecciones).length);
+                        };
+                        $scope.porcentajeAvance = function () {
+                            return(100 / $scope.totalLecciones() * $scope.avance.leccionesTerminadas);
+                        };
+                        $scope.irAlModulo = function () {
+                            $scope.cargando = true;
+                                nutrifami.training.loadModulo($scope.info.id, function () {
+                                    $scope.cargando = false;
+                                    $location.path('/m/' + $scope.info.id);
+                                });
+                        };
+                    }
+                };
+            }]);
