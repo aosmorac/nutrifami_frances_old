@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/fats2005/Documents/proyectos/nutrifami-webapp/public/views/directives/opcionesUnidadInfo.html</file>
-            <file>file:/Users/fats2005/Documents/proyectos/nutrifami-webapp/public/views/editar-perfil.tpl.html</file>
-            <file>file:/Users/fats2005/Documents/proyectos/nutrifami-webapp/public/js/controllers/homeController.js</file>
-            <file>file:/Users/fats2005/Documents/proyectos/nutrifami-webapp/public/js/controllers/moduloController.js</file>
-            <file>file:/Users/fats2005/Documents/proyectos/nutrifami-webapp/public/js/controllers/unidadController.js</file>
-            <file>file:/Users/fats2005/Documents/proyectos/nutrifami-webapp/public/js/mainController.js</file>
-            <file>file:/Users/fats2005/Documents/proyectos/nutrifami-webapp/public/views/unidad.tpl.html</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/views/directives/opcionesUnidadInfo.html</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/views/directives/parejasUnidadInfo.html</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/css/style.css</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/js/controllers/unidadController.js</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/app_maquetacion/unidad-1.html</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/app_maquetacion/unidad-3.html</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/views/unidad.tpl.html</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/js/nutrifami.js</file>
         </group>
     </open-files>
 </project-private>
