@@ -41,7 +41,7 @@ angular.module('NutrifamiWeb')
                         };
                         $scope.irAlModulo = function () {
                             $scope.cargando = true;
-                                nutrifami.training.loadModulo($scope.info.id, function () {
+                                nutrifami.training.loadModulo($scope.info.id, true, function () {
                                     $scope.cargando = false;
                                     $location.path('/m/' + $scope.info.id);
                                 });
