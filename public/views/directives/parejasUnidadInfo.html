@@ -1,0 +1,17 @@
+<!--<div class="col-md-4 pareja {{ info.pareja}} {{ info.match}} {{ info.estilo}}"> 
+    <span class="btn btn-default" role="button" ng-click="click()">{{info.texto}}</span>
+</div> -->
+
+<div class="col-xs-12 col-sm-6 col-md-3">
+    <a class="opcion-link" ng-mouseover="rollover='rollover'" ng-mouseout="rollover=''" href ng-click="click()">
+        <div class="opcion pareja-con-imagen {{ rollover }} {{ info.pareja}} {{ info.match}} {{ info.estilo}}">
+            <img data-ng-src="data:{{info.media.ContentType}};base64,{{info.media.content}}" alt="{{ info.texto}}" ng-show="info.media.mostrar" />
+            <div class="sonido">
+                <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
+            </div>
+            <div class="caption">
+                <p>{{info.texto}}</p>
+            </div>
+        </div>
+    </a>
+</div>

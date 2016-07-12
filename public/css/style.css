@@ -23,16 +23,11 @@ h1, h2, h3, h4, h5, h6{
     font-family: 'Muli', sans-serif;
 }
 
-#ncontent {
-    max-width: 1280px;
-    margin: 0 auto;
-}
-
-#nlogin {
+.login {
     background-color: #1863dc;
 }
 
-#nlogin .lbox {
+.login .lbox {
     background: #3dc0fd;
     max-width: 490px;
     margin: 60px auto 25px auto;
@@ -43,7 +38,7 @@ h1, h2, h3, h4, h5, h6{
     padding: 35px 10px;
 }
 
-#nlogin .lbox .logo {
+.login .lbox .logo {
     max-width: 257px;
     height: 127px;
     margin: 0 auto 35px auto;
@@ -55,7 +50,7 @@ h1, h2, h3, h4, h5, h6{
     position: relative;
 }
 
-#nlogin .lbox .text {
+.login .lbox .text {
     max-width: 340px;
     margin: 0 auto;
     color: #fff;
@@ -66,23 +61,23 @@ h1, h2, h3, h4, h5, h6{
     font-family: 'Muli-Light', sans-serif;
 }
 
-#nlogin .lbox .form-group,
-#nlogin .lbox .form-actions,
-#nlogin .lbox .error-msj {
+.login .lbox .form-group,
+.login .lbox .form-actions,
+.login .lbox .error-msj {
     max-width: 325px;
     margin: 0 auto;
     width: 100%;
     text-align: center;
 }
 
-#nlogin .lbox .error-msj {
+.login .lbox .error-msj {
     background: #fe26a5;
     color: #fff;
     padding: 10px;
     text-align: left;
 }
 
-#nlogin .lbox form input[type="text"] {
+.login .lbox form input[type="text"] {
     color: #3dc0fd;
     font-size: 18px;
     padding: 12px 30px 12px 60px;
@@ -93,44 +88,44 @@ h1, h2, h3, h4, h5, h6{
     width: 100%;
 }
 
-#nlogin .lbox form input[type="text"]::-webkit-input-placeholder {
+.login .lbox form input[type="text"]::-webkit-input-placeholder {
     color: #3dc0fd;
     font-size: 16px;
 }
 
-#nlogin .lbox form input[type="text"]:-moz-placeholder {
+.login .lbox form input[type="text"]:-moz-placeholder {
     /* Firefox 18- */
     color: #3dc0fd;
     font-size: 16px;
 }
 
-#nlogin .lbox form input[type="text"]::-moz-placeholder {
+.login .lbox form input[type="text"]::-moz-placeholder {
     /* Firefox 19+ */
     color: #3dc0fd;
     font-size: 16px;
 }
 
-#nlogin .lbox form input[type="text"]:-ms-input-placeholder {
+.login .lbox form input[type="text"]:-ms-input-placeholder {
     color: #3dc0fd;
     font-size: 16px;
 }
 
-#nlogin .lbox .form-group .ldocumento {
+.login .lbox .form-group .ldocumento {
     background: #fff url("../img/icons/document_42x42.png") no-repeat;
     background-position: 15px center;
 }
 
-#nlogin .lbox .form-group .lcodigo {
+.login .lbox .form-group .lcodigo {
     background: #fff url("../img/icons/card_42x42.png") no-repeat;
     background-position: 15px center;
 }
 
-#nlogin .lbox .form-group .help-block {
+.login .lbox .form-group .help-block {
     margin-top: -14px;
     color: #fe26a5;
 }
 
-#nlogin .lbox .form-actions .lingresar {
+.login .lbox .form-actions .lingresar {
     background: #fe26a5;
     color: #ffffff;
     font-size: 18px;
@@ -144,16 +139,16 @@ h1, h2, h3, h4, h5, h6{
     letter-spacing: 3px;
 }
 
-#nlogin .lbox .form-actions .lingresar:hover {
+.login .lbox .form-actions .lingresar:hover {
     background: #fd0496;
 }
 
-#nlogin .wfp-logo {
+.login .wfp-logo {
     margin-bottom: 25px;
     text-align: center;
 }
 
-#nlogin .wfp-logo img {
+.login .wfp-logo img {
     width: 100%;
     max-width: 250px;
     height: auto;
@@ -545,7 +540,7 @@ header .navbar-right {
     margin: 0 28px 50px 28px;
     background-color:  #ffffff;
     border-radius: 10px;
-    height: 295px;
+    min-height: 295px;
     border: solid 1px #dcdcdc;
 }
 
@@ -575,12 +570,15 @@ header .navbar-right {
     font-size: 14pt;
     width: 75%;
 }
-.unidad .panel-body .opcion-con-imagen img{
+
+.unidad .panel-body .opcion-con-imagen img,
+.unidad .panel-body .pareja-con-imagen img{
     width: 100%;
     border-radius: 7px 7px 0 0;
 }
 
-.unidad .panel-body .opcion-con-imagen p{
+.unidad .panel-body .opcion-con-imagen p,
+.unidad .panel-body .pareja-con-imagen p{
     margin-top: 35px;
 }
 
@@ -715,6 +713,10 @@ header .navbar-right {
     margin-bottom: 100px;
 }
 
+.unidad .panel-body .pareja-con-imagen  {
+    min-height: 275px;
+}
+
 .unidad-parejas .opciones .pareja .btn-default{
     background-color: #ffffff;
     font-size: 13pt;
@@ -729,37 +731,49 @@ header .navbar-right {
     margin-bottom: 25px;
 }
 
-.unidad-parejas .opciones .pareja .btn-default:hover{
+.unidad-parejas .opciones .pareja .btn-default:hover,
+.unidad-parejas .opciones .elegido .btn-default{
     color: #09df78;
     border: 3px solid #09df78;
 }
 
-.unidad-parejas .opciones .match .btn-default{
+.unidad-parejas .opciones .match .btn-default,
+.unidad-parejas .opcion-link .match{
     -webkit-filter: opacity(30%); /* Chrome, Safari, Opera */
     filter:  opacity(30%);
 }
 
 .unidad-parejas .opciones .pareja-1 .btn-default,
-.unidad-parejas .opciones .pareja-1 .btn-default:hover{
+.unidad-parejas .opciones .pareja-1 .btn-default:hover,
+.unidad-parejas .opcion-link .pareja-1{
     color: #ffffff;
     background-color: #09df78; 
     border: 1px solid #09df78;
 }
 
 .unidad-parejas .opciones .pareja-2 .btn-default,
-.unidad-parejas .opciones .pareja-2 .btn-default:hover{
+.unidad-parejas .opciones .pareja-2 .btn-default:hover,
+.unidad-parejas .opcion-link .pareja-2{
     color: #ffffff;
     background-color: #feea45; 
     border: 1px solid #feea45;
 }
 
 .unidad-parejas .opciones .pareja-3 .btn-default,
-.unidad-parejas .opciones .pareja-3 .btn-default:hover{
+.unidad-parejas .opciones .pareja-3 .btn-default:hover,
+.unidad-parejas .opcion-link .pareja-3{
     color: #ffffff;
     background-color: #3096fc; 
     border: 1px solid #3096fc;
 }
 
+.unidad-parejas .opciones .pareja-4 .btn-default,
+.unidad-parejas .opciones .pareja-4 .btn-default:hover,
+.unidad-parejas .opcion-link .pareja-4{
+    color: #ffffff;
+    background-color: #3dc0fd; 
+    border: 1px solid #3dc0fd;
+}
 
 .unidad  .panel-body .leccion-completada .sticker .glyphicon {
     background-color: #09df78;
