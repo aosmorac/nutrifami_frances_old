@@ -1,0 +1,16 @@
+<div class="col-xs-12 col-sm-6 col-md-{{colspan}}" >
+    <a class="opcion-link" href ng-mouseover="rollover='rollover'" ng-mouseout="rollover=''" ng-click="click()">
+        <div class="opcion {{ rollover }} {{ info.estilo }} {{info.media.imagen}}">
+            <div class="caption">
+                <img data-ng-src="data:{{info.media.ContentType}};base64,{{info.media.content}}" alt="{{ info.titulo}}" ng-show="info.media.mostrar" />
+                <p>{{ info.texto }}</p>
+                <div class="boton"> 
+                    <span class="btn btn-default center-block" role="button">Seleccionar</span>
+                </div>
+                <div class="sticker" ng-show="info.evaluacion">
+                    <span class="glyphicon glyphicon-{{ info.sticker }} center-block" aria-hidden="true"></span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

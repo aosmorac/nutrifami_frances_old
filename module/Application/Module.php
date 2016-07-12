@@ -11,6 +11,9 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\Session\Config\SessionConfig;
+use Zend\Session\Container;
+use Zend\Session\SessionManager;
 
 class Module
 {
@@ -19,6 +22,16 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        
+        $sm = $e->getApplication()->getServiceManager();
+         $adapter = $sm->get('Zend\Db\Adapter\Adapter');
+\Zend\Db\TableGateway\Feature\GlobalAdapterFeature::setStaticAdapter($adapter);
+        
+        $this->initSession(array(
+            'remember_me_seconds' => 180,
+            'use_cookies' => true,
+            'cookie_httponly' => true,
+        ));
     }
 
     public function getConfig()
@@ -36,4 +49,14 @@ class Module
             ),
         );
     }
+    
+    public function initSession($config)
+    {
+        $sessionConfig = new SessionConfig();
+        $sessionConfig->setOptions($config);
+        $sessionManager = new SessionManager($sessionConfig);
+        $sessionManager->start();
+        Container::setDefaultManager($sessionManager);
+    }
+
 }
