@@ -163,6 +163,7 @@ class Capacitacion
                             , 'fecha' => $opcion['uni_inf_x_opc_fecha']
                             , 'visible' => $opcion['uni_inf_x_opc_visible']
                             , 'texto' => $opcionInfo['uni_inf_opc_texto']
+                            , 'feedback' => $opcion['uni_inf_opc_feedback']
                     );
                     if ( isset($opcionInfo['uni_inf_opc_audio']) || $opcionInfo['uni_inf_opc_audio'] != null ){
                     $data['opciones'][$opcion['uni_inf_opc_id']]['audio'] = Array('nombre' => $opcionInfo['uni_inf_opc_audio'], 'loaded'=>'empty');
