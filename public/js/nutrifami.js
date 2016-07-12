@@ -533,20 +533,43 @@ var nutrifami = {
         },
         
         /*
-         * nutrifami.training.loadModulo(mid, callback);
+         * nutrifami.training.loadModulo(mid, all, callback);
          */
-        loadModulo: function(mid, callback) {
+        loadModulo: function(mid, all, callback) {
             mid = mid || 0;
+            all = all || false;
             callback = callback || function() {};   
-            $.each(nutrifami.training.cap_modulos[mid].lecciones, function(indexlec, id_leccion) {
-                nutrifami.training.downloadLeccion(id_leccion, function(){
-                    if (nutrifami.training.cap_lecciones[id_leccion].unidades) {
-                        $.each(nutrifami.training.cap_lecciones[id_leccion].unidades, function(indexuni, id_unidad) {
-                            nutrifami.training.downloadUnidad(id_unidad, function(){
-                                console.log('Carga unidad '+id_unidad);
-                            });
-                        }); 
-                    }
+            if ( all ) {
+                $.each(nutrifami.training.cap_modulos[mid].lecciones, function(indexlec, id_leccion) {
+                    nutrifami.training.downloadLeccion(id_leccion, function(){
+                        if (nutrifami.training.cap_lecciones[id_leccion].unidades) {
+                            $.each(nutrifami.training.cap_lecciones[id_leccion].unidades, function(indexuni, id_unidad) {
+                                nutrifami.training.downloadUnidad(id_unidad, function(){
+                                    console.log('Carga unidad '+id_unidad);
+                                });
+                            }); 
+                        }
+                    });
+                }); 
+            }else {
+                $.each(nutrifami.training.cap_modulos[mid].lecciones, function(indexlec, id_leccion) {
+                    nutrifami.training.downloadLeccion(id_leccion, function(){
+                        console.log('Carga leccion '+id_leccion);
+                    });
+                }); 
+            }
+            callback();
+        },
+        
+        /*
+         * nutrifami.training.loadLeccion(lid, callback);
+         */
+        loadLeccion: function(lid, callback) {
+            lid = lid || 0;
+            callback = callback || function() {};   
+            $.each(nutrifami.training.cap_lecciones[lid].unidades, function(indexuni, id_unidad) {
+                nutrifami.training.downloadUnidad(id_unidad, function(){
+                    console.log('Carga unidad '+id_unidad);
                 });
             }); 
             callback();
