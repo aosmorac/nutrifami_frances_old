@@ -540,7 +540,7 @@ header .navbar-right {
     margin: 0 28px 50px 28px;
     background-color:  #ffffff;
     border-radius: 10px;
-    height: 295px;
+    min-height: 295px;
     border: solid 1px #dcdcdc;
 }
 
@@ -570,12 +570,15 @@ header .navbar-right {
     font-size: 14pt;
     width: 75%;
 }
-.unidad .panel-body .opcion-con-imagen img{
+
+.unidad .panel-body .opcion-con-imagen img,
+.unidad .panel-body .pareja-con-imagen img{
     width: 100%;
     border-radius: 7px 7px 0 0;
 }
 
-.unidad .panel-body .opcion-con-imagen p{
+.unidad .panel-body .opcion-con-imagen p,
+.unidad .panel-body .pareja-con-imagen p{
     margin-top: 35px;
 }
 
@@ -710,6 +713,10 @@ header .navbar-right {
     margin-bottom: 100px;
 }
 
+.unidad .panel-body .pareja-con-imagen  {
+    min-height: 275px;
+}
+
 .unidad-parejas .opciones .pareja .btn-default{
     background-color: #ffffff;
     font-size: 13pt;
@@ -730,41 +737,39 @@ header .navbar-right {
     border: 3px solid #09df78;
 }
 
-.unidad-parejas .opciones .match .btn-default{
+.unidad-parejas .opciones .match .btn-default,
+.unidad-parejas .opcion-link .match{
     -webkit-filter: opacity(30%); /* Chrome, Safari, Opera */
     filter:  opacity(30%);
 }
 
 .unidad-parejas .opciones .pareja-1 .btn-default,
-.unidad-parejas .opciones .pareja-1 .btn-default:hover{
+.unidad-parejas .opciones .pareja-1 .btn-default:hover,
+.unidad-parejas .opcion-link .pareja-1{
     color: #ffffff;
     background-color: #09df78; 
     border: 1px solid #09df78;
 }
 
 .unidad-parejas .opciones .pareja-2 .btn-default,
-.unidad-parejas .opciones .pareja-2 .btn-default:hover{
+.unidad-parejas .opciones .pareja-2 .btn-default:hover,
+.unidad-parejas .opcion-link .pareja-2{
     color: #ffffff;
     background-color: #feea45; 
     border: 1px solid #feea45;
 }
 
 .unidad-parejas .opciones .pareja-3 .btn-default,
-.unidad-parejas .opciones .pareja-3 .btn-default:hover{
+.unidad-parejas .opciones .pareja-3 .btn-default:hover,
+.unidad-parejas .opcion-link .pareja-3{
     color: #ffffff;
     background-color: #3096fc; 
     border: 1px solid #3096fc;
 }
 
 .unidad-parejas .opciones .pareja-4 .btn-default,
-.unidad-parejas .opciones .pareja-4 .btn-default:hover{
-    color: #ffffff;
-    background-color: #09df78; 
-    border: 1px solid #09df78;
-}
-
-.unidad-parejas .opciones .pareja-5 .btn-default,
-.unidad-parejas .opciones .pareja-5 .btn-default:hover{
+.unidad-parejas .opciones .pareja-4 .btn-default:hover,
+.unidad-parejas .opcion-link .pareja-4{
     color: #ffffff;
     background-color: #3dc0fd; 
     border: 1px solid #3dc0fd;
