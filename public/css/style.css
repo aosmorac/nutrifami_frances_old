@@ -457,7 +457,6 @@ header .navbar-right {
 /* UNIDADES */
 
 .unidad .panel-header .unidad-sonido {
-    color: #ffffff;
     background-color: #09df78;
     width: 64px;
     height: 64px;
@@ -469,6 +468,11 @@ header .navbar-right {
     text-align: center;
     padding-top: 12px;
     font-weight: normal;
+}
+
+.unidad .panel-header .unidad-sonido a{
+    color: #ffffff;
+    text-decoration: none;
 }
 
 .unidad .panel-header .leccion-avance .progress{
@@ -548,7 +552,7 @@ header .navbar-right {
     border: solid 1px #dcdcdc;
 }
 
-.unidad .panel-body .opcion-con-imagen  {
+.unidad .panel-body .opcion-con-imagen .opcion {
     height: 350px;
 }
 
@@ -556,15 +560,31 @@ header .navbar-right {
     margin: 0 0 50px 0;
 }
 
-.unidad .panel-body .opcion .sonido{
-    float: right;
-    margin: 13px 13px 0 0;
+.unidad .panel-body .opcion-con-imagen .sonido,
+.unidad .panel-body .sonido{
+    position: absolute;
+    right: 16px;
+    top: 183px;
+    z-index: 1000;
 }
 
-.unidad .panel-body .opcion .sonido .glyphicon{
+.unidad .panel-body .sonido{
+    top: 0px;
+}
+
+.unidad .panel-body .col-md-4 .sonido{
+    top: 0px;
+    right: 50px;
+}
+
+.unidad .panel-body .opcion-con-imagen .sonido .glyphicon,
+.unidad .panel-body .sonido .glyphicon{
+    width: 40px;
+    height: 40px;
     color: #84efbb;
     font-size: 15pt;
     text-align: center;
+    padding: 13px;
 }
 
 .unidad .panel-body .opcion p {
@@ -718,7 +738,7 @@ header .navbar-right {
 }
 
 .unidad .panel-body .pareja-con-imagen  {
-    min-height: 275px;
+    min-height: 280px;
 }
 
 .unidad-parejas .opciones .pareja .btn-default{
