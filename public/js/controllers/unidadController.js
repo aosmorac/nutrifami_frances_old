@@ -1,6 +1,6 @@
 /*global angular*/
 angular.module('NutrifamiWeb')
-        .controller('UnidadController', ['$rootScope', '$scope', '$location', '$routeParams', '$anchorScroll', function ($rootScope, $scope, $location, $routeParams, $anchorScroll) {
+        .controller('UnidadController', ['$rootScope', '$scope', '$location', '$routeParams', '$anchorScroll', 'ngAudio', function ($rootScope, $scope, $location, $routeParams, $anchorScroll, ngAudio) {
                 'use strict';
                 $anchorScroll();
                 var usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
@@ -9,7 +9,7 @@ angular.module('NutrifamiWeb')
                 $scope.uids = {};
                 $scope.unidades = [];
                 $scope.parejas = [];
-
+                
                 var tempUnidad = JSON.parse(localStorage.getItem('unidad'));
                 var cargarUnidad = true;
                 if (tempUnidad !== null) {
@@ -46,6 +46,16 @@ angular.module('NutrifamiWeb')
                             }
                         }
 
+                        if (typeof $scope.unidad.audio !== 'undefined') {
+                            console.log("Audio no definido");
+                            if ($scope.unidad.audio.loaded === "loaded") {
+                                $scope.unidad.audio.mostrar = true;
+                                $scope.unidad.audio.audio = ngAudio.load('data:' + $scope.unidad.audio.ContentType + ';base64,' + $scope.unidad.audio.content);
+                            } else {
+                                $scope.unidad.audio.mostrar = false;
+                            }
+                        }
+                        
                         console.log($scope.unidad);
 
                         localStorage.setItem("uids" + $routeParams.leccion, JSON.stringify(temp));
@@ -159,7 +169,7 @@ angular.module('NutrifamiWeb')
                     $scope.unidad.opciones.colspan = 6;
                 } else {
                     $scope.unidad.colspan = 3;
-                }/*
+                }
                  
                  
                  /*
@@ -197,6 +207,17 @@ angular.module('NutrifamiWeb')
                         } else {
                             $scope.unidad.opciones[i].media.mostrar = false;
                             $scope.unidad.opciones[i].media.imagen = '';
+                        }
+                    }
+
+                    if (typeof $scope.unidad.opciones[i].audio !== 'undefined') {
+                        if ($scope.unidad.opciones[i].audio.loaded === "loaded") {
+                            $scope.unidad.opciones[i].audio.mostrar = true;
+                            $scope.unidad.opciones[i].audio.audio = ngAudio.load('data:audio/mpeg;base64,' + $scope.unidad.opciones[i].audio.content);
+                            console.log($scope.unidad.opciones[i].audio.audio);
+
+                        } else {
+                            $scope.unidad.opciones[i].audio.mostrar = false;
                         }
                     }
                 }
@@ -329,6 +350,9 @@ angular.module('NutrifamiWeb')
                             if ($scope.unidad.opciones[i].selected == $scope.unidad.opciones[i].correcta) {
                                 $scope.unidad.opciones[i].sticker = 'ok bien';
                                 respuestasAcertadas++;
+                            }else{
+                                /* Almacena la respuesta incorrecta */
+                                $scope.unidad.feedback = $scope.unidad.opciones[i].feedback;
                             }
                         }
 
@@ -364,7 +388,6 @@ angular.module('NutrifamiWeb')
                         }
                         avanceUsuario.leccionesTerminadas = contador;
                         localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));
-
                         $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $routeParams.unidad + "/leccion-terminada");
                     } else {
                         $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $scope.siguienteUnidad);
@@ -434,7 +457,9 @@ angular.module('NutrifamiWeb')
         .directive('reiniciarUnidad', function () {
             return {
                 restrict: 'E',
-                scope: {},
+                scope: {
+                    feedback:'='
+                },
                 templateUrl: 'views/directives/reiniciarUnidad.html',
                 link: function ($scope, $element, $attrs) {
                     $scope.reiniciar = function () {

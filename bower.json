@@ -29,6 +29,7 @@
     "angular-bootstrap": "^1.3.3",
     "angular-route": "^1.5.7",
     "angular-cookies": "^1.5.7",
-    "angular-loading-overlay": "^1.1.1"
+    "angular-loading-overlay": "^1.1.1",
+    "angular-audio": "^1.7.2"
   }
 }
