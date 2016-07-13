@@ -1,7 +1,8 @@
 /*global angular*/
 angular.module('NutrifamiWeb')
-        .controller('HomeController', ['$rootScope', '$scope', '$location', function ($rootScope, $scope, $location) {
+        .controller('HomeController', ['$rootScope', '$scope', '$location', '$anchorScroll', function ($rootScope, $scope, $location, $anchorScroll) {
                 'use strict';
+                $anchorScroll();
                 $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
                 $scope.avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
                 $scope.home = "active";
@@ -41,10 +42,10 @@ angular.module('NutrifamiWeb')
                         };
                         $scope.irAlModulo = function () {
                             $scope.cargando = true;
-                                nutrifami.training.loadModulo($scope.info.id, true, function () {
-                                    $scope.cargando = false;
-                                    $location.path('/m/' + $scope.info.id);
-                                });
+                            nutrifami.training.loadModulo($scope.info.id, false, function () {
+                                $scope.cargando = false;
+                                $location.path('/m/' + $scope.info.id);
+                            });
                         };
                     }
                 };
