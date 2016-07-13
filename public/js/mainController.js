@@ -1,7 +1,7 @@
 /*
  * Configuración de angular para la aplicación Web de nutrifami
  */
-dependencies = ['Authentication', 'ngRoute', 'ngCookies'];
+dependencies = ['Authentication', 'ngRoute', 'ngCookies','ngAudio'];
 'use strict';
 
 // declare modules
