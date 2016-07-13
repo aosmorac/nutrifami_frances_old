@@ -1,6 +1,6 @@
 /*global angular*/
 angular.module('NutrifamiWeb')
-        .controller('HomeController', ['$rootScope', '$scope', '$location','$anchorScroll', function ($rootScope, $scope, $location,$anchorScroll) {
+        .controller('HomeController', ['$rootScope', '$scope', '$location', '$anchorScroll', function ($rootScope, $scope, $location, $anchorScroll) {
                 'use strict';
                 $anchorScroll();
                 $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));

@@ -551,14 +551,15 @@ var nutrifami = {
                         }
                     });
                 }); 
+                callback();
             }else {
                 $.each(nutrifami.training.cap_modulos[mid].lecciones, function(indexlec, id_leccion) {
                     nutrifami.training.downloadLeccion(id_leccion, function(){
                         console.log('Carga leccion '+id_leccion);
                     });
                 }); 
+                callback();
             }
-            callback();
         },
         
         /*
