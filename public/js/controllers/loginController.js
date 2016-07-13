@@ -5,6 +5,7 @@ angular.module('Authentication')
         'use strict';
         // reset login status
         AuthenticationService.ClearCredentials();
+        localStorage.clear();
 
         $scope.login = function() {
             $scope.dataLoading = true;
