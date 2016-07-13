@@ -10,7 +10,7 @@ angular.module('NutrifamiWeb')
                 $scope.lecciones = [];
 
                 /* Verificamos si los modulos están guardados en el local estorage */
-                if (JSON.parse(localStorage.getItem('modulo'+$routeParams.modulo)) === null) {
+                if (JSON.parse(localStorage.getItem('modulo' + $routeParams.modulo)) === null) {
                     var temp = nutrifami.training.getModulo($routeParams.modulo);
                     $scope.modulo.id = temp.id;
                     $scope.modulo.titulo = temp.titulo;
@@ -21,13 +21,13 @@ angular.module('NutrifamiWeb')
                     for (lid in $scope.lids) {
                         $scope.lecciones.push(nutrifami.training.getLeccion($scope.lids[lid]));
                     }
-                    localStorage.setItem("modulo"+$routeParams.modulo, JSON.stringify($scope.modulo));
-                    localStorage.setItem("lids"+$routeParams.modulo, JSON.stringify($scope.lids));
-                    localStorage.setItem("lecciones"+$routeParams.modulo, JSON.stringify($scope.lecciones));
+                    localStorage.setItem("modulo" + $routeParams.modulo, JSON.stringify($scope.modulo));
+                    localStorage.setItem("lids" + $routeParams.modulo, JSON.stringify($scope.lids));
+                    localStorage.setItem("lecciones" + $routeParams.modulo, JSON.stringify($scope.lecciones));
                 } else {
-                    $scope.modulo = JSON.parse(localStorage.getItem('modulo'+$routeParams.modulo));
-                    $scope.lids = JSON.parse(localStorage.getItem('lids'+$routeParams.modulo));
-                    $scope.lecciones = JSON.parse(localStorage.getItem('lecciones'+$routeParams.modulo));
+                    $scope.modulo = JSON.parse(localStorage.getItem('modulo' + $routeParams.modulo));
+                    $scope.lids = JSON.parse(localStorage.getItem('lids' + $routeParams.modulo));
+                    $scope.lecciones = JSON.parse(localStorage.getItem('lecciones' + $routeParams.modulo));
                 }
 
                 if (!$scope.modulo) {
@@ -45,6 +45,21 @@ angular.module('NutrifamiWeb')
                 $scope.porcentajeAvance = function () {
                     return(100 / $scope.modulo.totalLecciones * $scope.avanceUsuario.leccionesTerminadas);
                 };
+                $scope.irALeccion = function (index) {
+                    console.log(index);
+                    console.log($scope.lids[index]);
+                    try {
+                        nutrifami.training.loadLeccion($scope.lids[index], function () {
+                            /* Acciones en el callback */
+                            console.log("Pasa algo");
+                            $location.path('/m/' + $routeParams.modulo + "/" + $scope.lids[index] + "/1");
+                        });
+                    } catch (err) {
+                        $location.path('/');
+                    }
+
+
+                };
             }]).directive('leccionesInfo', function () {
     return {
         restrict: 'E',
@@ -57,6 +72,9 @@ angular.module('NutrifamiWeb')
         link: function ($scope, $element, $attrs) {
             $scope.porcentajeAvance = function () {
                 return(100 / $scope.totalLecciones() * $scope.avance.leccionesTerminadas);
+            };
+            $scope.click = function () {
+                $scope.$parent.irALeccion($scope.index);
             };
         }
     };
