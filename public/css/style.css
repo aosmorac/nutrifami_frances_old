@@ -258,6 +258,10 @@ header .navbar-right {
 
 }
 
+.modulos .panel-body .deshabilitar{
+    background-color: gray;
+}
+
 .modulos .panel-body .modulo  {
     margin: 0 28px 50px 28px;
     background-color: #0dcd71;
