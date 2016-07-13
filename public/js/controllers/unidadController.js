@@ -9,16 +9,16 @@ angular.module('NutrifamiWeb')
                 $scope.uids = {};
                 $scope.unidades = [];
                 $scope.parejas = [];
-                
-                var tempUnidad = JSON.parse(localStorage.getItem('unidad'));
+
+                /*var tempUnidad = JSON.parse(localStorage.getItem('unidad'));
                 var cargarUnidad = true;
                 if (tempUnidad !== null) {
                     if (tempUnidad.id === $routeParams.unidad) {
                         cargarUnidad = false;
                     }
-                }
+                }*/
 
-                if (cargarUnidad) {
+                /*if (cargarUnidad) {*/
 
                     try {
 
@@ -38,7 +38,6 @@ angular.module('NutrifamiWeb')
 
 
                         if (typeof $scope.unidad.imagen !== 'undefined') {
-                            console.log("imagen no definida");
                             if ($scope.unidad.imagen.loaded === "loaded") {
                                 $scope.unidad.imagen.mostrar = true;
                             } else {
@@ -47,7 +46,6 @@ angular.module('NutrifamiWeb')
                         }
 
                         if (typeof $scope.unidad.audio !== 'undefined') {
-                            console.log("Audio no definido");
                             if ($scope.unidad.audio.loaded === "loaded") {
                                 $scope.unidad.audio.mostrar = true;
                                 $scope.unidad.audio.audio = ngAudio.load('data:' + $scope.unidad.audio.ContentType + ';base64,' + $scope.unidad.audio.content);
@@ -55,18 +53,20 @@ angular.module('NutrifamiWeb')
                                 $scope.unidad.audio.mostrar = false;
                             }
                         }
-                        
+
                         console.log($scope.unidad);
 
-                        localStorage.setItem("uids" + $routeParams.leccion, JSON.stringify(temp));
-                        localStorage.setItem("unidad", JSON.stringify($scope.unidad));
+                        /*localStorage.setItem("uids" + $routeParams.leccion, JSON.stringify(temp));
+                        localStorage.setItem("unidad", JSON.stringify($scope.unidad));*/
                     } catch (err) {
+                        console.log("Hay un error");
+                        console.log(err.message);
                         $location.path('/');
                     }
-                } else {
+                /*} else {
                     $scope.uids = JSON.parse(localStorage.getItem('uids' + $routeParams.leccion));
                     $scope.unidad = JSON.parse(localStorage.getItem('unidad'));
-                }
+                }*/
 
                 /*  DATOS DUMMY PARA PROBAR PAREJAS */
                 /*var opciones = [
@@ -170,18 +170,9 @@ angular.module('NutrifamiWeb')
                 } else {
                     $scope.unidad.colspan = 3;
                 }
-                 
-                 
-                 /*
-                 * Se define el tipo de pregunta para adaptar el funcionamiento
-                 * id = 1 ; Contenidos
-                 * id = 2; Parejas
-                 * id = 3,4,5; Opción multiple con única respuesta, y verdadero o falso.
-                 * 
-                 */
 
-                $scope.tipoPregunta = $scope.unidad.tipo.id;
-                /*$scope.tipoPregunta = 2;*/
+
+
 
                 /* Obtenemos la cantidad de preguntas correctas*/
                 var respuestasCorrectas = 0;
@@ -214,13 +205,15 @@ angular.module('NutrifamiWeb')
                         if ($scope.unidad.opciones[i].audio.loaded === "loaded") {
                             $scope.unidad.opciones[i].audio.mostrar = true;
                             $scope.unidad.opciones[i].audio.audio = ngAudio.load('data:audio/mpeg;base64,' + $scope.unidad.opciones[i].audio.content);
-                            console.log($scope.unidad.opciones[i].audio.audio);
+                            console.log("Audio: " + $scope.unidad.opciones[i].audio.audio);
 
                         } else {
                             $scope.unidad.opciones[i].audio.mostrar = false;
                         }
                     }
                 }
+
+                console.log("1");
 
 
 
@@ -263,6 +256,8 @@ angular.module('NutrifamiWeb')
                     }
 
                 };
+
+                console.log("2");
 
                 var parejasContador = 0;
                 var pareja1Orden = 0;
@@ -341,6 +336,9 @@ angular.module('NutrifamiWeb')
 
                 };
 
+                console.log("3");
+
+
                 $scope.calificarUnidad = function () {
                     /* Validar si acerto o fallo*/
                     var respuestasAcertadas = 0;
@@ -350,7 +348,7 @@ angular.module('NutrifamiWeb')
                             if ($scope.unidad.opciones[i].selected == $scope.unidad.opciones[i].correcta) {
                                 $scope.unidad.opciones[i].sticker = 'ok bien';
                                 respuestasAcertadas++;
-                            }else{
+                            } else {
                                 /* Almacena la respuesta incorrecta */
                                 $scope.unidad.feedback = $scope.unidad.opciones[i].feedback;
                             }
@@ -363,6 +361,7 @@ angular.module('NutrifamiWeb')
                         $scope.estadoUnidad = 'fallo';
                     }
                 };
+                console.log("4");
 
                 $scope.irASiguienteUnidad = function () {
                     $scope.siguienteUnidad = parseInt($routeParams.unidad) + 1;
@@ -390,9 +389,13 @@ angular.module('NutrifamiWeb')
                         localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));
                         $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $routeParams.unidad + "/leccion-terminada");
                     } else {
+                        console.log('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $scope.siguienteUnidad);
                         $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $scope.siguienteUnidad);
                     }
                 };
+
+                console.log("5");
+
 
                 $scope.reiniciarUnidad = function () {
                     for (var i in $scope.unidad.opciones) {
@@ -458,7 +461,7 @@ angular.module('NutrifamiWeb')
             return {
                 restrict: 'E',
                 scope: {
-                    feedback:'='
+                    feedback: '='
                 },
                 templateUrl: 'views/directives/reiniciarUnidad.html',
                 link: function ($scope, $element, $attrs) {
