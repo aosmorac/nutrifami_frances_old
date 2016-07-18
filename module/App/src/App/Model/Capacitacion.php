@@ -45,6 +45,77 @@ class Capacitacion
         $this->capacitacionTable = new CapCapacitacionTable();
     }
     
+    public function getAll() {
+        $capacitaciones =  $this->capacitacionTable->getCapacitacion(0); 
+        $data = Array();
+        $dataCapacitacionesId = Array();
+        $dataCapacitaciones = Array();
+        $dataModulos = Array();
+        $leccionesId = Array();
+        $dataLecciones = Array();
+        $unidadesId = Array();
+        $dataUnidadesinformacion = Array();
+        foreach ($capacitaciones AS $capacitacion) {
+            $dataCapacitaciones[$capacitacion['cap_id']] = Array('id'=> $capacitacion['cap_id']
+                                                , 'titulo'=> $capacitacion['cap_titulo']
+                                                , 'descripcion'=> $capacitacion['cap_descripcion']
+                                                , 'fecha'=> $capacitacion['cap_fecha']
+                                                , 'activo'=> $capacitacion['cap_activo']
+                    );
+            $tipoObj = new CapCapacitacionTipoTable();
+            $tipo = $tipoObj->getTipo($capacitacion['cap_tip_id'], $capacitacion['cap_tip_alias']);
+            $dataCapacitaciones[$capacitacion['cap_id']]['tipo'] = Array(
+                        'id'=> $tipo['cap_tip_id'],
+                        'alias'=> $tipo['cap_tip_alias'],
+                        'nombre'=> $tipo['cap_tip_nombre'],
+                        'descripcion'=> $tipo['cap_tip_descripcion']
+                    );
+            $elementosObj = new CapCapacitacionElementoTable;
+            $elementos = $elementosObj->getIdListByCapacitacion($capacitacion['cap_id']);
+            $dataCapacitaciones[$capacitacion['cap_id']]['modulos'] = Array();
+            $dataCapacitacionesId[] = $capacitacion['cap_id'];
+            foreach ( $elementos AS $elemento ){ 
+                $dataCapacitaciones[$capacitacion['cap_id']]['modulos'][$elemento['order']] = $elemento['id'];
+                $moduloData = $this->getModulo($elemento['id'], true);
+                if (count($leccionesId) > 0) {
+                    $leccionesId = array_merge($leccionesId, $moduloData['leccionesId']);
+                }else {
+                    $leccionesId = $moduloData['leccionesId'];
+                }
+                $moduloData['modulo']['completo'] = false;
+                $dataModulos[$elemento['id']] = $moduloData['modulo'];
+            }
+        }
+        foreach ( $leccionesId AS $lid ) {
+            $leccionData = $this->getLeccion($lid, true);
+            $dataLecciones[$lid] = $leccionData['leccion'];
+            $dataLecciones[$lid]['completo'] = false;
+            if (count($unidadesId) > 0) {
+                $unidadesId = array_merge($unidadesId, $leccionData['unidadesId']);
+            }else {
+                $unidadesId = $leccionData['unidadesId'];
+            }
+        }
+        foreach ( $unidadesId AS $uid ){
+            $dataUnidadesinformacion[$uid] = $this->getUnidad($uid);
+            $dataUnidadesinformacion[$uid]['completo'] = false;
+        }
+        $data['cap_capacitacionesId'] = $dataCapacitacionesId;
+        $dataCapacitaciones['completo'] = false;
+        $data['cap_capacitaciones'] = $dataCapacitaciones;
+        $data['cap_modulos'] = $dataModulos;
+        $data['cap_lecciones'] = $dataLecciones;
+        $data['cap_unidadesinformacion'] = $dataUnidadesinformacion;
+        
+        $file = 'var serv_capacitacionesId = '.json_encode($dataCapacitacionesId).';';
+        $file .= 'var serv_capacitaciones = '.json_encode($dataCapacitaciones).';';
+        $file .= 'var serv_modulos = '.json_encode($dataModulos).';';
+        $file .= 'var serv_lecciones = '.json_encode($dataLecciones).';';
+        $file .= 'var serv_unidades = '.json_encode($dataUnidadesinformacion).';';
+        
+        return $file;
+    }
+    
     /*
      * 
      */
@@ -77,7 +148,7 @@ class Capacitacion
     }
     
     
-    public function getModulo($mid = 0){
+    public function getModulo($mid = 0, $getLecciones = false){
         $moduloTable = new CapModuloTable();
         $modulo = $moduloTable->getModulo($mid);
         $data = Array();
@@ -85,20 +156,31 @@ class Capacitacion
            $data['id'] = $modulo['mod_id']; 
            $data['titulo'] = $modulo['mod_titulo']; 
            $data['descripcion'] = $modulo['mod_descripcion']; 
-           $data['imagen'] = Array('nombre' => $modulo['mod_imagen'], 'loaded'=>'empty');
+           $data['imagen'] = Array('url' => 'https://s3.amazonaws.com/nutrifami/'.$modulo['mod_imagen'], 'nombre' => $modulo['mod_imagen'], 'loaded'=>'empty');
            $data['fecha'] = $modulo['mod_fecha']; 
            $data['activo'] = $modulo['mod_activo']; 
+           $data['lecciones'] = Array();
            $elementosObj = new CapModuloElementoTable();
            $elementos = $elementosObj->getIdListByModulo($modulo['mod_id']);
+           $aElementos = Array();
            foreach ( $elementos AS $elemento ){ 
-                $data['lecciones'][$elemento['order']] = $elemento['id'];
+                $aElementos[$elemento['order']] = $elemento['id'];
+           }
+           $leccionesId = Array();
+           foreach ( $aElementos AS $elemento ){ 
+                $data['lecciones'][] = $elemento;
+                $leccionesId[$elemento] = $elemento;
            }
         }
-        return $data;
+        if ($getLecciones) {
+            return Array('modulo' => $data, 'leccionesId' => $leccionesId );
+        }else{
+            return $data;
+        }
     }
     
     
-    public function getLeccion ($lid = 0) {
+    public function getLeccion ($lid = 0, $getUnidades = false) {
         $leccionTable = new CapLeccionTable();
         $leccion = $leccionTable->getLeccion($lid);
         $data = Array();
@@ -106,17 +188,29 @@ class Capacitacion
             $data['id'] = $leccion['lec_id']; 
             $data['titulo'] = $leccion['lec_titulo']; 
             $data['descripcion'] = $leccion['lec_descripcion']; 
-            $data['imagen'] = Array('nombre' => $leccion['lec_imagen'], 'loaded'=>'empty');
+            $data['imagen'] = Array('url' => 'https://s3.amazonaws.com/nutrifami/'.$leccion['lec_imagen'], 'nombre' => $leccion['lec_imagen'], 'loaded'=>'empty');
             $data['fecha'] = $leccion['lec_fecha']; 
             $data['activo'] = $leccion['lec_activo']; 
             $elementosObj = new CapLeccionElementoTable();
-            $elementos = $elementosObj->getIdListByLeccion($leccion['lec_id']);           
+            $elementos = $elementosObj->getIdListByLeccion($leccion['lec_id']);       
+            $aElementos = Array();
             foreach ( $elementos AS $elemento ) {
                 $orderU = substr('0'.$elemento['order'], -2).substr('0'.$elemento['father'], -2);
-                $data['unidades'][$orderU] = $elemento['id'];
+                $aElementos[$orderU] = $elemento['id'];
+            }
+            $unidadesId = Array();
+            foreach ( $aElementos AS $elemento ){ 
+                 $data['unidades'][] = $elemento;
+                 if ($getUnidades) {
+                     $unidadesId[$elemento] = $elemento;
+                 }
             }
         }
-        return $data;
+        if ($getUnidades) {
+            return Array('leccion' => $data, 'unidadesId' => $unidadesId );
+        }else{
+            return $data;
+        }
     }
     
     
@@ -134,13 +228,13 @@ class Capacitacion
             $data['instruccion'] = $unidad['uni_inf_instruccion'];
             $data['texto'] = $unidad['uni_inf_texto'];
             if ( isset($unidad['uni_inf_imagen']) || $unidad['uni_inf_imagen'] != null ){
-                $data['imagen'] = Array('nombre' => $unidad['uni_inf_imagen'], 'loaded'=>'empty');
+                $data['imagen'] = Array('url' => 'https://s3.amazonaws.com/nutrifami/'.$unidad['uni_inf_imagen'], 'nombre' => $unidad['uni_inf_imagen'], 'loaded'=>'empty');
             }
             if ( isset($unidad['uni_inf_audio']) || $unidad['uni_inf_audio'] != null ){
-                $data['audio'] = Array('nombre' => $unidad['uni_inf_audio'], 'loaded'=>'empty');
+                $data['audio'] = Array('url' => 'https://s3.amazonaws.com/nutrifami/'.$unidad['uni_inf_audio'], 'nombre' => $unidad['uni_inf_audio'], 'loaded'=>'empty');
             }
             if ( isset($unidad['uni_inf_media']) || $unidad['uni_inf_media'] != null ){
-                $data['media'] = Array('nombre' => $unidad['uni_inf_media'], 'loaded'=>'empty');
+                $data['media'] = Array('url' => 'https://s3.amazonaws.com/nutrifami/'.$unidad['uni_inf_media'], 'nombre' => $unidad['uni_inf_media'], 'loaded'=>'empty');
             }
             
             $data['fecha'] = $unidad['uni_inf_fecha'];
@@ -166,10 +260,10 @@ class Capacitacion
                             , 'feedback' => $opcion['uni_inf_opc_feedback']
                     );
                     if ( isset($opcionInfo['uni_inf_opc_audio']) || $opcionInfo['uni_inf_opc_audio'] != null ){
-                    $data['opciones'][$opcion['uni_inf_opc_id']]['audio'] = Array('nombre' => $opcionInfo['uni_inf_opc_audio'], 'loaded'=>'empty');
+                    $data['opciones'][$opcion['uni_inf_opc_id']]['audio'] = Array('url' => 'https://s3.amazonaws.com/nutrifami/'.$opcionInfo['uni_inf_opc_audio'], 'nombre' => $opcionInfo['uni_inf_opc_audio'], 'loaded'=>'empty');
                     }
                     if ( isset($opcionInfo['uni_inf_opc_media']) || $opcionInfo['uni_inf_opc_media'] != null ){
-                        $data['opciones'][$opcion['uni_inf_opc_id']]['media'] = Array('nombre' => $opcionInfo['uni_inf_opc_media'], 'loaded'=>'empty');
+                        $data['opciones'][$opcion['uni_inf_opc_id']]['media'] = Array('url' => 'https://s3.amazonaws.com/nutrifami/'.$opcionInfo['uni_inf_opc_media'], 'nombre' => $opcionInfo['uni_inf_opc_media'], 'loaded'=>'empty');
                     }
                 }
             }
