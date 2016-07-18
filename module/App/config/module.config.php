@@ -16,7 +16,7 @@ return array(
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
-            'application' => array(
+            'app' => array(
                 'type'    => 'Literal',
                 'options' => array(
                     'route'    => '/app',
@@ -47,7 +47,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'App\Controller\Index' => 'App\Controller\IndexController',
-            'App\Controller\Api' => 'App\Controller\ApiController'
+            'App\Controller\Api' => 'App\Controller\ApiController'    
         ),
     ),
     'view_manager' => array(
