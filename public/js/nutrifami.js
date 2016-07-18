@@ -259,11 +259,11 @@ var nutrifami = {
         initClient: function(callback) {
             callback = callback || function() {};
             
-            // this.cap_capacitacion = LocalStorage Si existe;
-            // this.cap_modulos = LocalStorage Si existe;
-            // this.cap_lecciones = LocalStorage Si existe;
-            // this.cap_unidadesinformacion = LocalStorage Si existe;
-            // this.cap_loadContentProgress = LocalStorage Si existe;
+            nutrifami.training.cap_capacitacionesId = serv_capacitacionesId;
+            nutrifami.training.cap_capacitaciones = serv_capacitaciones;
+            nutrifami.training.cap_modulos = serv_modulos;
+            nutrifami.training.cap_lecciones = serv_lecciones;
+            nutrifami.training.cap_unidadesinformacion = serv_unidades;
             
         }, 
         
@@ -520,6 +520,8 @@ var nutrifami = {
          * nutrifami.training.loadCapacitacion(callback);
          */
         loadCapacitacion: function(callback){
+            callback();
+            /*
             callback = callback || function() {};
             nutrifami.training.downloadCapacitacion(0, function(){
                 $.each(nutrifami.training.cap_capacitaciones, function(indexcap, capacitaciones) {
@@ -530,6 +532,7 @@ var nutrifami = {
                     }); 
                 }); 
             });
+            */
         },
         
         /*
@@ -539,6 +542,8 @@ var nutrifami = {
             mid = mid || 0;
             all = all || false;
             callback = callback || function() {};   
+            callback();
+            /*
             if ( all ) {
                 $.each(nutrifami.training.cap_modulos[mid].lecciones, function(indexlec, id_leccion) {
                     nutrifami.training.downloadLeccion(id_leccion, function(){
@@ -559,7 +564,7 @@ var nutrifami = {
                     });
                 }); 
                 callback();
-            }
+            }*/
         },
         
         /*
@@ -568,12 +573,15 @@ var nutrifami = {
         loadLeccion: function(lid, callback) {
             lid = lid || 0;
             callback = callback || function() {};   
+            callback();
+            /*
             $.each(nutrifami.training.cap_lecciones[lid].unidades, function(indexuni, id_unidad) {
                 nutrifami.training.downloadUnidad(id_unidad, function(){
                     console.log('Carga unidad '+id_unidad);
                 });
             }); 
             callback();
+            */
         },
         
         /*
