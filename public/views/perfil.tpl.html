@@ -5,66 +5,97 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel">
                     <div class="boton-flotante">
-                        <a class="btn btn-default" href="#/editar-perfil" role="button">Editar Info<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                        <a class="btn btn-default" ng-href="#/editar-perfil" role="button">Editar Info<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                     </div>
                     <div class="panel-header">
-                        <img src="../img/ico-{{usuarioActivo.genero}}.png">
+                        <img ng-src="../img/ico-{{usuarioActivo.genero}}.png">
                         <h1>Mi información</h1>
                     </div>
                     <div class="panel-body">
+                        <div ng-show="mensaje.estado" class="alert alert-success" role="alert">{{mensaje.texto}}</div>
                         <form>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Nombres</label>
-                                    <p class="{{ usuarioActivo.nombre | estilo }}">{{ usuarioActivo.nombre | capitalize:true | esVacio }}</p>
+                                    <label>Nombres</label>
+                                    <p class="{{ usuarioActivo.nombre | estilo }}" ng-class="">{{ usuarioActivo.nombre | esVacio }}</p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Apellidos</label>
-                                    <p class="{{ usuarioActivo.apellido | estilo }}">{{ usuarioActivo.apellido | capitalize:true | esVacio }}</p>
+                                    <label>Apellidos</label>
+                                    <p class="{{ usuarioActivo.apellido | estilo }}">{{ usuarioActivo.apellido | esVacio }}</p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Documento de Identidad</label>
+                                    <label>Documento de Identidad</label>
                                     <p class="{{ usuarioActivo.login_documento | estilo }}">{{ usuarioActivo.login_documento }}</p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Genero</label>
-                                    <p class="{{ usuarioActivo.genero | estilo }}">{{ usuarioActivo.genero | capitalize:true | esVacio}}</p>
+                                    <label>Correo electrónico</label>
+                                    <p class="{{ usuarioActivo.email | estilo }}">{{ usuarioActivo.email }}</p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Etnia</label>
-                                    <p class="{{ usuarioActivo.etnia | estilo }}">{{ usuarioActivo.etnia | capitalize:true | esVacio}}</p>
+                                    <label>Dirección</label>
+                                    <p class="{{ usuarioActivo.direccion | estilo }}">{{ usuarioActivo.direccion }}</p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Fecha de Nacimiento</label>
-                                    <p class="{{ usuarioActivo.nacimiento | estilo }}">{{ usuarioActivo.nacimiento | capitalize:true | esVacio }}</p>
+                                    <label>Teléfono</label>
+                                    <p class="{{ usuarioActivo.telefono | estilo }}">{{ usuarioActivo.telefono }}</p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Departamento</label>
-                                    <p class="{{ usuarioActivo.departamento | estilo }}">{{ usuarioActivo.departamento | capitalize:true | esVacio }}</p>
+                                    <label>Genero</label>
+                                    <p class="{{ usuarioActivo.genero | estilo }}">{{ usuarioActivo.genero | esVacio}}</p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Municipio</label>
-                                    <p class="{{ usuarioActivo.municipio | estilo }}">{{ usuarioActivo.municipio | capitalize:true | esVacio }}</p>
+                                    <label>Etnia</label>
+                                    <p class="{{ usuarioActivo.etnia | estilo }}">{{ usuarioActivo.etnia | esVacio}}</p>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Comunidad</label>
-                                    <p class="{{ usuarioActivo.comunidad | estilo }}">{{ usuarioActivo.comunidad | capitalize:true | esVacio }}</p>
+                                    <label>Fecha de Nacimiento</label>
+                                    <p class="{{ usuarioActivo.birthdate | estilo }}" >{{ usuarioActivo.birthdate | esVacio }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label>Edad</label>
+                                    <p class="{{ usuarioActivo.edad | estilo }}" >{{ usuarioActivo.edad | esVacio }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label>Departamento</label>
+                                    <p class="{{ usuarioActivo.departamento | estilo }}">{{ usuarioActivo.departamento  | esVacio }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label>Municipio</label>
+                                    <p class="{{ usuarioActivo.municipio | estilo }}">{{ usuarioActivo.municipio  | esVacio }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label>Comunidad</label>
+                                    <p class="{{ usuarioActivo.comunidad | estilo }}">{{ usuarioActivo.comunidad  | esVacio }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <label>Zona</label>
+                                    <p class="{{ usuarioActivo.zona | estilo }}">{{ usuarioActivo.zona  | esVacio }}</p>
                                 </div>
                             </div>
                         </form>
@@ -79,7 +110,7 @@
                         <!--<a class="btn btn-default" href="#" role="button">Agregar<span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>-->
                     </div>
                     <div class="panel-header">
-                        <img src="../img/ico-familia.png">
+                        <img ng-src="../img/ico-familia.png">
                         <h1>Mi familia</h1>
                         <h3>{{ usuarioActivo.miembrosFamilia }}</h3>
                     </div>
@@ -94,27 +125,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-if="usuarioActivo.rango_0a2 !== 0">
+                                    <tr ng-hide="usuarioActivo.rango_0a2 === '0'">
                                         <td>{{ usuarioActivo.rango_0a2 }}</td>
                                         <td>0 a 2 años</td>
                                         <!--<td><a href="#">Editar</a></td>-->
                                     </tr>
-                                    <tr ng-if="usuarioActivo.rango_2a5 !== 0">
+                                    <tr ng-hide="usuarioActivo.rango_2a5 === '0'">
                                         <td>{{ usuarioActivo.rango_2a5 }}</td>
                                         <td>2 a 5 años</td>
                                         <!--<td><a href="#">Editar</a></td>-->
                                     </tr>
-                                    <tr ng-if="usuarioActivo.rango_6a17 !== 0">
+                                    <tr ng-hide="usuarioActivo.rango_6a17 === '0'">
                                         <td>{{ usuarioActivo.rango_6a17 }}</td>
                                         <td>6 a 17 años</td>
                                         <!--<td><a href="#">Editar</a></td>-->
                                     </tr>
-                                    <tr ng-if="usuarioActivo.rango_18a60 !== 0">
+                                    <tr ng-hide="usuarioActivo.rango_18a60 === '0'">
                                         <td>{{ usuarioActivo.rango_18a60 }}</td>
                                         <td>18 a 60 años</td>
                                         <!--<td><a href="#">Editar</a></td>-->
                                     </tr>
-                                    <tr ng-if="usuarioActivo.rango_60mas !== 0">
+                                    <tr ng-hide="usuarioActivo.rango_60mas === '0'">
                                         <td>{{ usuarioActivo.rango_60mas }}</td>
                                         <td>60 o más años</td>
                                         <!--<td><a href="#">Editar</a></td>-->
@@ -122,7 +153,7 @@
                                     <tr>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+                                        <!--<td></td>-->
                                     </tr>
                                 </tbody>
                             </table>
@@ -134,7 +165,7 @@
         <footer>
             <div class="row text-center">
                 <div class="col-md-12">
-                    <img src="../img/wfp_blue.png">
+                    <img ng-src="../img/wfp_blue.png">
                 </div>
             </div>
         </footer>

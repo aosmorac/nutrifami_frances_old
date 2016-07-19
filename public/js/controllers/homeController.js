@@ -1,28 +1,18 @@
 /*global angular*/
 angular.module('NutrifamiWeb')
-        .controller('HomeController', ['$rootScope', '$scope', '$location', '$anchorScroll', function ($rootScope, $scope, $location, $anchorScroll) {
+        .controller('HomeController', ['$scope', '$anchorScroll', function ($scope, $anchorScroll) {
                 'use strict';
                 $anchorScroll();
                 $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
                 $scope.avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
                 $scope.home = "active";
-                $scope.mids = {};
                 $scope.modulos = [];
-                /* Verificamos si los modulos están guardados en el local estorage */
-                if (JSON.parse(localStorage.getItem('mids')) === null) {
-                    $scope.mids = nutrifami.training.getModulosId(3);
-                    var mid;
-                    for (mid in $scope.mids) {
-                        $scope.modulos.push(nutrifami.training.getModulo($scope.mids[mid]));
-                    }
-                    localStorage.setItem("mids", JSON.stringify($scope.mids));
-                    localStorage.setItem("modulos", JSON.stringify($scope.modulos));
-
-                } else {
-                    $scope.mids = JSON.parse(localStorage.getItem('mids'));
-                    $scope.modulos = JSON.parse(localStorage.getItem('modulos'));
+                /* Obtenemos los ids de los modulos de la capacitación 3 */
+                $scope.mids = nutrifami.training.getModulosId(3);
+                /*Creamos un arreglo para poder recorerlo y mostrarlo a traves de directivas */
+                for (var mid in $scope.mids) {
+                    $scope.modulos.push(nutrifami.training.getModulo($scope.mids[mid]));
                 }
-
             }])
         .directive('modulosInfo', ['$location', function ($location) {
                 return {
@@ -42,10 +32,7 @@ angular.module('NutrifamiWeb')
                         };
                         $scope.irAlModulo = function () {
                             $scope.cargando = true;
-                            nutrifami.training.loadModulo($scope.info.id, false, function () {
-                                $scope.cargando = false;
-                                $location.path('/m/' + $scope.info.id);
-                            });
+                            $location.path('/m/' + $scope.info.id);
                         };
                     }
                 };
