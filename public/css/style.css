@@ -162,7 +162,7 @@ header .navbar {
     background-color: #09df78;
     border-radius: 0;
     border: solid 0;
-    height: 60px;
+    min-height: 60px;
     color: #ffffff;
     margin: 0;
 }
@@ -191,6 +191,17 @@ header .navbar-right {
     padding-right: 35px;
 }
 
+header .navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #ffffff;
+}
+header .navbar-default .navbar-toggle {
+    border-color: #ffffff;
+}
+
+header .navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
 /*  PANELES GENERALES */
 .panel {
     margin-top: 73px;
@@ -207,6 +218,11 @@ header .navbar-right {
     top: 90px;
 }
 
+@media(max-width:991px){
+    .panel .boton-flotante {
+        top: 10px;
+    }
+}
 .panel .boton-flotante a,
 .panel .boton-flotante a:hover {
     height: 38px;
@@ -256,6 +272,10 @@ header .navbar-right {
 .modulos .panel-body  {
     margin-top: 75px;
 
+}
+
+.panel .panel-body .alert {
+    text-align: center;
 }
 
 .modulos .panel-body .deshabilitar{
@@ -838,6 +858,7 @@ header .navbar-right {
 .panel-body .form-group .sin-registro {
     font-size: 10pt;
     padding: 6px 22px;
+    text-transform: capitalize;
 }
 
 .panel-body .form-group .sin-registro {

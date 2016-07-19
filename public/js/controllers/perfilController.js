@@ -1,40 +1,49 @@
 /*global angular*/
-angular.module('NutrifamiWeb').controller('PerfilController', ['$scope','$rootScope',function ($scope,$rootScope) {
-    'use strict';
-    
-    var usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
-    $scope.usuarioActivo = usuarioActivo;
-    $scope.informacion="active";
-   console.log(usuarioActivo.genero);
-    if (usuarioActivo.genero === 'F' || usuarioActivo.genero === 'f') {
-        $scope.usuarioActivo.genero = 'femenino';
-    } else {
-        $scope.usuarioActivo.genero = 'masculino';
-    }
-    $scope.usuarioActivo.miembrosFamilia = (usuarioActivo.rango_0a2 + usuarioActivo.rango_2a5 + usuarioActivo.rango_6a17 + usuarioActivo.rango_18a60 + usuarioActivo.rango_60mas) + " miembros";
-}]).filter('capitalize', function () {
-    'use strict';
-    return function (input, all) {
-        var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;
-        return (!!input) ? input.replace(reg, function (txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        }) : '';
-    };
-}).filter('esVacio', function () {
-    'use strict';
-    return function (input) {
-        if (input === "") {
-            input = 'Dato no ingresado';
+angular.module('NutrifamiWeb').controller('PerfilController', ['$scope', '$rootScope', '$anchorScroll', '$timeout', function ($scope, $rootScope, $anchorScroll, $timeout) {
+        'use strict';
+        $anchorScroll();
+
+        /* Verifica si viene un mensaje, lo muestra cierta cantidad de tiempo y lo elimina*/
+        if ($rootScope.mensaje.estado!== null) {
+            $timeout(function () {
+                $rootScope.mensaje.estado = false;
+            }, $rootScope.mensaje.tiempo);
         }
-        return input;
-    };
-}).filter('estilo', function () {
-    'use strict';
-    return function (input) {
-        if (input === undefined) {
-            input = 'sin-registro';
+        
+        $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+        $scope.informacion = "active";
+
+        console.log($rootScope.mensaje);
+
+        if ($scope.usuarioActivo.genero.toUpperCase() === 'F') {
+            $scope.usuarioActivo.genero = 'Femenino';
+        } else {
+            $scope.usuarioActivo.genero = 'Masculino';
         }
-        return input;
-    };
-});
+
+        $scope.usuarioActivo.miembrosFamilia = (
+                parseInt($scope.usuarioActivo.rango_0a2) +
+                parseInt($scope.usuarioActivo.rango_2a5) +
+                parseInt($scope.usuarioActivo.rango_6a17) +
+                parseInt($scope.usuarioActivo.rango_18a60) +
+                parseInt($scope.usuarioActivo.rango_60mas)) + " miembros";
+    }])
+        .filter('esVacio', function () {
+            'use strict';
+            return function (input) {
+                if (input === "" || input === null) {
+                    input = 'Dato no ingresado';
+                }
+                return input;
+            };
+        })
+        .filter('estilo', function () {
+            'use strict';
+            return function (input) {
+                if (input === undefined || input === null) {
+                    input = 'sin-registro';
+                }
+                return input;
+            };
+        });
 
