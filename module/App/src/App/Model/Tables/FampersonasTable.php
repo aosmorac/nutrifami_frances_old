@@ -47,6 +47,7 @@ class FampersonasTable extends AbstractTableGateway
             'FAM_PER_JEFE' => $params['jefe'], 
             'FAM_PER_NOMBRE' => $params['nombre'],
             'FAM_PER_APELLIDO' => $params['apellido'],
+            'FAM_PER_BIRTHDATE' => $params['birthdate'],
             'FAM_PER_EDAD' => $params['edad'],
             'FAM_PER_GENERO' => $params['genero'],
             'FAM_PER_ETNIA' => $params['etnia'],

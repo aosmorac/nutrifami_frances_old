@@ -75,7 +75,7 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController' 
         ),
     ),
     'view_manager' => array(
@@ -91,7 +91,7 @@ return array(
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ),
         'template_path_stack' => array(
-            __DIR__ . '/../view',
+            'Application' => __DIR__ . '/../view',
         ),
     ),
     // Placeholder for console routes
