@@ -6,7 +6,7 @@
                 <div class="panel-header">
                     <div class="row"> 
                         <div class="col-md-12">
-                            <div class="unidad-sonido" ng-show=" unidad.audio.mostrar">
+                            <div class="unidad-sonido" ng-show="unidad.audio.url != ''">
                                 <a href><span ng-click='unidad.audio.audio.paused ? unidad.audio.audio.play() : unidad.audio.audio.pause()' class="glyphicon glyphicon-volume-up" aria-hidden="true"></span></a>
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                             <div class="unidad-descripcion">
                                 <h2>{{ unidad.instruccion}}</h2>
                                 <h3>{{ unidad.titulo}}</h3>
-                                <img data-ng-src="data:{{unidad.imagen.ContentType}};base64,{{unidad.imagen.content}}" alt="{{ unidad.titulo}}" ng-show="unidad.imagen.mostrar" />
+                                <img ng-src="{{unidad.imagen.url}}" alt="{{ unidad.titulo}}" ng-hide="{{unidad.imagen === undefined}}" />
                                 <p>{{ unidad.texto}}</p>
                             </div>
                         </div>
