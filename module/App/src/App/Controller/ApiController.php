@@ -19,6 +19,7 @@ use Zend\Debug\Debug;
 class ApiController extends AbstractActionController {
 
     public function getSessionIdAction() {
+        header('Access-Control-Allow-Origin: *');
         $data = array();
         $data['sid'] = \Util\UserSession::getCurrentSessionID();
         echo json_encode($data);
@@ -29,6 +30,7 @@ class ApiController extends AbstractActionController {
     }
 
     public function loginAction() {
+        header('Access-Control-Allow-Origin: *');
         $params = $this->params()->fromQuery();
         $personasObj = new Personas();
         $data = $personasObj->getFamilia($params['d'], $params['c'], $params['t']);
@@ -70,6 +72,7 @@ class ApiController extends AbstractActionController {
     }
 
     public function editarUsuarioAction() {
+        header('Access-Control-Allow-Origin: *');
         $params = $this->params()->fromQuery(); 
         
         $personasObj = new Personas();
@@ -99,6 +102,7 @@ class ApiController extends AbstractActionController {
      * 
      */
     public function getCapacitacionesAction() {
+        header('Access-Control-Allow-Origin: *');
         
         $params = $this->params()->fromQuery();
         if (isset($params['cid'])){
@@ -144,6 +148,7 @@ class ApiController extends AbstractActionController {
      * 
      */
     public function getModuloAction() {
+        header('Access-Control-Allow-Origin: *');
         
         $params = $this->params()->fromQuery();
         if (isset($params['mid'])){
@@ -169,6 +174,7 @@ class ApiController extends AbstractActionController {
      * 
      */
     public function getLeccionAction() {
+        header('Access-Control-Allow-Origin: *');
         
         $params = $this->params()->fromQuery();
         if (isset($params['lid'])){
@@ -193,6 +199,7 @@ class ApiController extends AbstractActionController {
      * 
      */
     public function getUnidadinformacionAction() {
+        header('Access-Control-Allow-Origin: *');
         
         $params = $this->params()->fromQuery();
         if (isset($params['uid'])){
