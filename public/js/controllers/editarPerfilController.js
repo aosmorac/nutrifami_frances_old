@@ -1,5 +1,5 @@
 /*global angular*/
-angular.module('NutrifamiWeb').controller('EditarPerfilController', ['$scope', '$location', 'PerfilService', '$rootScope', '$anchorScroll', function ($scope, $location, PerfilService, $rootScope, $anchorScroll) {
+nutrifamiApp.controller('EditarPerfilController', ['$scope', '$location', 'PerfilService', '$rootScope', '$anchorScroll', function ($scope, $location, PerfilService, $rootScope, $anchorScroll) {
         'use strict';
         $anchorScroll();
 
@@ -57,7 +57,9 @@ angular.module('NutrifamiWeb').controller('EditarPerfilController', ['$scope', '
             });
 
         };
-    }]).filter('capitalize', function () {
+    }]);
+
+nutrifamiApp.filter('capitalize', function () {
     'use strict';
     return function (input, all) {
         var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;

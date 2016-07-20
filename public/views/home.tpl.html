@@ -1,24 +1,22 @@
-<div ng-controller="HomeController"> 
-    <header ng-include="'views/header.tpl.html'"></header>
-    <div class="container">
-        <div class="modulos">
-            <div class="panel">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel-header">
-                                <h1>Alimentación Saludable y Agua Sana</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <ng-repeat ng-repeat="modulo in modulos">
-                                <modulos-info info="modulo" avance="avanceUsuario"></modulos-info>
-                            </ng-repeat>
-                        </div>
+<header ng-include="'views/header.tpl.html'"></header>
+<div class="container">
+    <div class="modulos">
+        <div class="panel">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel-header">
+                        <h1>Alimentación Saludable y Agua Sana</h1>
                     </div>
                 </div>
             </div>
-            <footer ng-include="'views/footer.tpl.html'"></footer>
+            <div class="panel-body">
+                <div class="row">
+                    <ng-repeat ng-repeat="modulo in modulos">
+                        <modulos-info info="modulo" avance="avanceUsuario"></modulos-info>
+                    </ng-repeat>
+                </div>
+            </div>
         </div>
     </div>
+    <footer ng-include="'views/footer.tpl.html'"></footer>
+</div>
