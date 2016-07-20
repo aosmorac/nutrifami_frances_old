@@ -3,12 +3,12 @@
 </div> -->
 
 <div class="col-xs-12 col-sm-6 col-md-3">
-    <div class="sonido" ng-show="info.audio.mostrar">
+    <div class="sonido" ng-show="info.audio.url != ''">
         <a href><span ng-click='info.audio.audio.paused ? info.audio.audio.play() : info.audio.audio.pause()'class="glyphicon glyphicon-volume-up" aria-hidden="true"></span></a>
     </div>
     <a class="opcion-link" ng-mouseover="rollover = 'rollover'" ng-mouseout="rollover=''" href ng-click="click()">
-        <div class="opcion pareja-con-imagen {{ rollover }} {{ info.pareja}} {{ info.match}} {{ info.estilo}}">
-            <img data-ng-src="data:{{info.media.ContentType}};base64,{{info.media.content}}" alt="{{ info.texto}}" ng-show="info.media.mostrar" />
+        <div class="opcion pareja-con-imagen {{ info.pareja}} {{ info.match}}" ng-class="[rollover, info.selected ? 'selected' : 'no-selected']">
+            <img data-ng-src="{{info.media.url}}" alt="{{ info.titulo}}" ng-hide="{{info.media === undefined}}" />
             <div class="caption">
                 <p>{{info.texto}}</p>
             </div>

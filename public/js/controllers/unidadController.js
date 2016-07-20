@@ -1,6 +1,6 @@
 /*global angular*/
 angular.module('NutrifamiWeb')
-        .controller('UnidadController', ['$rootScope', '$scope', '$location', '$routeParams', '$anchorScroll', 'ngAudio', function ($rootScope, $scope, $location, $routeParams, $anchorScroll, ngAudio) {
+        .controller('UnidadController', ['$scope', '$location', '$routeParams', '$anchorScroll', 'ngAudio', function ($scope, $location, $routeParams, $anchorScroll, ngAudio) {
                 'use strict';
                 $anchorScroll();
 
@@ -49,10 +49,7 @@ angular.module('NutrifamiWeb')
                     }
                 }
 
-                $scope.botonCalificar = {
-                    estilo: 'no-activo',
-                    disabled: 'disabled'
-                };
+                $scope.botonCalificar = false;
 
                 $scope.seleccionarOpcion = function (index) {
                     if ($scope.unidad.opciones[index].selected) {
@@ -76,13 +73,10 @@ angular.module('NutrifamiWeb')
                     }
 
                     if (respuestasSeleccionadas === respuestasCorrectas) {
-                        $scope.botonCalificar.estilo = 'activo';
-                        $scope.botonCalificar.disabled = '';
+                        $scope.botonCalificar = true;
                     } else {
-                        $scope.botonCalificar.estilo = 'no-activo';
-                        $scope.botonCalificar.disabled = 'disabled';
+                        $scope.botonCalificar = false;
                     }
-
                 };
 
                 var parejasContador = 0;
@@ -94,19 +88,14 @@ angular.module('NutrifamiWeb')
 
                 $scope.seleccionarPareja = function (index) {
                     if ($scope.unidad.opciones[index].selected) {
-                        $scope.unidad.opciones[index].pareja = '';
                         $scope.unidad.opciones[index].selected = false;
 
                         /*Borrar la respuesta correcta para validar más adelante si es una pareja*/
-                        //respuestasSeleccionadas--;
                         parejasContador--;
-
-
                     } else {
-                        $scope.unidad.opciones[index].pareja = 'pareja-' + $scope.unidad.opciones[index].orden;
                         $scope.unidad.opciones[index].selected = true;
                         /*Almacenar la respuesta correcta para validar más adelante si es una pareja*/
-                        //respuestasSeleccionadas++;
+
                         parejasContador++;
                         if (parejasContador == 1) {
                             pareja1Orden = $scope.unidad.opciones[index].orden;
@@ -116,8 +105,6 @@ angular.module('NutrifamiWeb')
                             pareja2Pos = index;
 
                             if (pareja1Orden == pareja2Orden) {
-                                console.log("Hay Match");
-
                                 /*Estilos para la pareja actual*/
                                 $scope.unidad.opciones[pareja2Pos].pareja = 'pareja-' + pareja2Orden;
                                 $scope.unidad.opciones[pareja2Pos].selected = false;
@@ -135,8 +122,6 @@ angular.module('NutrifamiWeb')
                                 pareja2Orden = 0;
 
                                 parejasCorrectas++;
-                                console.log(parejasCorrectas + " parejas correctas de " + ($scope.unidad.opciones.length / 2));
-
                                 if (parejasCorrectas == ($scope.unidad.opciones.length / 2)) {
                                     /*Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar*/
                                     $scope.estadoUnidad = 'acierto';
@@ -185,7 +170,7 @@ angular.module('NutrifamiWeb')
                     $scope.siguienteUnidad = parseInt($routeParams.unidad) + 1;
                     if ($scope.siguienteUnidad > $scope.unidad.totalUnidades) {
                         var avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
-                        var lids = JSON.parse(localStorage.getItem('lids' + $routeParams.modulo));
+                        var lids = nutrifami.training.getLeccionesId($routeParams.modulo);
                         var indice = 0;
 
                         /*Busca el indice basado en el id de la lección para actualizar e avance*/
@@ -207,7 +192,6 @@ angular.module('NutrifamiWeb')
                         localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));
                         $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $routeParams.unidad + "/leccion-terminada");
                     } else {
-                        console.log('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $scope.siguienteUnidad);
                         $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $scope.siguienteUnidad);
                     }
                 };
@@ -219,8 +203,7 @@ angular.module('NutrifamiWeb')
                         respuestasSeleccionadas = 0;
                     }
                     $scope.estadoUnidad = 'espera';
-                    $scope.botonCalificar.estilo = 'no-activo';
-                    $scope.botonCalificar.disabled = 'disabled';
+                    $scope.botonCalificar = false;
                 };
             }])
         .directive('opcionesUnidadInfo', function () {

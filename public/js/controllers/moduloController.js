@@ -5,6 +5,7 @@ angular.module('NutrifamiWeb')
                 $anchorScroll();
                 $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
                 $scope.avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
+                console.log($scope.avanceUsuario);
                 $scope.lecciones = [];
 
                 /* Se hace un try por si el usuario intenta ingresar a la URL a otro modulo que lo lleve al home */
@@ -26,6 +27,7 @@ angular.module('NutrifamiWeb')
                     } else {
                         $scope.lecciones[i].terminada = false;
                     }
+                    console.log($scope.lecciones[i].terminada);
                 }
                 $scope.porcentajeAvance = function () {
                     return(100 / $scope.modulo.totalLecciones * $scope.avanceUsuario.leccionesTerminadas);
