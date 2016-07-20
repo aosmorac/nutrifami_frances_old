@@ -1,7 +1,7 @@
 /*
  * Configuración de angular para la aplicación Web de nutrifami
  */
-dependencies = ['Authentication', 'ngRoute', 'ngCookies', 'ngAudio'];
+dependencies = ['Authentication', 'ngRoute', 'ngCookies', 'ngAudio', 'bsLoadingOverlay'];
 'use strict';
 
 // declare modules
@@ -52,10 +52,14 @@ nutrifamiApp.config(['$routeProvider', function ($routeProvider) {
     }])
 
 
-nutrifamiApp.run(['$rootScope', '$location', '$cookieStore',
-    function ($rootScope, $location, $cookieStore) {
+nutrifamiApp.run(['$rootScope', '$location', '$cookieStore', 'bsLoadingOverlayService',
+    function ($rootScope, $location, $cookieStore, bsLoadingOverlayService) {
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
+        
+        bsLoadingOverlayService.setGlobalConfig({
+		templateUrl: 'views/loading-overlay-template.html'
+	});
 
         $rootScope.mensaje = {
             estado: false,

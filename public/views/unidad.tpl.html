@@ -1,63 +1,65 @@
-<header ng-include="'views/header.tpl.html'"></header>
-<div class="container">
-    <div class="modulos unidad">
-        <div class="panel">
-            <div class="panel-header">
-                <div class="row"> 
-                    <div class="col-md-12">
-                        <div class="unidad-sonido" ng-show="unidad.audio.url != ''">
-                            <a href><span ng-click='unidad.audio.audio.paused ? unidad.audio.audio.play() : unidad.audio.audio.pause()' class="glyphicon glyphicon-volume-up" aria-hidden="true"></span></a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-9">
-                        <div class="leccion-avance">
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{unidad.avanceLeccion}}%;">
-
-                                </div>
-                                <div class="leccion-ok"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></div>
+<div class="bs-loading-container" bs-loading-overlay>
+    <header ng-include="'views/header.tpl.html'"></header>
+    <div class="container">
+        <div class="modulos unidad">
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="row"> 
+                        <div class="col-md-12">
+                            <div class="unidad-sonido" ng-show="unidad.audio.url != ''">
+                                <a href><span ng-click='unidad.audio.audio.paused ? unidad.audio.audio.play() : unidad.audio.audio.pause()' class="glyphicon glyphicon-volume-up" aria-hidden="true"></span></a>
                             </div>
                         </div>
+                        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-9">
+                            <div class="leccion-avance">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{unidad.avanceLeccion}}%;">
 
+                                    </div>
+                                    <div class="leccion-ok"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="unidad-descripcion">
-                            <h2>{{ unidad.instruccion}}</h2>
-                            <h3>{{ unidad.titulo}}</h3>
-                            <img ng-src="{{unidad.imagen.url}}" alt="{{ unidad.titulo}}" ng-hide="{{unidad.imagen === undefined}}" />
-                            <p>{{ unidad.texto}}</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="unidad-descripcion">
+                                <h2>{{ unidad.instruccion}}</h2>
+                                <h3>{{ unidad.titulo}}</h3>
+                                <img ng-src="{{unidad.imagen.url}}" alt="{{ unidad.titulo}}" ng-hide="{{unidad.imagen === undefined}}" />
+                                <p>{{ unidad.texto}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel-body">
+                <div class="panel-body">
 
-                <!--
-* Se define el tipo de pregunta para adaptar el funcionamiento
-* id = 1 ; Contenidos
-* id = 2; Parejas
-* id = 3,4,5; Opción multiple con única respuesta, y verdadero o falso.
-                -->
+                    <!--
+    * Se define el tipo de pregunta para adaptar el funcionamiento
+    * id = 1 ; Contenidos
+    * id = 2; Parejas
+    * id = 3,4,5; Opción multiple con única respuesta, y verdadero o falso.
+                    -->
 
-                <div class="row" ng-show="unidad.tipo.id != '2'">
-                    <opciones-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}" colspan="unidad.colspan" ng-click="validar()"></opciones-unidad-info>
+                    <div class="row" ng-show="unidad.tipo.id != '2'">
+                        <opciones-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}" colspan="unidad.colspan" ng-click="validar()"></opciones-unidad-info>
+                    </div>
+
+                    <div class="row unidad-parejas" ng-show="unidad.tipo.id == '2'">
+                        <parejas-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}"></parejas-unidad-info>
+                    </div>
+
+                    <calificar-unidad data="botonCalificar" ng-show="estadoUnidad == 'espera'"></calificar-unidad>
+
+                    <siguiente-unidad ng-show="estadoUnidad == 'acierto'"></siguiente-unidad>
+
+                    <reiniciar-unidad ng-show="estadoUnidad == 'fallo'" feedback="unidad.feedback"></reiniciar-unidad>
+
+                    <!--<pre>{{ unidad | json : unidad}}</pre>-->
                 </div>
-
-                <div class="row unidad-parejas" ng-show="unidad.tipo.id == '2'">
-                    <parejas-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}"></parejas-unidad-info>
-                </div>
-
-                <calificar-unidad data="botonCalificar" ng-show="estadoUnidad == 'espera'"></calificar-unidad>
-
-                <siguiente-unidad ng-show="estadoUnidad == 'acierto'"></siguiente-unidad>
-
-                <reiniciar-unidad ng-show="estadoUnidad == 'fallo'" feedback="unidad.feedback"></reiniciar-unidad>
-
-                <!--<pre>{{ unidad | json : unidad}}</pre>-->
             </div>
         </div>
+        <footer ng-include="'views/footer.tpl.html'"></footer>
     </div>
-    <footer ng-include="'views/footer.tpl.html'"></footer>
 </div>
