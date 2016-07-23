@@ -1,9 +1,9 @@
 /*global angular*/
 nutrifamiApp.controller('HomeController', ['$scope', '$anchorScroll', 'bsLoadingOverlayService', '$timeout', function ($scope, $anchorScroll, bsLoadingOverlayService, $timeout) {
         'use strict';
-        
+
         $anchorScroll();
-        
+
         /* Overloading*/
         bsLoadingOverlayService.start();
         /* Se apaga cuando el todo el contenido de la vista ha sido cargado*/
@@ -16,7 +16,6 @@ nutrifamiApp.controller('HomeController', ['$scope', '$anchorScroll', 'bsLoading
         });
         $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
         $scope.avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
-        $scope.home = "active";
         $scope.modulos = [];
         /* Obtenemos los ids de los modulos de la capacitación 3 */
         $scope.mids = nutrifami.training.getModulosId(3);

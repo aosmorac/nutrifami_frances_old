@@ -203,13 +203,22 @@ header .navbar-default .navbar-toggle .icon-bar {
     background-color: #fff;
 }
 /*  PANELES GENERALES */
+
+.breadcrumb {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
 .panel {
-    margin-top: 25px;
+    margin-top: 15px;
     border: solid 1px #dcdcdc;
     background-color: #ffffff;
     border-radius: 4px;
     box-shadow: none;
     color: #2f3e47;
+}
+
+.panel-perfil {
+    margin-top: 65px;
 }
 
 .panel .boton-flotante {
@@ -706,7 +715,8 @@ header .navbar-default .navbar-toggle .icon-bar {
     color: #ffffff;
 }
 
-.unidad .panel-body .calificacion .glyphicon {
+.unidad .panel-body .calificacion .glyphicon,
+.modal-dialog .calificacion .glyphicon{
     color: #ffffff;
     width: 84px;
     height: 84px;
@@ -714,41 +724,49 @@ header .navbar-default .navbar-toggle .icon-bar {
     font-size: 30pt;
     text-align: center;
     padding-top: 22px;
-    font-weight: normal;
-    position: relative;
-    top: -18px;
 }
 
-.unidad .panel-body .calificacion .bien {
+.unidad .panel-body .calificacion .bien,
+.modal-dialog .calificacion .bien{
     background-color: #09df78;
 
 }
-.unidad .panel-body .calificacion .mal {
+.unidad .panel-body .calificacion .mal,
+.modal-dialog .calificacion .mal{
     background-color: #ff1244;
 }
 
-.unidad .panel-body .calificacion .mensaje{
+.unidad .panel-body .calificacion .mensaje,
+.modal-dialog .calificacion .mensaje{
     color: #2f3e47;
     font-size: 20pt;
+    text-align: center;
 }
 
-.unidad .panel-body .calificacion .feedback{
+.unidad .panel-body .calificacion .feedback,
+.modal-dialog .calificacion .feedback{
     color: #2f3e47;
     font-size: 13pt;
 }
 
 .unidad .panel-body .calificacion .no-activo .btn-default,
-.unidad .panel-body .calificacion .activo .btn-default{
+.unidad .panel-body .calificacion .activo .btn-default,
+.modal-dialog .calificacion .no-activo .btn-default,
+.modal-dialog .calificacion .activo .btn-default{
     background-color: #d0d0d0;
     margin: 0px 28px 0 28px;
     letter-spacing: 5px;
 }
 
-.unidad .panel-body .calificacion .activo .btn-default{
+.unidad .panel-body .calificacion .activo .btn-default,
+.modal-dialog .calificacion .activo .btn-default{
     background-color: #09df78;
+    letter-spacing: 0px;
+    padding: 17px 0px;
 }
 
-.unidad .panel-body .calificacion .activo .intentar-nuevo{
+.unidad .panel-body .calificacion .activo .intentar-nuevo,
+.modal-dialog .calificacion .activo .intentar-nuevo{
     font-size: 10pt;
     letter-spacing: 3px;
 }
@@ -889,7 +907,8 @@ header .navbar-default .navbar-toggle .icon-bar {
     padding: 6px 22px;
 }
 
-.panel-body .btn-default {
+.panel-body .btn-default,
+.modal-dialog .btn-default{
     margin-top: 28px;
     text-transform: uppercase;
     text-shadow: none;

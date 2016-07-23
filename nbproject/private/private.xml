@@ -3,22 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/views/directives/siguienteUnidad.html</file>
             <file>file:/C:/proyectos/nutrifami-webapp/public/views/directives/opcionesUnidadInfo.html</file>
             <file>file:/C:/proyectos/nutrifami-webapp/public/js/controllers/homeController.js</file>
             <file>file:/C:/proyectos/nutrifami-webapp/public/views/directives/calificarUnidad.html</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/app_maquetacion/perfil.html</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/views/directives/modulosInfo.html</file>
             <file>file:/C:/proyectos/nutrifami-webapp/public/js/controllers/unidadController.js</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/js/controllers/editarPerfilController.js</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/views/perfil.tpl.html</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/module/App/src/App/Controller/ApiController.php</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/views/directives/reiniciarUnidad.html</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/views/modals/feedbackUnidad.html</file>
             <file>file:/C:/proyectos/nutrifami-webapp/public/views/unidad.tpl.html</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/js/controllers/moduloController.js</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/css/style.css</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/module/App/src/App/Model/Tables/FampersonasTable.php</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/views/directives/leccionesInfo.html</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/module/App/src/App/Model/Capacitacion.php</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/js/controllers/perfilController.js</file>
         </group>
     </open-files>
 </project-private>

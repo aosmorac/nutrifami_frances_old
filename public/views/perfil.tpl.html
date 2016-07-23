@@ -1,9 +1,9 @@
 <div class="bs-loading-container" bs-loading-overlay>
-    <header ng-include="'views/header.tpl.html'"></header>
+    <ng-include src="'views/template/header.tpl.html'"></ng-include>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel">
+                <div class="panel panel-perfil">
                     <div class="boton-flotante">
                         <a class="btn btn-default" ng-href="#/editar-perfil" role="button">Editar Info<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                     </div>
@@ -53,7 +53,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Genero</label>
-                                    <p ng-class="usuarioActivo.genero==undefined ? 'sin-registro' : ''">{{ usuarioActivo.genero!=undefined ? (usuarioActivo.genero=='F'? 'Femenino' : 'Masculino'): 'Genero no ingresado'}}</p>
+                                    <p ng-class="usuarioActivo.genero==undefined ? 'sin-registro' : ''">{{ usuarioActivo.genero != undefined ? (usuarioActivo.genero == 'F' ? 'Femenino' : 'Masculino') : 'Genero no ingresado'}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
@@ -105,7 +105,7 @@
         </div>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel">
+                <div class="panel panel-perfil">
                     <div class="boton-flotante">
                         <!--<a class="btn btn-default" href="#" role="button">Agregar<span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>-->
                     </div>
@@ -162,11 +162,6 @@
                 </div>
             </div>
         </div>
-        <footer>
-            <div class="row text-center">
-                <div class="col-md-12">
-                    <img ng-src="../img/wfp_blue.png">
-                </div>
-            </div>
-        </footer>
+        <footer ng-include="'views/template/footer.tpl.html'"></footer>
     </div>
+</div>

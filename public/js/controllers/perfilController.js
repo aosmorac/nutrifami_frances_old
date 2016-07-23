@@ -23,7 +23,6 @@ nutrifamiApp.controller('PerfilController', ['$scope', '$rootScope', '$anchorScr
         }
 
         $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
-        $scope.informacion = "active";
 
         $scope.usuarioActivo.miembrosFamilia = (
                 parseInt($scope.usuarioActivo.rango_0a2) +

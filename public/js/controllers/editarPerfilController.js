@@ -17,7 +17,6 @@ nutrifamiApp.controller('EditarPerfilController', ['$scope', '$location', 'Perfi
 
         var usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
         $scope.usuarioActivo = usuarioActivo;
-        $scope.informacion = "active";
         $scope.usuarioActivo.generos = {
             availableOptions: [
                 {id: 'F', name: 'Femenino'},

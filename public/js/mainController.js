@@ -58,7 +58,7 @@ nutrifamiApp.run(['$rootScope', '$location', '$cookieStore', 'bsLoadingOverlaySe
         $rootScope.globals = $cookieStore.get('globals') || {};
         
         bsLoadingOverlayService.setGlobalConfig({
-		templateUrl: 'views/loading-overlay-template.html'
+		templateUrl: 'views/template/loading-overlay-template.html'
 	});
 
         $rootScope.mensaje = {

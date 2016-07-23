@@ -3,38 +3,6 @@ nutrifamiApp.controller('UnidadController', ['$scope', '$location', '$routeParam
         'use strict';
         $anchorScroll();
 
-        $scope.items = ['item1', 'item2', 'item3'];
-
-        $scope.animationsEnabled = true;
-
-        $scope.open = function (size) {
-
-            var modalInstance = $uibModal.open({
-                animation: $scope.animationsEnabled,
-                templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
-                size: size,
-                resolve: {
-                    items: function () {
-                        return $scope.items;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        };
-
-        $scope.toggleAnimation = function () {
-            $scope.animationsEnabled = !$scope.animationsEnabled;
-        };
-
-
-
-
         /* Overloading*/
         bsLoadingOverlayService.start();
         /* Se apaga cuando el todo el contenido de la vista ha sido cargado*/
@@ -167,6 +135,7 @@ nutrifamiApp.controller('UnidadController', ['$scope', '$location', '$routeParam
                         if (parejasCorrectas == ($scope.unidad.opciones.length / 2)) {
                             /*Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar*/
                             $scope.estadoUnidad = 'acierto';
+                            $scope.feedback();
                         }
 
                     } else {
@@ -206,6 +175,37 @@ nutrifamiApp.controller('UnidadController', ['$scope', '$location', '$routeParam
             } else {
                 $scope.estadoUnidad = 'fallo';
             }
+
+            $scope.feedback();
+        };
+
+        $scope.feedback = function () {
+            var data = {
+                estado: $scope.estadoUnidad,
+                feedback: $scope.unidad.feedback
+            };
+
+            var feedbackModal = $uibModal.open({
+                animation: true,
+                templateUrl: 'views/modals/feedbackUnidad.html',
+                controller: 'ModalInstanceController',
+                backdrop: 'static',
+                keyboard: false,
+                size: 'lg',
+                resolve: {
+                    data: function () {
+                        return data;
+                    }
+                }
+            });
+
+            feedbackModal.result.then(function (estado) {
+                if (estado === 'acierto') {
+                    $scope.irASiguienteUnidad();
+                } else {
+                    $scope.reiniciarUnidad();
+                }
+            });
         };
 
         $scope.irASiguienteUnidad = function () {
@@ -326,18 +326,9 @@ nutrifamiApp.directive('siguienteUnidad', function () {
 });
 
 
-nutrifamiApp.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
-
-    $scope.items = items;
-    $scope.selected = {
-        item: $scope.items[0]
-    };
-
-    $scope.ok = function () {
-        $uibModalInstance.close($scope.selected.item);
-    };
-
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
+nutrifamiApp.controller('ModalInstanceController', function ($scope, $uibModalInstance, data) {
+    $scope.data = data;
+    $scope.clickBoton = function () {
+        $uibModalInstance.close($scope.data.estado);
     };
 });

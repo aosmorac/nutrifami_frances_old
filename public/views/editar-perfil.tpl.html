@@ -1,9 +1,9 @@
 <div class="bs-loading-container" bs-loading-overlay>
-    <header ng-include="'views/header.tpl.html'"></header>
+    <ng-include src="'views/template/header.tpl.html'"></ng-include>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel">
+                <div class="panel panel-perfil">
                     <div class="panel-header">
                         <img ng-src="../img/ico-{{usuarioActivo.genero=='F'? 'femenino' : 'masculino'}}.png" alt="Genero {{usuarioActivo.genero}}">
                         <h1>Mi información</h1>
@@ -143,12 +143,6 @@
                 </div>
             </div>
         </div>
-        <footer>
-            <div class="row text-center">
-                <div class="col-md-12">
-                    <img src="../img/wfp_blue.png" alt="Programa Mundial de Alimentos">
-                </div>
-            </div>
-        </footer>
+       <footer ng-include="'views/template/footer.tpl.html'"></footer>
     </div>
 </div>
