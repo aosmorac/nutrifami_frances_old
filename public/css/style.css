@@ -206,7 +206,11 @@ header .navbar-default .navbar-toggle .icon-bar {
 
 .breadcrumb {
     margin-top: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
+}
+
+.breadcrumb li{
+    color:#09df78;
 }
 .panel {
     margin-top: 15px;
@@ -533,6 +537,10 @@ header .navbar-default .navbar-toggle .icon-bar {
     text-align: center;
     padding-top: 7px;
     font-weight: normal;
+}
+
+.unidad .panel-header .leccion-avance .progress .progress-bar span{
+    line-height: 28px;
 }
 
 .unidad .panel-header .leccion-avance .ok {

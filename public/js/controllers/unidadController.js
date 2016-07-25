@@ -24,7 +24,7 @@ nutrifamiApp.controller('UnidadController', ['$scope', '$location', '$routeParam
                 temp.push($scope.uids[i]);
             }
             $scope.unidad = nutrifami.training.getUnidad(temp[$routeParams.unidad - 1]);
-            $scope.unidad.avanceLeccion = (100 / temp.length) * (parseInt($routeParams.unidad) - 1);
+            $scope.unidad.numeroUnidad = $routeParams.unidad;
             $scope.unidad.totalUnidades = temp.length;
             var tempOpciones = [];
             for (var i in $scope.unidad.opciones) {

@@ -12,14 +12,9 @@
                         </div>
                         <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-9">
                             <div class="leccion-avance">
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{unidad.avanceLeccion}}%;">
-
-                                    </div>
-                                    <div class="leccion-ok"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></div>
-                                </div>
+                                <uib-progressbar max="unidad.totalUnidades" value="unidad.numeroUnidad"><span style="color:white; white-space:nowrap;">{{unidad.numeroUnidad}} / {{unidad.totalUnidades}}</span></uib-progressbar>
+                                <div class="leccion-ok"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></div>
                             </div>
-
                         </div>
                     </div>
                     <div class="row">

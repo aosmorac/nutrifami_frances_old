@@ -27,7 +27,7 @@
     </nav>
     <div class="container" ng-show="{{breadcrumb}}">
         <ol class="breadcrumb">
-            <li ng-repeat="link in links">{{link}}</li>
+            <li ng-repeat="link in links" ng-class="{'active':$last}">{{link}}</li>
         </ol>
     </div>
 </header>

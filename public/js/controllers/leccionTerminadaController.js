@@ -1,5 +1,5 @@
 /*global angular*/
-nutrifamiApp.controller('LeccionTerminadaController', ['$rootScope', '$scope', '$location', '$routeParams', 'bsLoadingOverlayService', '$timeout', function ($rootScope, $scope, $location, $routeParams, $anchorScroll, bsLoadingOverlayService, $timeout) {
+nutrifamiApp.controller('LeccionTerminadaController', ['$scope', '$anchorScroll', 'bsLoadingOverlayService', '$timeout', function ($scope, $anchorScroll, bsLoadingOverlayService, $timeout) {
         'use strict';
 
         $anchorScroll();

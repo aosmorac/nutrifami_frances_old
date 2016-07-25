@@ -3,14 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/views/directives/siguienteUnidad.html</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/views/directives/opcionesUnidadInfo.html</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/js/controllers/homeController.js</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/views/directives/calificarUnidad.html</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/js/controllers/unidadController.js</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/views/directives/reiniciarUnidad.html</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/views/modals/feedbackUnidad.html</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/views/unidad.tpl.html</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/js/controllers/template/headerController.js</file>
+            <file>file:/C:/proyectos/nutrifami-webapp/public/views/template/header.tpl.html</file>
         </group>
     </open-files>
 </project-private>
