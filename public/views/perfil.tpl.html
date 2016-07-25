@@ -1,14 +1,14 @@
-<div ng-controller="PerfilController">
-    <header ng-include="'views/header.tpl.html'"></header>
+<div class="bs-loading-container" bs-loading-overlay>
+    <ng-include src="'views/template/header.tpl.html'"></ng-include>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel">
+                <div class="panel panel-perfil">
                     <div class="boton-flotante">
                         <a class="btn btn-default" ng-href="#/editar-perfil" role="button">Editar Info<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                     </div>
                     <div class="panel-header">
-                        <img ng-src="../img/ico-{{usuarioActivo.genero}}.png">
+                        <img ng-src="../img/ico-{{usuarioActivo.genero=='F'? 'femenino' : 'masculino'}}.png">
                         <h1>Mi información</h1>
                     </div>
                     <div class="panel-body">
@@ -17,85 +17,85 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Nombres</label>
-                                    <p class="{{ usuarioActivo.nombre | estilo }}" ng-class="">{{ usuarioActivo.nombre | esVacio }}</p>
+                                    <p ng-class="usuarioActivo.nombre==undefined ? 'sin-registro' : ''">{{ usuarioActivo.nombre!=undefined ? usuarioActivo.nombre:'Nombre no ingresado'}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Apellidos</label>
-                                    <p class="{{ usuarioActivo.apellido | estilo }}">{{ usuarioActivo.apellido | esVacio }}</p>
+                                    <p ng-class="usuarioActivo.apellido==undefined ? 'sin-registro' : ''">{{ usuarioActivo.apellido!=undefined ? usuarioActivo.apellido: 'Apellido no ingresado'}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Documento de Identidad</label>
-                                    <p class="{{ usuarioActivo.login_documento | estilo }}">{{ usuarioActivo.login_documento }}</p>
+                                    <p ng-class="usuarioActivo.login_documento==undefined ? 'sin-registro' : ''">{{ usuarioActivo.login_documento!=undefined ? usuarioActivo.login_documento: 'Documento no ingresado'}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Correo electrónico</label>
-                                    <p class="{{ usuarioActivo.email | estilo }}">{{ usuarioActivo.email }}</p>
+                                    <p ng-class="usuarioActivo.email==undefined ? 'sin-registro' : ''">{{ usuarioActivo.email!=undefined ? usuarioActivo.email: 'Documento no ingresado'}}</p>
                                 </div>
                             </div>
-                             <div class="col-md-6 col-sm-6">
+                            <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Dirección</label>
-                                    <p class="{{ usuarioActivo.direccion | estilo }}">{{ usuarioActivo.direccion }}</p>
+                                    <p ng-class="usuarioActivo.direccion==undefined ? 'sin-registro' : ''">{{ usuarioActivo.direccion!=undefined ? usuarioActivo.direccion: 'Direccion no ingresada'}}</p>
                                 </div>
                             </div>
-                             <div class="col-md-6 col-sm-6">
+                            <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Teléfono</label>
-                                    <p class="{{ usuarioActivo.telefono | estilo }}">{{ usuarioActivo.telefono }}</p>
+                                    <p ng-class="usuarioActivo.telefono==undefined ? 'sin-registro' : ''">{{ usuarioActivo.telefono!=undefined ? usuarioActivo.telefono: 'Teléfono no ingresado'}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Genero</label>
-                                    <p class="{{ usuarioActivo.genero | estilo }}">{{ usuarioActivo.genero | esVacio}}</p>
+                                    <p ng-class="usuarioActivo.genero==undefined ? 'sin-registro' : ''">{{ usuarioActivo.genero != undefined ? (usuarioActivo.genero == 'F' ? 'Femenino' : 'Masculino') : 'Genero no ingresado'}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Etnia</label>
-                                    <p class="{{ usuarioActivo.etnia | estilo }}">{{ usuarioActivo.etnia | esVacio}}</p>
+                                    <p ng-class="usuarioActivo.etnia==undefined ? 'sin-registro' : ''">{{ usuarioActivo.etnia!=undefined ? usuarioActivo.etnia: 'Etina no ingresada'}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Fecha de Nacimiento</label>
-                                    <p class="{{ usuarioActivo.birthdate | estilo }}" >{{ usuarioActivo.birthdate | esVacio }}</p>
+                                    <p ng-class="usuarioActivo.birthdate==undefined ? 'sin-registro' : ''">{{ usuarioActivo.birthdate!=undefined ? usuarioActivo.birthdate: 'Fecha no ingresada'}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Edad</label>
-                                    <p class="{{ usuarioActivo.edad | estilo }}" >{{ usuarioActivo.edad | esVacio }}</p>
+                                    <p ng-class="usuarioActivo.edad==undefined ? 'sin-registro' : ''">{{ usuarioActivo.edad!=undefined ? usuarioActivo.edad: 'Edad no ingresada'}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Departamento</label>
-                                    <p class="{{ usuarioActivo.departamento | estilo }}">{{ usuarioActivo.departamento  | esVacio }}</p>
+                                    <p ng-class="usuarioActivo.departamento==undefined ? 'sin-registro' : ''">{{ usuarioActivo.departamento!=undefined ? usuarioActivo.departamento: 'Departamento no ingresado'}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Municipio</label>
-                                    <p class="{{ usuarioActivo.municipio | estilo }}">{{ usuarioActivo.municipio  | esVacio }}</p>
+                                    <p ng-class="usuarioActivo.municipio==undefined ? 'sin-registro' : ''">{{ usuarioActivo.municipio!=undefined ? usuarioActivo.municipio: 'Municipio no ingresado'}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Comunidad</label>
-                                    <p class="{{ usuarioActivo.comunidad | estilo }}">{{ usuarioActivo.comunidad  | esVacio }}</p>
+                                    <p ng-class="usuarioActivo.comunidad==undefined ? 'sin-registro' : ''">{{ usuarioActivo.comunidad!=undefined ? usuarioActivo.comunidad: 'Comunidad no ingresada'}}</p>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <label>Zona</label>
-                                    <p class="{{ usuarioActivo.zona | estilo }}">{{ usuarioActivo.zona  | esVacio }}</p>
+                                    <p ng-class="usuarioActivo.zona==undefined ? 'sin-registro' : ''">{{ usuarioActivo.zona!=undefined ? usuarioActivo.zona: 'Zona no ingresada'}}</p>
                                 </div>
                             </div>
                         </form>
@@ -105,14 +105,14 @@
         </div>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel">
+                <div class="panel panel-perfil">
                     <div class="boton-flotante">
                         <!--<a class="btn btn-default" href="#" role="button">Agregar<span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>-->
                     </div>
                     <div class="panel-header">
                         <img ng-src="../img/ico-familia.png">
                         <h1>Mi familia</h1>
-                        <h3>{{ usuarioActivo.miembrosFamilia }}</h3>
+                        <h3>{{ usuarioActivo.miembrosFamilia}}</h3>
                     </div>
                     <div class="panel-body">
                         <div class="col-md-12">
@@ -126,27 +126,27 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-hide="usuarioActivo.rango_0a2 === '0'">
-                                        <td>{{ usuarioActivo.rango_0a2 }}</td>
+                                        <td>{{ usuarioActivo.rango_0a2}}</td>
                                         <td>0 a 2 años</td>
                                         <!--<td><a href="#">Editar</a></td>-->
                                     </tr>
                                     <tr ng-hide="usuarioActivo.rango_2a5 === '0'">
-                                        <td>{{ usuarioActivo.rango_2a5 }}</td>
+                                        <td>{{ usuarioActivo.rango_2a5}}</td>
                                         <td>2 a 5 años</td>
                                         <!--<td><a href="#">Editar</a></td>-->
                                     </tr>
                                     <tr ng-hide="usuarioActivo.rango_6a17 === '0'">
-                                        <td>{{ usuarioActivo.rango_6a17 }}</td>
+                                        <td>{{ usuarioActivo.rango_6a17}}</td>
                                         <td>6 a 17 años</td>
                                         <!--<td><a href="#">Editar</a></td>-->
                                     </tr>
                                     <tr ng-hide="usuarioActivo.rango_18a60 === '0'">
-                                        <td>{{ usuarioActivo.rango_18a60 }}</td>
+                                        <td>{{ usuarioActivo.rango_18a60}}</td>
                                         <td>18 a 60 años</td>
                                         <!--<td><a href="#">Editar</a></td>-->
                                     </tr>
                                     <tr ng-hide="usuarioActivo.rango_60mas === '0'">
-                                        <td>{{ usuarioActivo.rango_60mas }}</td>
+                                        <td>{{ usuarioActivo.rango_60mas}}</td>
                                         <td>60 o más años</td>
                                         <!--<td><a href="#">Editar</a></td>-->
                                     </tr>
@@ -162,13 +162,6 @@
                 </div>
             </div>
         </div>
-        <footer>
-            <div class="row text-center">
-                <div class="col-md-12">
-                    <img ng-src="../img/wfp_blue.png">
-                </div>
-            </div>
-        </footer>
+        <footer ng-include="'views/template/footer.tpl.html'"></footer>
     </div>
-    
 </div>
