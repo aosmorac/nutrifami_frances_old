@@ -1,23 +1,28 @@
 /*global angular*/
-angular.module('NutrifamiWeb').controller('EditarPerfilController', ['$scope', '$location', 'PerfilService', '$rootScope', '$anchorScroll', function ($scope, $location, PerfilService, $rootScope, $anchorScroll) {
+nutrifamiApp.controller('EditarPerfilController', ['$scope', '$location', 'PerfilService', '$rootScope', '$anchorScroll', 'bsLoadingOverlayService', '$timeout', function ($scope, $location, PerfilService, $rootScope, $anchorScroll, bsLoadingOverlayService, $timeout) {
         'use strict';
+
         $anchorScroll();
+
+        /* Overloading*/
+        bsLoadingOverlayService.start();
+        /* Se apaga cuando el todo el contenido de la vista ha sido cargado*/
+        $scope.$on('$viewContentLoaded', function () {
+            /* Se le agrega 0,3 segundos para poder verlo ver inicialmente
+             * cuando el contenido se demore mucho en cargar se puede quitar el timeout*/
+            $timeout(function () {
+                bsLoadingOverlayService.stop();
+            }, 300);
+        });
 
         var usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
         $scope.usuarioActivo = usuarioActivo;
-        $scope.informacion = "active";
-        var genero = usuarioActivo.genero;
-        if ($scope.usuarioActivo.genero.toUpperCase() === 'F') {
-            $scope.usuarioActivo.genero = 'Femenino';
-        } else {
-            $scope.usuarioActivo.genero = 'Masculino';
-        }
         $scope.usuarioActivo.generos = {
             availableOptions: [
-                {id: 'f', name: 'Femenino'},
-                {id: 'm', name: 'Masculino'},
+                {id: 'F', name: 'Femenino'},
+                {id: 'M', name: 'Masculino'}
             ],
-            selectedOption: {id: genero, name: $scope.usuarioActivo.genero}
+            selectedOption: {id: usuarioActivo.genero, name: $scope.usuarioActivo.genero}
         };
         $scope.usuarioActivo.etnias = {
             availableOptions: [
@@ -57,7 +62,9 @@ angular.module('NutrifamiWeb').controller('EditarPerfilController', ['$scope', '
             });
 
         };
-    }]).filter('capitalize', function () {
+    }]);
+
+nutrifamiApp.filter('capitalize', function () {
     'use strict';
     return function (input, all) {
         var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;
