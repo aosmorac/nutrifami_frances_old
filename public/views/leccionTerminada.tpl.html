@@ -1,5 +1,5 @@
-<div ng-controller="HomeController"> 
-    <header ng-include="'views/header.tpl.html'"></header>
+<div class="bs-loading-container" bs-loading-overlay>
+    <ng-include src="'views/template/header.tpl.html'"></ng-include>
     <div class="container">
         <div class="modulos unidad">
             <div class="panel">
@@ -49,6 +49,6 @@
                 </div>
             </div>
         </div>
-        <footer ng-include="'views/footer.tpl.html'"></footer>
+        <footer ng-include="'views/template/footer.tpl.html'"></footer>
     </div>
 </div>
