@@ -26,11 +26,34 @@ nutrifamiApp.controller('UnidadController', ['$scope', '$location', '$routeParam
             $scope.unidad = nutrifami.training.getUnidad(temp[$routeParams.unidad - 1]);
             $scope.unidad.numeroUnidad = $routeParams.unidad;
             $scope.unidad.totalUnidades = temp.length;
+
             var tempOpciones = [];
-            for (var i in $scope.unidad.opciones) {
-                tempOpciones.push($scope.unidad.opciones[i]);
+
+            /* Validamos si la unidad actual es de parejas o de otra 
+             * Si es parejas ponemos las imagenes de primeras y los textos abajo
+             * Si es otro tipo de unidad, desorganizamos las opciones */
+            if ($scope.unidad.tipo.id == 2) {
+                var tempImagenes = [];
+                /* Recorre todo el objeto de las opciones para crear el arreglo*/
+                for (var i in $scope.unidad.opciones) {
+                    /* Si la opción tiene imagen, se almacena en un arreglo temporal para que las imagenes queden juntas*/
+                    if (typeof $scope.unidad.opciones[i].media === 'undefined') {
+                        tempOpciones.push($scope.unidad.opciones[i]);
+                    } else { /* Si no, se guardan en otro arreglo*/
+                        tempImagenes.push($scope.unidad.opciones[i]);
+                    }
+                }
+                /* Se mezclan los arreglos */
+                shuffle(tempImagenes);
+                shuffle(tempOpciones);
+                $scope.unidad.opciones =  tempImagenes.concat(tempOpciones); /* Se concatenan los arreglos, con las imagenes primero y las opciones despues */
+            } else {
+                for (var i in $scope.unidad.opciones) {
+                    tempOpciones.push($scope.unidad.opciones[i]);
+                }
+                shuffle(tempOpciones);
+                $scope.unidad.opciones = tempOpciones;
             }
-            $scope.unidad.opciones = tempOpciones;
 
             /*Verifica si la unidad tienen audio y lo carga*/
             if (typeof $scope.unidad.audio !== 'undefined') {
@@ -97,10 +120,10 @@ nutrifamiApp.controller('UnidadController', ['$scope', '$location', '$routeParam
         var parejasCorrectas = 0;
 
         $scope.seleccionarPareja = function (index) {
+            /* Toggle para seleccionar y deseleccionar tarjeta*/
             if ($scope.unidad.opciones[index].selected) {
                 $scope.unidad.opciones[index].selected = false;
-
-                /*Borrar la respuesta correcta para validar más adelante si es una pareja*/
+                /*Si se deselecciona la carta se resta del contador*/
                 parejasContador--;
             } else {
                 $scope.unidad.opciones[index].selected = true;
@@ -247,6 +270,20 @@ nutrifamiApp.controller('UnidadController', ['$scope', '$location', '$routeParam
             $scope.estadoUnidad = 'espera';
             $scope.botonCalificar = false;
         };
+
+        /**
+         * Shuffles array in place.
+         * @param {Array} a items The array containing the items.
+         */
+        function shuffle(a) {
+            var j, x, i;
+            for (i = a.length; i; i--) {
+                j = Math.floor(Math.random() * i);
+                x = a[i - 1];
+                a[i - 1] = a[j];
+                a[j] = x;
+            }
+        }
     }]);
 
 nutrifamiApp.directive('opcionesUnidadInfo', function () {

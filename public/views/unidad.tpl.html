@@ -37,7 +37,7 @@
     * id = 3,4,5; Opción multiple con única respuesta, y verdadero o falso.
                     -->
 
-                    <div class="row" ng-show="unidad.tipo.id != '2'">
+                    <div class="row" ng-hide="unidad.tipo.id == '2'">
                         <opciones-unidad-info ng-repeat="opcion in unidad.opciones" info="opcion" index="{{$index}}" colspan="unidad.colspan" ng-click="validar()"></opciones-unidad-info>
                     </div>
 
