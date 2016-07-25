@@ -30,8 +30,8 @@ nutrifamiApp.controller('UnidadController', ['$scope', '$location', '$routeParam
             var tempOpciones = [];
 
             /* Validamos si la unidad actual es de parejas o de otra 
-             * Si es parejas ponemos las imagenes de primeras y los textos abajo
-             * Si es otro tipo de unidad, desorganizamos las opciones */
+             * if - Si es parejas ponemos las imagenes de primeras y los textos abajo
+             * else - Si es otro tipo de unidad, desorganizamos las opciones */
             if ($scope.unidad.tipo.id == 2) {
                 var tempImagenes = [];
                 /* Recorre todo el objeto de las opciones para crear el arreglo*/
@@ -46,7 +46,7 @@ nutrifamiApp.controller('UnidadController', ['$scope', '$location', '$routeParam
                 /* Se mezclan los arreglos */
                 shuffle(tempImagenes);
                 shuffle(tempOpciones);
-                $scope.unidad.opciones =  tempImagenes.concat(tempOpciones); /* Se concatenan los arreglos, con las imagenes primero y las opciones despues */
+                $scope.unidad.opciones = tempImagenes.concat(tempOpciones); /* Se concatenan los arreglos, con las imagenes primero y las opciones despues */
             } else {
                 for (var i in $scope.unidad.opciones) {
                     tempOpciones.push($scope.unidad.opciones[i]);
@@ -74,7 +74,7 @@ nutrifamiApp.controller('UnidadController', ['$scope', '$location', '$routeParam
             $scope.unidad.opciones[i].selected = false;
             $scope.unidad.opciones[i].evaluacion = false;
             $scope.unidad.opciones[i].pareja = '';
-            $scope.unidad.opciones[i].match = '';
+            $scope.unidad.opciones[i].match = false;
 
             /*Verifica si la opcion tienen audio y lo carga*/
             if (typeof $scope.unidad.opciones[i].audio !== 'undefined') {
@@ -120,62 +120,67 @@ nutrifamiApp.controller('UnidadController', ['$scope', '$location', '$routeParam
         var parejasCorrectas = 0;
 
         $scope.seleccionarPareja = function (index) {
-            /* Toggle para seleccionar y deseleccionar tarjeta*/
-            if ($scope.unidad.opciones[index].selected) {
-                $scope.unidad.opciones[index].selected = false;
-                /*Si se deselecciona la carta se resta del contador*/
-                parejasContador--;
-            } else {
-                $scope.unidad.opciones[index].selected = true;
-                /*Almacenar la respuesta correcta para validar más adelante si es una pareja*/
+            /* Verifica si es una opcion que no ha hecho match para poderla seleccionar*/
+            if (!$scope.unidad.opciones[index].match) {
 
-                parejasContador++;
-                if (parejasContador == 1) {
-                    pareja1Orden = $scope.unidad.opciones[index].orden;
-                    pareja1Pos = index;
-                } else if (parejasContador == 2) {
-                    pareja2Orden = $scope.unidad.opciones[index].orden;
-                    pareja2Pos = index;
+                /* Toggle para seleccionar y deseleccionar tarjeta*/
+                if ($scope.unidad.opciones[index].selected) {
+                    $scope.unidad.opciones[index].selected = false;
+                    /*Si se deselecciona la carta se resta del contador*/
+                    parejasContador--;
+                } else {
+                    $scope.unidad.opciones[index].selected = true;
+                    /*Almacenar la respuesta correcta para validar más adelante si es una pareja*/
 
-                    if (pareja1Orden == pareja2Orden) {
-                        /*Estilos para la pareja actual*/
-                        $scope.unidad.opciones[pareja2Pos].pareja = 'pareja-' + pareja2Orden;
-                        $scope.unidad.opciones[pareja2Pos].selected = false;
-                        $scope.unidad.opciones[pareja2Pos].match = 'match';
+                    parejasContador++;
+                    if (parejasContador === 1) {
+                        pareja1Orden = $scope.unidad.opciones[index].orden;
+                        pareja1Pos = index;
+                    } else if (parejasContador === 2) {
+                        pareja2Orden = $scope.unidad.opciones[index].orden;
+                        pareja2Pos = index;
 
-                        /*Estilos para pareja anterior*/
-                        $scope.unidad.opciones[pareja1Pos].pareja = 'pareja-' + pareja2Orden;
-                        $scope.unidad.opciones[pareja1Pos].selected = false;
-                        $scope.unidad.opciones[pareja1Pos].match = 'match';
+                        if (pareja1Orden === pareja2Orden) {
+                            /*Estilos para la pareja actual*/
+                            $scope.unidad.opciones[pareja2Pos].pareja = 'pareja-' + pareja2Orden;
+                            $scope.unidad.opciones[pareja2Pos].selected = false;
+                            $scope.unidad.opciones[pareja2Pos].match = true;
 
-                        parejasContador = 0;
-                        pareja1Pos = 0;
-                        pareja2Pos = 0;
-                        pareja1Orden = 0;
-                        pareja2Orden = 0;
+                            /*Estilos para pareja anterior*/
+                            $scope.unidad.opciones[pareja1Pos].pareja = 'pareja-' + pareja2Orden;
+                            $scope.unidad.opciones[pareja1Pos].selected = false;
+                            $scope.unidad.opciones[pareja1Pos].match = true;
 
-                        parejasCorrectas++;
-                        if (parejasCorrectas == ($scope.unidad.opciones.length / 2)) {
-                            /*Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar*/
-                            $scope.estadoUnidad = 'acierto';
-                            $scope.feedback();
+                            parejasContador = 0;
+                            pareja1Pos = 0;
+                            pareja2Pos = 0;
+                            pareja1Orden = 0;
+                            pareja2Orden = 0;
+
+                            parejasCorrectas++;
+                            if (parejasCorrectas == ($scope.unidad.opciones.length / 2)) {
+                                /*Si las parejas correctas es igual a la mitad de la cantidad de opciones habilitar el botón de continuar*/
+                                $scope.estadoUnidad = 'acierto';
+                                $scope.feedback();
+                            }
+
+                        } else {
+                            $scope.unidad.opciones[pareja2Pos].pareja = '';
+                            $scope.unidad.opciones[pareja2Pos].selected = false;
+                            $scope.unidad.opciones[pareja2Pos].match = false;
+                            $scope.unidad.opciones[pareja1Pos].pareja = '';
+                            $scope.unidad.opciones[pareja1Pos].selected = false;
+                            $scope.unidad.opciones[pareja1Pos].match = false;
+                            parejasContador = 0;
+                            pareja1Pos = 0;
+                            pareja2Pos = 0;
+                            pareja1Orden = 0;
+                            pareja2Orden = 0;
+
                         }
-
-                    } else {
-                        $scope.unidad.opciones[pareja2Pos].pareja = '';
-                        $scope.unidad.opciones[pareja2Pos].selected = false;
-                        $scope.unidad.opciones[pareja2Pos].match = '';
-                        $scope.unidad.opciones[pareja1Pos].pareja = '';
-                        $scope.unidad.opciones[pareja1Pos].selected = false;
-                        $scope.unidad.opciones[pareja1Pos].match = '';
-                        parejasContador = 0;
-                        pareja1Pos = 0;
-                        pareja2Pos = 0;
-                        pareja1Orden = 0;
-                        pareja2Orden = 0;
-
                     }
                 }
+
             }
         };
 

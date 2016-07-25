@@ -581,6 +581,10 @@ header .navbar-default .navbar-toggle .icon-bar {
     text-decoration: none;
 }
 
+.unidad .panel-body .opcion-link-pointer{
+    cursor: pointer;
+}
+
 .unidad .panel-body .opcion  {
     margin: 0 28px 50px 28px;
     background-color:  #ffffff;
@@ -673,6 +677,14 @@ header .navbar-default .navbar-toggle .icon-bar {
 .unidad .panel-body .rollover .btn-default,
 .unidad .panel-body .col-md-3 .rollover .btn-default{
     border: solid 3px #09df78;
+}
+
+.unidad .panel-body .fallo{
+    border: solid 3px red;
+}
+
+.unidad .panel-body .fallo p{
+    color: red;
 }
 
 .unidad .panel-body .rollover p {
@@ -841,8 +853,8 @@ header .navbar-default .navbar-toggle .icon-bar {
 .unidad-parejas .opciones .pareja-4 .btn-default:hover,
 .unidad-parejas .opcion-link .pareja-4{
     color: #ffffff;
-    background-color: #3dc0fd; 
-    border: 1px solid #3dc0fd;
+    background-color: #FC4CAA; 
+    border: 1px solid #FC4CAA;
 }
 
 .unidad  .panel-body .leccion-completada .sticker .glyphicon {
