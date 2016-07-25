@@ -1,9 +1,21 @@
 /*global angular*/
-angular.module('NutrifamiWeb')
-        .controller('LeccionTerminadaController', ['$rootScope', '$scope', '$location', '$routeParams', function ($rootScope, $scope, $location, $routeParams) {
-                'use strict';
+nutrifamiApp.controller('LeccionTerminadaController', ['$scope', '$anchorScroll', 'bsLoadingOverlayService', '$timeout', function ($scope, $anchorScroll, bsLoadingOverlayService, $timeout) {
+        'use strict';
 
-                $scope.mensaje = "Ha finalizado la leccion";
+        $anchorScroll();
 
-            }]);
+        /* Overloading*/
+        bsLoadingOverlayService.start();
+        /* Se apaga cuando el todo el contenido de la vista ha sido cargado*/
+        $scope.$on('$viewContentLoaded', function () {
+            /* Se le agrega 0,3 segundos para poder verlo ver inicialmente
+             * cuando el contenido se demore mucho en cargar se puede quitar el timeout*/
+            $timeout(function () {
+                bsLoadingOverlayService.stop();
+            }, 300);
+        });
+
+        $scope.mensaje = "Ha finalizado la leccion";
+
+    }]);
         

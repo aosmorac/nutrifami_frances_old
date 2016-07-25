@@ -203,13 +203,26 @@ header .navbar-default .navbar-toggle .icon-bar {
     background-color: #fff;
 }
 /*  PANELES GENERALES */
+
+.breadcrumb {
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+.breadcrumb li{
+    color:#09df78;
+}
 .panel {
-    margin-top: 73px;
+    margin-top: 15px;
     border: solid 1px #dcdcdc;
     background-color: #ffffff;
     border-radius: 4px;
     box-shadow: none;
     color: #2f3e47;
+}
+
+.panel-perfil {
+    margin-top: 65px;
 }
 
 .panel .boton-flotante {
@@ -270,7 +283,7 @@ header .navbar-default .navbar-toggle .icon-bar {
 }
 
 .modulos .panel-body  {
-    margin-top: 75px;
+    margin-top: 10px;
 
 }
 
@@ -526,6 +539,10 @@ header .navbar-default .navbar-toggle .icon-bar {
     font-weight: normal;
 }
 
+.unidad .panel-header .leccion-avance .progress .progress-bar span{
+    line-height: 28px;
+}
+
 .unidad .panel-header .leccion-avance .ok {
     background-color: #feea45;
 }
@@ -537,12 +554,12 @@ header .navbar-default .navbar-toggle .icon-bar {
 }
 .unidad .panel-header .unidad-descripcion h2{
     font-size: 20pt;
-    margin-top: 77px;
+    margin-top: 30px;
 }
 
 .unidad .panel-header .unidad-descripcion h3{
     font-size: 30pt;
-    margin-top: 40px;
+    margin-top: 20px;
     color: #2f3e47;
 }
 
@@ -554,7 +571,7 @@ header .navbar-default .navbar-toggle .icon-bar {
 }
 
 .unidad .panel-header .unidad-descripcion img{
-    margin-top: 30px;
+    margin-top: 10px;
     border: 1px solid #dcdcdc;
     border-radius: 10px;
     max-width: 100%;
@@ -562,6 +579,10 @@ header .navbar-default .navbar-toggle .icon-bar {
 
 .unidad .panel-body a.opcion-link{
     text-decoration: none;
+}
+
+.unidad .panel-body .opcion-link-pointer{
+    cursor: pointer;
 }
 
 .unidad .panel-body .opcion  {
@@ -658,6 +679,14 @@ header .navbar-default .navbar-toggle .icon-bar {
     border: solid 3px #09df78;
 }
 
+.unidad .panel-body .fallo{
+    border: solid 3px red;
+}
+
+.unidad .panel-body .fallo p{
+    color: red;
+}
+
 .unidad .panel-body .rollover p {
     color: #09df78;
 }
@@ -706,7 +735,8 @@ header .navbar-default .navbar-toggle .icon-bar {
     color: #ffffff;
 }
 
-.unidad .panel-body .calificacion .glyphicon {
+.unidad .panel-body .calificacion .glyphicon,
+.modal-dialog .calificacion .glyphicon{
     color: #ffffff;
     width: 84px;
     height: 84px;
@@ -714,41 +744,49 @@ header .navbar-default .navbar-toggle .icon-bar {
     font-size: 30pt;
     text-align: center;
     padding-top: 22px;
-    font-weight: normal;
-    position: relative;
-    top: -18px;
 }
 
-.unidad .panel-body .calificacion .bien {
+.unidad .panel-body .calificacion .bien,
+.modal-dialog .calificacion .bien{
     background-color: #09df78;
 
 }
-.unidad .panel-body .calificacion .mal {
+.unidad .panel-body .calificacion .mal,
+.modal-dialog .calificacion .mal{
     background-color: #ff1244;
 }
 
-.unidad .panel-body .calificacion .mensaje{
+.unidad .panel-body .calificacion .mensaje,
+.modal-dialog .calificacion .mensaje{
     color: #2f3e47;
     font-size: 20pt;
+    text-align: center;
 }
 
-.unidad .panel-body .calificacion .feedback{
+.unidad .panel-body .calificacion .feedback,
+.modal-dialog .calificacion .feedback{
     color: #2f3e47;
     font-size: 13pt;
 }
 
 .unidad .panel-body .calificacion .no-activo .btn-default,
-.unidad .panel-body .calificacion .activo .btn-default{
+.unidad .panel-body .calificacion .activo .btn-default,
+.modal-dialog .calificacion .no-activo .btn-default,
+.modal-dialog .calificacion .activo .btn-default{
     background-color: #d0d0d0;
     margin: 0px 28px 0 28px;
     letter-spacing: 5px;
 }
 
-.unidad .panel-body .calificacion .activo .btn-default{
+.unidad .panel-body .calificacion .activo .btn-default,
+.modal-dialog .calificacion .activo .btn-default{
     background-color: #09df78;
+    letter-spacing: 0px;
+    padding: 17px 0px;
 }
 
-.unidad .panel-body .calificacion .activo .intentar-nuevo{
+.unidad .panel-body .calificacion .activo .intentar-nuevo,
+.modal-dialog .calificacion .activo .intentar-nuevo{
     font-size: 10pt;
     letter-spacing: 3px;
 }
@@ -815,8 +853,8 @@ header .navbar-default .navbar-toggle .icon-bar {
 .unidad-parejas .opciones .pareja-4 .btn-default:hover,
 .unidad-parejas .opcion-link .pareja-4{
     color: #ffffff;
-    background-color: #3dc0fd; 
-    border: 1px solid #3dc0fd;
+    background-color: #FC4CAA; 
+    border: 1px solid #FC4CAA;
 }
 
 .unidad  .panel-body .leccion-completada .sticker .glyphicon {
@@ -889,7 +927,8 @@ header .navbar-default .navbar-toggle .icon-bar {
     padding: 6px 22px;
 }
 
-.panel-body .btn-default {
+.panel-body .btn-default,
+.modal-dialog .btn-default{
     margin-top: 28px;
     text-transform: uppercase;
     text-shadow: none;
