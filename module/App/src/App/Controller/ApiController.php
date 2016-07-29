@@ -92,7 +92,25 @@ class ApiController extends AbstractActionController {
         
     }
 
-    
+    public function agregarFamiliarAction() {
+        header('Access-Control-Allow-Origin: *');
+        $params = $this->params()->fromQuery(); 
+        
+        $personasObj = new Personas();
+        $data = $personasObj->agregarFamiliar($params);
+        
+        /*Prepara la respusta -> Debe retornar  $response['response'] = 1 si la adición se hizo con éxito
+         * y $response['response'] = 0; si hubo algún error 
+         */
+        $response = array();
+        $response['response'] = $data;
+         
+        echo json_encode($response);
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        return $viewModel;
+        
+    }
     
     
     
