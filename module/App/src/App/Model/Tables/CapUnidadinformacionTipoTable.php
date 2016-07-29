@@ -39,8 +39,6 @@ class CapUnidadinformacionTipoTable extends AbstractTableGateway
         	return array();
         }
     }
-    
-    
 }
 
 ?>
