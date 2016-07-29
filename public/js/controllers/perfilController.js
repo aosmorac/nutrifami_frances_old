@@ -25,6 +25,8 @@ nutrifamiApp.controller('PerfilController', ['$scope', '$rootScope', '$anchorScr
         $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
 
         /* Creamos un arreglo para mostrar los miembros de la familia de forma dinamica */
+        
+        console.log($scope.usuarioActivo);
 
         $scope.usuarioActivo.miembrosPorRango = [
             {
@@ -87,18 +89,12 @@ nutrifamiApp.directive('agregarFamiliar', [function (PerfilService) {
                 $scope.familiar = {};
                 $scope.familiar.nombre = '';
                 $scope.familiar.apellido = '';
-                $scope.familiar.generos = {
-                    availableOptions: [
-                        {id: 'F', name: 'Femenino'},
-                        {id: 'M', name: 'Masculino'}
-                    ]
-                };
                 $scope.familiar.parentescos = {
                     availableOptions: [
-                        {id: 'HIJO', name: 'Hijo'},
-                        {id: 'CONYUGE', name: 'Conyuge'},
-                        {id: 'PADRE', name: 'Padre'},
-                        {id: 'OTROS', name: 'Otros'}
+                        {id: 'hijo', name: 'Hijo'},
+                        {id: 'conyuge', name: 'Conyuge'},
+                        {id: 'padre', name: 'Padre'},
+                        {id: 'otros', name: 'Otros'}
                     ]
                 };
                 $scope.update = function () {
@@ -109,11 +105,10 @@ nutrifamiApp.directive('agregarFamiliar', [function (PerfilService) {
                     }
 
                     familiar.birthdate = familiar.birthdate.getFullYear() + "-" + tempMonth + "-" + familiar.birthdate.getDate();
-                    familiar.genero = familiar.generos.selectedOption.id;
                     familiar.parentesco = familiar.parentescos.selectedOption.id;
-                    delete familiar["generos"];
-                    delete familiar["parentescos"];
-
+                    familiar.jefe = $scope.$parent.usuarioActivo.id;
+                    
+                    console.log(familiar);
                     $scope.$parent.agregarFamiliar(familiar);
 
                 };

@@ -39,6 +39,7 @@ class ApiController extends AbstractActionController {
 
         if ($data != false) {
             $personaInfo['response'] = 1;
+            $personaInfo['id'] = $data['FAM_PER_ID'];
             $personaInfo['jefe'] = $data['FAM_PER_JEFE'];
             $personaInfo['nombre'] = $data['FAM_PER_NOMBRE'];
             $personaInfo['apellido'] = $data['FAM_PER_APELLIDO'];

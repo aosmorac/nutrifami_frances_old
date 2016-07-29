@@ -918,6 +918,12 @@ header .navbar-default .navbar-toggle .icon-bar {
     text-transform: uppercase;
 }
 
+.panel-body .form-group .error,
+.panel-body form .message{
+    font-size: 10px;
+    color: #fc4cab;
+}
+
 ::-webkit-calendar-picker-indicator {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -940,7 +946,7 @@ header .navbar-default .navbar-toggle .icon-bar {
     height: 50px;
     padding: 17px 57px;
     font-size: 12pt;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 .panel-body .form-group .form-control[disabled],
