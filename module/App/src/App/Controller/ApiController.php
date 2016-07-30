@@ -98,7 +98,7 @@ class ApiController extends AbstractActionController {
         $params = $this->params()->fromQuery(); 
         
         $personasObj = new Personas();
-        $data = $personasObj->agregarFamiliar($params);
+        $data = $personasObj->savePersona($params);
         
         /*Prepara la respusta -> Debe retornar  $response['response'] = 1 si la adición se hizo con éxito
          * y $response['response'] = 0; si hubo algún error 
