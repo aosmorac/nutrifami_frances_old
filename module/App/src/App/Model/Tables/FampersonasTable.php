@@ -28,12 +28,12 @@ class FampersonasTable extends AbstractTableGateway {
     }
 
     public function getPersona($cedula, $codigo = '') {
-        if($codigo == ''){
+        if ($codigo == '') {
             $params = array('FAM_PER_DOCUMENTO' => $cedula);
-        }else{
+        } else {
             $params = array('FAM_PER_DOCUMENTO' => $cedula, 'FAM_PER_CODIGO' => $codigo);
         }
-        
+
         $resultSet = $this->select($params);
         if ($resultRow = $resultSet->toArray()) {
             return $resultRow[0];
@@ -85,6 +85,10 @@ class FampersonasTable extends AbstractTableGateway {
             unset($data['FAM_PER_ID']);
         }
         return $this->insert($data);
+    }
+
+    public function updatePersona($id, $data) {
+        $this->update($data, array('FAM_PER_ID' => $id));
     }
 
 }

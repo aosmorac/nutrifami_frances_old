@@ -922,6 +922,7 @@ header .navbar-default .navbar-toggle .icon-bar {
 .panel-body form .message{
     font-size: 10px;
     color: #fc4cab;
+    text-align: center;
 }
 
 ::-webkit-calendar-picker-indicator {
@@ -975,6 +976,13 @@ header .navbar-default .navbar-toggle .icon-bar {
     font-size: 12pt;
 }
 
+.panel-body .panel-group .panel-first{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0;
+    border: none;
+}
+
 .panel-body .panel-default>.panel-heading+.panel-collapse .panel-body {
     border-top-color: #ffffff;
     margin-top: 15px;
@@ -984,6 +992,10 @@ header .navbar-default .navbar-toggle .icon-bar {
     background-image: none;
     background-color: #ffffff;
     text-align: center;
+}
+
+.panel-body .panel-first>.panel-heading {
+    padding: 0;
 }
 
 .panel-body .panel-group .panel .editar-miembro a{

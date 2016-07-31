@@ -54,8 +54,6 @@ class Personas {
 
     public function savePersona($params) {
 
-        /* HAY QUE VALIDAR SI LOS DATOS SON CORRECTOS PARA LUEGO INGRESARLOS */
-
         /* Validamos si los datos de jefe no son correctos, retornamos 0 para que el frontend muestre el mensaje */
         if ($this->personaTable->getPersona($params['documento_jefe'], $params['codigo']) == false) {
             $response = array(
@@ -85,9 +83,18 @@ class Personas {
             'FAM_PER_CODIGO' => $params['codigo'], /* Codigo del jefe de Hogar */
                 /* 'FAM_PER_TOKEN' => $params['token'] */
         );
+        
 
-        /* Insertarmos el usuario en la base de datos y enviamos respuesta */
+        /* Insertarmos el usuario en la base de datos y enviamos respuesta. */
         if ($this->personaTable->insertPersona($data) == 1) {
+
+            if ($params['rango'] !== 'false') {
+                $data2 = array(
+                    'FAM_PER_RANGO_' . $params['rango'] => $params['cantidad']
+                );
+                $this->personaTable->updatePersona($params['jefe'], $data2);
+            }
+
             $response = array(
                 'success' => true,
                 'message' => 'El familiar fue agregado con éxito'
