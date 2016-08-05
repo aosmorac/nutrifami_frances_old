@@ -219,13 +219,7 @@ var nutrifami = {
             data: data,
             success: function (data) {
                 var objServ = JSON.parse(data);
-                if (objServ.response === 1) {
-                    response.success = true;
-                    response.message = 'El familiar se ha agregado con éxito';
-                } else {
-                    response.success = false;
-                    response.message = 'Los datos son errados';
-                }
+                response = objServ.response;
             },
             error: function () {
                 response.success = true;

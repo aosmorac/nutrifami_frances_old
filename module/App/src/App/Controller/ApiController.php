@@ -39,6 +39,7 @@ class ApiController extends AbstractActionController {
 
         if ($data != false) {
             $personaInfo['response'] = 1;
+            $personaInfo['id'] = $data['FAM_PER_ID'];
             $personaInfo['jefe'] = $data['FAM_PER_JEFE'];
             $personaInfo['nombre'] = $data['FAM_PER_NOMBRE'];
             $personaInfo['apellido'] = $data['FAM_PER_APELLIDO'];
@@ -97,7 +98,7 @@ class ApiController extends AbstractActionController {
         $params = $this->params()->fromQuery(); 
         
         $personasObj = new Personas();
-        $data = $personasObj->agregarFamiliar($params);
+        $data = $personasObj->savePersona($params);
         
         /*Prepara la respusta -> Debe retornar  $response['response'] = 1 si la adición se hizo con éxito
          * y $response['response'] = 0; si hubo algún error 
