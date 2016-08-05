@@ -197,6 +197,38 @@ var nutrifami = {
 
         callback(response);
     },
+    
+    /*
+     * nutrifami.editarUsuarioActivo(data, callback);
+     * @param {type} data
+     * @param {type} callback
+     */
+    agregarFamiliar: function (data, callback) {
+        callback = callback || function () {
+        };
+        //  app/api/agregar-familar?t='token'
+        var serv = base_url + "app/api/agregar-familiar";
+        response = {
+            success: false,
+            message: ''
+        };
+        $.ajax({
+            url: serv,
+            type: 'GET',
+            async: false,
+            data: data,
+            success: function (data) {
+                var objServ = JSON.parse(data);
+                response = objServ.response;
+            },
+            error: function () {
+                response.success = true;
+                response.message = 'Ha ocurrido un error durante la ejecución';
+            }
+        });
+
+        callback(response);
+    },
 
     /*
      * nutrifami.subirUsuarioActivo(callback);
