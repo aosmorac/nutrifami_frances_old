@@ -1,12 +1,12 @@
 <div class="calificacion">
     <div class="modal-header">
-        <span class="center-block glyphicon" ng-class="data.success ? 'glyphicon-ok bien' :'glyphicon-remove mal'" aria-hidden="true"></span>
+        <span class="center-block glyphicon" ng-class="data.success === true ? 'glyphicon-ok bien' :'glyphicon-remove mal'" aria-hidden="true"></span>
     </div>
     <div class="modal-body">
         <div>
-            <span class="mensaje" ng-show="{{data.success === true}}">Registro guardado con éxito</span>
-            <span class="mensaje" ng-hide="{{data.success === false}}">Error al guardar la información</span>
-            <p class="feedback"> {{ data.mensaje}} </p>
+            <span class="mensaje" ng-show="{{data.success === true}}">Muy Bien!!</span>
+            <span class="mensaje" ng-show="{{data.success === false}}">Error</span>
+            <p class="feedback"> {{ data.message}} </p>
         </div>
         <div class="modal-footer">
             <div class="activo"> 
