@@ -13,7 +13,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="nombre">Nombres</label>
-                                    <input type="text" class="form-control" name='nombre' id='nombre' placeholder="Ingresa tu nombre" ng-model="usuarioActivo.nombre" ng-model-options="{ updateOn: 'blur' }" requiered>
+                                    <input type="text" class="form-control" name='nombre' id='nombre' placeholder="Ingresa tu nombre" ng-model="usuarioActivo.nombre" ng-model-options="{ updateOn: 'blur' }" required>
                                     <span class="messages" ng-show="userForm.$submitted || userForm.nombre.$touched">
                                         <span ng-show="userForm.nombre.$error.required">El campo es obligatorio.</span>
                                     </span>

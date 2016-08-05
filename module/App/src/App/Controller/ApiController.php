@@ -39,6 +39,7 @@ class ApiController extends AbstractActionController {
 
         if ($data != false) {
             $personaInfo['response'] = 1;
+            $personaInfo['id'] = $data['FAM_PER_ID'];
             $personaInfo['jefe'] = $data['FAM_PER_JEFE'];
             $personaInfo['nombre'] = $data['FAM_PER_NOMBRE'];
             $personaInfo['apellido'] = $data['FAM_PER_APELLIDO'];
@@ -92,7 +93,25 @@ class ApiController extends AbstractActionController {
         
     }
 
-    
+    public function agregarFamiliarAction() {
+        header('Access-Control-Allow-Origin: *');
+        $params = $this->params()->fromQuery(); 
+        
+        $personasObj = new Personas();
+        $data = $personasObj->savePersona($params);
+        
+        /*Prepara la respusta -> Debe retornar  $response['response'] = 1 si la adición se hizo con éxito
+         * y $response['response'] = 0; si hubo algún error 
+         */
+        $response = array();
+        $response['response'] = $data;
+         
+        echo json_encode($response);
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        return $viewModel;
+        
+    }
     
     
     
