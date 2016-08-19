@@ -55,21 +55,33 @@ nutrifamiApp.controller('PerfilController', ['$scope', '$rootScope', '$anchorScr
                 rango_alias: '60mas'
             }
         ];
-
-        $scope.usuarioActivo.totalMiembros = 0;
+        
+        $scope.usuarioActivo.totalMiembrosPorInscribir = 0;
         for (var i in $scope.usuarioActivo.miembrosPorRango) {
-            $scope.usuarioActivo.totalMiembros = $scope.usuarioActivo.totalMiembros + $scope.usuarioActivo.miembrosPorRango[i].cantidad;
+            $scope.usuarioActivo.totalMiembrosPorInscribir = $scope.usuarioActivo.totalMiembrosPorInscribir + $scope.usuarioActivo.miembrosPorRango[i].cantidad;
         }
+        
+        $scope.usuarioActivo.totalMiembrosInscritos = $scope.usuarioActivo.familia.length;
 
         $scope.agregarFamiliar = function (familiar, index) {
             PerfilService.agregarFamiliar(familiar, function (response) {
+                
+                console.log(familiar);
 
                 if (response.success) {
-
+                    /* Restarle el familiar agregado al rango */
                     if (familiar.rango !== false) {
                         $scope.usuarioActivo.miembrosPorRango[index].cantidad--;
                         $scope.usuarioActivo['rango_' + familiar.rango] = familiar.cantidad;
                     }
+                    
+                    /* Agregar el miembro de la familia a los familiares incritos */
+                    
+                    $scope.usuarioActivo.familia.push(familiar);
+                    
+                    console.log($scope.UsuarioActivo);
+                    
+                    
                     localStorage.setItem("usuarioActivo", JSON.stringify($scope.usuarioActivo));
                 }
                 var feedbackModal = $uibModal.open({
@@ -98,13 +110,13 @@ nutrifamiApp.directive('agregarFamiliar', function () {
         restrict: 'E',
         scope: {
             miembro: "=",
-            index: '@'
+            index: '@',
         },
         templateUrl: 'views/directives/agregarFamiliar.html',
         link: function ($scope, $element, $attrs) {
             $scope.familiar = {};
-            $scope.familiar.nombre = '';
-            $scope.familiar.apellido = '';
+            $scope.familiar.FAM_PER_NOMBRE = '';
+            $scope.familiar.FAM_PER_APELLIDO = '';
             $scope.familiar.birthdate = new Date();
             $scope.familiar.parentescos = {
                 availableOptions: [
@@ -121,14 +133,12 @@ nutrifamiApp.directive('agregarFamiliar', function () {
                     tempMonth = "0" + tempMonth;
                 }
 
-                familiar.birthdate = familiar.birthdate.getFullYear() + "-" + tempMonth + "-" + familiar.birthdate.getDate();
-                familiar.parentesco = familiar.parentescos.selectedOption.id;
-                familiar.jefe = $scope.$parent.usuarioActivo.id;
-                familiar.codigo = $scope.$parent.usuarioActivo.login_codigo;
+                familiar.FAM_PER_BIRTHDATE = familiar.birthdate.getFullYear() + "-" + tempMonth + "-" + familiar.birthdate.getDate();
+                familiar.FAM_PER_PARENTESCO = familiar.parentescos.selectedOption.id;
+                familiar.FAM_PER_JEFE = $scope.$parent.usuarioActivo.id;
+                familiar.FAM_PER_CODIGO = $scope.$parent.usuarioActivo.login_codigo;
                 familiar.documento_jefe = $scope.$parent.usuarioActivo.login_documento;
 
-                console.log($scope.miembro);
-                console.log(typeof $scope.miembro === undefined);
                 /* If para verificar si es usuario nuevo o miembro de la familia */
                 if (typeof $scope.miembro === 'undefined') {
                     familiar.rango = false;
