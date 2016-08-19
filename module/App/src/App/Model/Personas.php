@@ -36,7 +36,7 @@ class Personas {
         $this->personaTable = new FampersonasTable();
     }
 
-    public function getFamilia($cedula = '', $codigo = '', $token = '') {
+    public function getPersona($cedula = '', $codigo = '', $token = '') {
         /*
          * Generar y comprar toke
          * Organizar nombres de campos
@@ -55,7 +55,7 @@ class Personas {
     public function savePersona($params) {
 
         /* Validamos si los datos de jefe no son correctos, retornamos 0 para que el frontend muestre el mensaje */
-        if ($this->personaTable->getPersona($params['documento_jefe'], $params['codigo']) == false) {
+        if ($this->personaTable->getPersona($params['documento_jefe'], $params['FAM_PER_CODIGO']) == false) {
             $response = array(
                 'success' => false,
                 'message' => 'Error! - Los datos no fueron guardados'
@@ -64,7 +64,7 @@ class Personas {
         }
 
         /* Validamos si el usuario ya existe, retornamos 0 para que el frontend muestre el mensaje */
-        if ($this->personaTable->getPersona($params['documento']) != false) {
+        if ($this->personaTable->getPersona($params['FAM_PER_DOCUMENTO']) != false) {
             $response = array(
                 'success' => false,
                 'message' => 'Error! - El documento ya existe'
@@ -73,14 +73,14 @@ class Personas {
         }
 
         $data = array(
-            'FAM_PER_DOCUMENTO' => $params['documento'],
-            'FAM_PER_NOMBRE' => $params['nombre'],
-            'FAM_PER_APELLIDO' => $params['apellido'],
-            'FAM_PER_EMAIL' => $params['email'],
-            'FAM_PER_PARENTESCO' => $params['parentesco'],
-            'FAM_PER_BIRTHDATE' => $params['birthdate'],
-            'FAM_PER_JEFE' => $params['jefe'], /* Id del jefe de hogar para crear la relación */
-            'FAM_PER_CODIGO' => $params['codigo'], /* Codigo del jefe de Hogar */
+            'FAM_PER_DOCUMENTO' => $params['FAM_PER_DOCUMENTO'],
+            'FAM_PER_NOMBRE' => $params['FAM_PER_NOMBRE'],
+            'FAM_PER_APELLIDO' => $params['FAM_PER_APELLIDO'],
+            'FAM_PER_EMAIL' => $params['FAM_PER_EMAIL'],
+            'FAM_PER_PARENTESCO' => $params['FAM_PER_PARENTESCO'],
+            'FAM_PER_BIRTHDATE' => $params['FAM_PER_BIRTHDATE'],
+            'FAM_PER_JEFE' => $params['FAM_PER_JEFE'], /* Id del jefe de hogar para crear la relación */
+            'FAM_PER_CODIGO' => $params['FAM_PER_CODIGO'], /* Codigo del jefe de Hogar */
                 /* 'FAM_PER_TOKEN' => $params['token'] */
         );
         
@@ -92,7 +92,7 @@ class Personas {
                 $data2 = array(
                     'FAM_PER_RANGO_' . $params['rango'] => $params['cantidad']
                 );
-                $this->personaTable->updatePersona($params['jefe'], $data2);
+                $this->personaTable->updatePersona($params['FAM_PER_JEFE'], $data2);
             }
 
             $response = array(
@@ -109,5 +109,10 @@ class Personas {
         );
         return $response;
     }
+    
+    public function getFamilia($id = '') {
+        return $this->personaTable->getFamilia($id);
+    }
+    
 
 }

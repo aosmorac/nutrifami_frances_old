@@ -33,7 +33,7 @@ class ApiController extends AbstractActionController {
         header('Access-Control-Allow-Origin: *');
         $params = $this->params()->fromQuery();
         $personasObj = new Personas();
-        $data = $personasObj->getFamilia($params['d'], $params['c'], $params['t']);
+        $data = $personasObj->getPersona($params['d'], $params['c'], $params['t']);
 
         $personaInfo = array();
 
@@ -61,6 +61,7 @@ class ApiController extends AbstractActionController {
             $personaInfo['rango_6a17'] = $data['FAM_PER_RANGO_6A17'];
             $personaInfo['rango_18a60'] = $data['FAM_PER_RANGO_18A60'];
             $personaInfo['rango_60mas'] = $data['FAM_PER_RANGO_60MAS'];
+            $personaInfo['familia'] = $personasObj->getFamilia($data['FAM_PER_ID']);
         } else {
             $personaInfo['response'] = 0;
         }
