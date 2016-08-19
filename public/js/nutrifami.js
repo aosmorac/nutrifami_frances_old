@@ -1,8 +1,5 @@
 var usuarioActivo = new Object();   /* Información del usuario logueado */
 var avanceUsuario = new Object();   /* Información de avance del usuario*/
-var familiaObj = new Object();      /* Datos de la familia del usuario logueado, incluidos miembros de la familia*/
-
-
 
 var base_url = 'http://nutrifami.org/'; /* Direccion del servidor */
 
@@ -105,44 +102,6 @@ var nutrifami = {
                     };
                     localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));
 
-                    familiaObj.codigo = '123456';
-                    familiaObj.personas = Array();
-                    /* Información de la cabeza de hogar*/
-                    familiaObj.personas.cabeza = Array();
-                    familiaObj.personas.cabeza.nombres = 'Abel Oswaldo';
-                    familiaObj.personas.cabeza.apellidos = 'Moreno Acevedo';
-                    familiaObj.personas.cabeza.documeto = '999999';
-                    familiaObj.personas.cabeza.genero = 'Masculino';
-                    familiaObj.personas.cabeza.etnia = 'Mestizo';
-                    familiaObj.personas.cabeza.edad = '31';
-                    familiaObj.personas.cabeza.nacimiento = '10/12/1984';
-                    familiaObj.personas.cabeza.departamento = 'Bogotá';
-                    familiaObj.personas.cabeza.municipio = 'Bogotá';
-                    familiaObj.personas.cabeza.comunidad = '';
-                    familiaObj.personas.cabeza.avatar = '';
-                    /* Informacion de cantidad de personas */
-                    familiaObj.personas.cantidades = Array();
-                    familiaObj.personas.cantidades.rango1 = Array();
-                    familiaObj.personas.cantidades.rango1.descripcion = 'Entre 18 y 60 años';
-                    familiaObj.personas.cantidades.rango1.cantidad = 2;
-                    familiaObj.personas.cantidades.rango2 = Array();
-                    familiaObj.personas.cantidades.rango2.descripcion = 'Entre 0 y 2 años';
-                    familiaObj.personas.cantidades.rango2.cantidad = 1;
-                    /* Infomacion detallada de otras personas */
-                    familiaObj.personas.otros = Array();
-                    familiaObj.personas.otros[1] = Array();
-                    familiaObj.personas.otros[1].nombres = 'Pepito';
-                    familiaObj.personas.otros[1].apellidos = 'Moreno';
-                    familiaObj.personas.otros[1].documeto = '888';
-                    familiaObj.personas.otros[1].genero = 'Masculino';
-                    familiaObj.personas.otros[1].etnia = 'Mestizo';
-                    familiaObj.personas.otros[1].edad = '1.6';
-                    familiaObj.personas.otros[1].nacimiento = '10/12/2015';
-                    familiaObj.personas.otros[1].departamento = 'Bogotá';
-                    familiaObj.personas.otros[1].municipio = 'Bogotá';
-                    familiaObj.personas.otros[1].comunidad = '';
-                    familiaObj.personas.otros[1].avatar = '';
-                    familiaObj.personas.otros[1].parentezco = 'hijo';
                     this.isloginFlag = true;
                     response.success = true;
                     response.message = usuarioActivo.token;

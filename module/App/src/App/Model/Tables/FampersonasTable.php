@@ -42,6 +42,18 @@ class FampersonasTable extends AbstractTableGateway {
         }
     }
 
+    public function getFamilia($id) {
+
+        $params = array('FAM_PER_JEFE' => $id);
+
+        $resultSet = $this->select($params);
+        if ($resultRow = $resultSet->toArray()) {
+            return $resultRow;
+        } else {
+            return array();
+        }
+    }
+
     public function updateUsuario($params) {
         $data = array(
             'FAM_PER_NOMBRE' => $params['nombre'],
