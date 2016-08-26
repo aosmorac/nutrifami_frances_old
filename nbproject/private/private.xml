@@ -2,19 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/views/modals/actualizacionUsuario.html</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/js/controllers/unidadController.js</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/views/modals/feedbackUnidad.html</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/js/controllers/editarPerfilController.js</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/module/App/src/App/Model/Personas.php</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/views/directives/agregarFamiliar.html</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/public/js/controllers/perfilController.js</file>
-            <file>file:/C:/proyectos/nutrifami-webapp/module/App/src/App/Controller/ApiController.php</file>
+            <file>file:/C:/Desarrollo/nutrifami/nutrifamiapp/module/App/src/App/Model/Tables/CapCapacitacionTipoTable.php</file>
+            <file>file:/C:/Desarrollo/nutrifami/nutrifamiapp/module/Util/src/Util/Controller/JobsController.php</file>
+            <file>file:/C:/Desarrollo/nutrifami/nutrifamiapp/module/App/src/App/Model/Capacitacion.php</file>
+            <file>file:/C:/Desarrollo/nutrifami/nutrifamiapp/public/js/capacitacion.js</file>
         </group>
->>>>>>> 898abc661c5297bb3e6e838c9d8ab5db9255f744
     </open-files>
 </project-private>
