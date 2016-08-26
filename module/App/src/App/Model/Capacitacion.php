@@ -154,9 +154,10 @@ class Capacitacion
         $data = Array();
         if ( isset($modulo) && isset($modulo['mod_id']) ){
            $data['id'] = $modulo['mod_id']; 
-           $data['titulo'] = $modulo['mod_titulo']; 
-           $data['descripcion'] = $modulo['mod_descripcion']; 
+           $data['titulo'] = Array('texto' => $modulo['mod_titulo'], 'audio' => Array('url'=>'https://s3.amazonaws.com/nutrifami/'.$modulo['mod_audio'], 'nombre'=>$modulo['mod_audio'], 'loaded'=>'empty')); 
+           $data['descripcion'] = Array('texto' => $modulo['mod_descripcion'], 'audio' => Array('url'=>'https://s3.amazonaws.com/nutrifami/'.$modulo['mod_descripcion_audio'], 'nombre'=>$modulo['mod_descripcion_audio'], 'loaded'=>'empty')); 
            $data['imagen'] = Array('url' => 'https://s3.amazonaws.com/nutrifami/'.$modulo['mod_imagen'], 'nombre' => $modulo['mod_imagen'], 'loaded'=>'empty');
+           $data['imagen2'] = Array('url' => 'https://s3.amazonaws.com/nutrifami/'.$modulo['mod_imagen'], 'nombre' => $modulo['mod_imagen'], 'loaded'=>'empty');
            $data['fecha'] = $modulo['mod_fecha']; 
            $data['activo'] = $modulo['mod_activo']; 
            $data['lecciones'] = Array();
@@ -186,9 +187,10 @@ class Capacitacion
         $data = Array();
         if ( isset($leccion) && isset($leccion['lec_id']) ){
             $data['id'] = $leccion['lec_id']; 
-            $data['titulo'] = $leccion['lec_titulo']; 
+            $data['titulo'] = Array('texto' => $leccion['lec_titulo'], 'audio' => Array('url'=>'https://s3.amazonaws.com/nutrifami/'.$leccion['lec_audio'], 'nombre'=>$leccion['lec_audio'], 'loaded'=>'empty')); 
             $data['descripcion'] = $leccion['lec_descripcion']; 
             $data['imagen'] = Array('url' => 'https://s3.amazonaws.com/nutrifami/'.$leccion['lec_imagen'], 'nombre' => $leccion['lec_imagen'], 'loaded'=>'empty');
+            $data['icono'] = $leccion['lec_icono'];
             $data['fecha'] = $leccion['lec_fecha']; 
             $data['activo'] = $leccion['lec_activo']; 
             $elementosObj = new CapLeccionElementoTable();
@@ -205,6 +207,7 @@ class Capacitacion
                      $unidadesId[$elemento] = $elemento;
                  }
             }
+            $data['finalizado'] = Array('texto' => $leccion['lec_mensaje'], 'audio' => Array('url' => 'https://s3.amazonaws.com/nutrifami/'.$leccion['lec_audio_final'], 'nombre' => $leccion['lec_audio_final'], 'loaded' => 'empty'));
         }
         if ($getUnidades) {
             return Array('leccion' => $data, 'unidadesId' => $unidadesId );
@@ -223,9 +226,9 @@ class Capacitacion
             $data['id'] = $unidad['uni_inf_id'];
             $tipoObj = new CapUnidadinformacionTipoTable();
             $tipoU = $tipoObj->getTipo($unidad['uni_inf_tip_id']);
-            $data['tipo'] = Array('id'=>$tipoU['uni_inf_tip_id'], 'nombre'=>$tipoU['uni_inf_tip_nombre'], 'alias'=>$tipoU['uni_inf_tip_alias'], 'descripcion'=>$tipoU['uni_inf_tip_descripcion']); /* Obtenerlo de tipo */ 
-            $data['titulo'] =$unidad['uni_inf_titulo'];
-            $data['instruccion'] = $unidad['uni_inf_instruccion'];
+            $data['tipo'] = Array('id'=>$tipoU['uni_inf_tip_id'], 'nombre'=>$tipoU['uni_inf_tip_nombre'], 'alias'=>$tipoU['uni_inf_tip_alias'], 'descripcion'=>$tipoU['uni_inf_tip_descripcion'], 'icono'=> $tipoU['uni_inf_tip_icono'], 'audio'=> Array('nombre'=> $tipoU['uni_inf_tip_audio'])); /* Obtenerlo de tipo */ 
+            $data['titulo'] = Array('texto' => $unidad['uni_inf_titulo'], 'audio' => Array('url'=>'https://s3.amazonaws.com/nutrifami/'.$unidad['uni_inf_audio'], 'nombre'=>$unidad['uni_inf_audio'], 'loaded'=>'empty')); 
+            $data['instruccion'] = Array('texto' => $unidad['uni_inf_instruccion'], 'audio' => Array('url'=>'https://s3.amazonaws.com/nutrifami/'.$unidad['uni_inf_instruccion_audio'], 'nombre'=>$unidad['uni_inf_instruccion_audio'], 'loaded'=>'empty')); 
             $data['texto'] = $unidad['uni_inf_texto'];
             if ( isset($unidad['uni_inf_imagen']) || $unidad['uni_inf_imagen'] != null ){
                 $data['imagen'] = Array('url' => 'https://s3.amazonaws.com/nutrifami/'.$unidad['uni_inf_imagen'], 'nombre' => $unidad['uni_inf_imagen'], 'loaded'=>'empty');
@@ -257,7 +260,7 @@ class Capacitacion
                             , 'fecha' => $opcion['uni_inf_x_opc_fecha']
                             , 'visible' => $opcion['uni_inf_x_opc_visible']
                             , 'texto' => $opcionInfo['uni_inf_opc_texto']
-                            , 'feedback' => $opcion['uni_inf_opc_feedback']
+                            , 'feedback' => Array('texto' => $opcion['uni_inf_opc_feedback'], 'audio' => Array('url'=>'https://s3.amazonaws.com/nutrifami/'.$opcion['uni_inf_opc_feedback_audio'], 'nombre'=>$opcion['uni_inf_opc_feedback_audio'], 'loaded'=>'empty'))
                     );
                     if ( isset($opcionInfo['uni_inf_opc_audio']) || $opcionInfo['uni_inf_opc_audio'] != null ){
                     $data['opciones'][$opcion['uni_inf_opc_id']]['audio'] = Array('url' => 'https://s3.amazonaws.com/nutrifami/'.$opcionInfo['uni_inf_opc_audio'], 'nombre' => $opcionInfo['uni_inf_opc_audio'], 'loaded'=>'empty');
