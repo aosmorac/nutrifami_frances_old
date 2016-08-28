@@ -25,6 +25,7 @@ h1, h2, h3, h4, h5, h6{
 
 .login {
     background-color: #1863dc;
+    height: 100vh;
 }
 
 .login .lbox {
@@ -141,6 +142,12 @@ h1, h2, h3, h4, h5, h6{
 
 .login .lbox .form-actions .lingresar:hover {
     background: #fd0496;
+}
+
+.login .lbox .form-group .ldocumento:focus,
+.login .lbox .form-group .lcodigo:focus,
+.login .lbox .form-actions .lingresar:focus{
+    outline: none;
 }
 
 .login .wfp-logo {
@@ -437,7 +444,7 @@ header .navbar-default .navbar-toggle .icon-bar {
 .lecciones .panel-body .leccion .boton{
     width: 100%;
     position: absolute;
-    bottom: 35px;
+    bottom: 50px;
     left: 0px;
 
 }
@@ -650,7 +657,7 @@ header .navbar-default .navbar-toggle .icon-bar {
 .unidad .panel-body .opcion .boton{
     width: 100%;
     position: absolute;
-    bottom: 35px;
+    bottom: 50px;
     left: 0px;
 }
 

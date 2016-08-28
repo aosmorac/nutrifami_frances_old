@@ -10,7 +10,7 @@ use Zend\Db\Sql\Select;
 use Zend\Debug\Debug;
 use Zend\Db\Sql\Expression;
 
-class FampersonasTable extends AbstractTableGateway {
+class FamPersonasTable extends AbstractTableGateway {
 
     protected $table = 'fam_personas';
 
@@ -27,14 +27,9 @@ class FampersonasTable extends AbstractTableGateway {
         return $resultSet->toArray();
     }
 
-    public function getPersona($cedula, $codigo = '') {
-        if ($codigo == '') {
-            $params = array('FAM_PER_DOCUMENTO' => $cedula);
-        } else {
-            $params = array('FAM_PER_DOCUMENTO' => $cedula, 'FAM_PER_CODIGO' => $codigo);
-        }
+    public function getPersona($data) {
 
-        $resultSet = $this->select($params);
+        $resultSet = $this->select($data);
         if ($resultRow = $resultSet->toArray()) {
             return $resultRow[0];
         } else {
@@ -102,5 +97,5 @@ class FampersonasTable extends AbstractTableGateway {
     public function updatePersona($id, $data) {
         $this->update($data, array('FAM_PER_ID' => $id));
     }
-
+  
 }

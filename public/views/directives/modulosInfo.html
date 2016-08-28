@@ -8,7 +8,7 @@
             </div>
             <div class="caption">
                 <h3>{{ info.titulo}}</h3>  
-                <h4>{{ avance.leccionesTerminadas}} / {{ totalLecciones()}}</h4>
+                <h4>{{ info.avance.leccionesFinalizadas}} / {{ totalLecciones()}}</h4>
                 <div class="progress">
                     <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{{ porcentajeAvance()}}%;"></div>
                 </div>
@@ -22,9 +22,9 @@
         <img ng-src="{{info.imagen.url}}">
         <div class="caption">
             <h3>{{ info.titulo}}</h3>
-            <h4>0 / {{ totalLecciones()}}</h4>
+            <h4>{{ info.avance.leccionesFinalizadas}} / {{ totalLecciones()}}</h4>
             <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:0%;"></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{{ porcentajeAvance()}}%;"></div>
             </div>
         </div>
     </div>

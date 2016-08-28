@@ -16,6 +16,7 @@ nutrifamiApp.controller('UnidadController', ['$scope', '$location', '$routeParam
 
         $scope.usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
         $scope.estadoUnidad = 'espera';
+        console.log($scope.usuarioActivo);
 
         try {
             $scope.uids = nutrifami.training.getUnidadesId($routeParams.leccion);
@@ -241,26 +242,23 @@ nutrifamiApp.controller('UnidadController', ['$scope', '$location', '$routeParam
             if ($scope.siguienteUnidad > $scope.unidad.totalUnidades) {
                 var avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
                 var lids = nutrifami.training.getLeccionesId($routeParams.modulo);
-                var indice = 0;
+                
+                avanceUsuario['3'][$routeParams.modulo][$routeParams.leccion] = "true";
 
-                /*Busca el indice basado en el id de la lección para actualizar e avance*/
-                for (var i in lids) {
-                    if (lids[i] == $routeParams.leccion) {
-                        indice = i;
-                    }
-                }
-                avanceUsuario.lecciones[indice - 1] = 1;
-
-                /* Mira cuantas lecciones se han terminaddo para dar un resultado final */
-                var contador = 0;
-                for (var i in avanceUsuario.lecciones) {
-                    if (avanceUsuario.lecciones[i] == 1) {
-                        contador++;
-                    }
-                }
-                avanceUsuario.leccionesTerminadas = contador;
                 localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));
-                $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $routeParams.unidad + "/leccion-terminada");
+
+                var data = {
+                    'per_id': $scope.usuarioActivo.id,
+                    'cap_id': 3,
+                    'mod_id': $routeParams.modulo,
+                    'lec_id': $routeParams.leccion
+                };
+                nutrifami.avance.addAvance(data, function (response) {
+                    if (response.success) {
+                        $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $routeParams.unidad + "/leccion-terminada");
+                    }
+                });
+
             } else {
                 $location.path('/m/' + $routeParams.modulo + "/" + $routeParams.leccion + "/" + $scope.siguienteUnidad);
             }
