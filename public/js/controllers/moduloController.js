@@ -22,26 +22,31 @@ angular.module('NutrifamiWeb')
 
                 /* Se hace un try por si el usuario intenta ingresar a la URL a otro modulo que lo lleve al home */
                 try {
-                    $scope.modulo = nutrifami.training.getModulo($routeParams.modulo);
-                    $scope.modulo.totalLecciones = Object.keys($scope.modulo.lecciones).length;
+                $scope.modulo = nutrifami.training.getModulo($routeParams.modulo);
+                $scope.modulo.totalLecciones = Object.keys($scope.modulo.lecciones).length;
+                if (typeof $scope.avanceUsuario['3'] !== 'undefined' && typeof $scope.avanceUsuario['3'][$routeParams.modulo] !== 'undefined') {
                     $scope.modulo.leccionesFinalizadas = Object.keys($scope.avanceUsuario['3'][$routeParams.modulo]).length;
-                    $scope.lids = nutrifami.training.getLeccionesId($routeParams.modulo);
-                    console.log($scope.lids);
-                    for (var lid in $scope.lids) {
-                        var tempLecciones = nutrifami.training.getLeccion($scope.lids[lid]);
-                        tempLecciones.avance = {};
-
-                        if (typeof $scope.avanceUsuario['3'][$routeParams.modulo][$scope.lids[lid]] !== 'undefined') {
-                            tempLecciones.avance.terminada = true;
-                        } else {
-                            tempLecciones.avance.terminada = false;
-                        }
-                        $scope.lecciones.push(tempLecciones);
-                    }
-                } catch (err) {
-                    console.log(err);
-                    //$location.path('/');
+                } else {
+                    $scope.modulo.leccionesFinalizadas = 0;
                 }
+
+                $scope.lids = nutrifami.training.getLeccionesId($routeParams.modulo);
+                console.log($scope.lids);
+                for (var lid in $scope.lids) {
+                    var tempLecciones = nutrifami.training.getLeccion($scope.lids[lid]);
+                    tempLecciones.avance = {};
+                    if (typeof $scope.avanceUsuario['3'] !== 'undefined' && typeof $scope.avanceUsuario['3'][$routeParams.modulo] !== 'undefined' && typeof $scope.avanceUsuario['3'][$routeParams.modulo][$scope.lids[lid]] !== 'undefined') {
+                        tempLecciones.avance.terminada = true;
+                    }
+                    else {
+                        tempLecciones.avance.terminada = false;
+                    }
+                    $scope.lecciones.push(tempLecciones);
+                }
+                } catch (err) {
+                 console.log(err);
+                 //$location.path('/');
+                 }
 
                 console.log($scope.lecciones);
                 console.log($scope.modulo);

@@ -241,8 +241,10 @@ nutrifamiApp.controller('UnidadController', ['$scope', '$location', '$routeParam
             $scope.siguienteUnidad = parseInt($routeParams.unidad) + 1;
             if ($scope.siguienteUnidad > $scope.unidad.totalUnidades) {
                 var avanceUsuario = JSON.parse(localStorage.getItem('avanceUsuario'));
-                var lids = nutrifami.training.getLeccionesId($routeParams.modulo);
-                
+                if (typeof avanceUsuario['3'] === 'undefined') {
+                    avanceUsuario['3'] = {};
+                    avanceUsuario['3'][$routeParams.modulo] = {};
+                }
                 avanceUsuario['3'][$routeParams.modulo][$routeParams.leccion] = "true";
 
                 localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));

@@ -89,120 +89,16 @@ var nutrifami = {
                     /* Combinamos la información de usuarioActivo existente con la nueva */
                     $.extend(usuarioActivo, objServ);
 
-                    
+
                     /* Se copia la información de avance en un objeto independiente y se elimina la información de usuarioActivo*/
                     avanceUsuario = usuarioActivo.avance[usuarioActivo.id];
                     /* Se copia la informaciòn de avance de familia a un objeto independiente*/
                     avanceFamilia = usuarioActivo.avance;
                     delete usuarioActivo["avance"];
                     delete avanceFamilia[usuarioActivo.id];
-                    
+
                     /* Se almacena usuario activo en el locaStorage para llamarlo más facilmente */
                     localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
-
-                    /* Estructura del objeto avance*/
-                    /*avance = {
-                     "usuarios": {
-                     "48155": {
-                     "capacitaciones": {
-                     "3": {
-                     "modulos": {
-                     "5": {
-                     "lecciones": {
-                     '17': true,
-                     '18': false,
-                     '19': false,
-                     '20': false
-                     }
-                     },
-                     "6": {
-                     "lecciones": {
-                     '17': true,
-                     '18': false,
-                     '19': false,
-                     '20': false
-                     }
-                     }
-                     }
-                     },
-                     "4": {
-                     "modulos": {
-                     "7": {
-                     "lecciones": {
-                     '17': true,
-                     '18': false,
-                     '19': false,
-                     '20': false
-                     }
-                     },
-                     "8": {
-                     "lecciones": {
-                     '17': true,
-                     '18': false,
-                     '19': false,
-                     '20': false
-                     }
-                     }
-                     }
-                     }
-                     }
-                     }
-                     },
-                     
-                     "48155": {
-                     "capacitaciones": {
-                     "3": {
-                     "capacitacion_id": 3,
-                     "modulos": {
-                     "5": {
-                     "id": 5,
-                     "lecciones": {
-                     '17': true,
-                     '18': false,
-                     '19': false,
-                     '20': false
-                     }
-                     },
-                     "6": {
-                     "id": 6,
-                     "lecciones": {
-                     '17': true,
-                     '18': false,
-                     '19': false,
-                     '20': false
-                     }
-                     }
-                     }
-                     },
-                     "4": {
-                     "capacitacion_id": 4,
-                     "modulos": {
-                     "7": {
-                     "id": 7,
-                     "lecciones": {
-                     '17': true,
-                     '18': false,
-                     '19': false,
-                     '20': false
-                     }
-                     },
-                     "8": {
-                     "id": 8,
-                     "lecciones": {
-                     '17': true,
-                     '18': false,
-                     '19': false,
-                     '20': false
-                     }
-                     }
-                     }
-                     }
-                     }
-                     }
-                     
-                     };
-                     */
-                    /* FIN Objeto Javascript para ver el avance*/
 
                     localStorage.setItem("avanceUsuario", JSON.stringify(avanceUsuario));
                     localStorage.setItem("avanceFamilia", JSON.stringify(avanceFamilia));

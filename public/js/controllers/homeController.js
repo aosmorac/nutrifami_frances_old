@@ -29,7 +29,7 @@ nutrifamiApp.controller('HomeController', ['$scope', '$anchorScroll', 'bsLoading
                 tempModulo.activo = false;
             }
             
-            if (typeof $scope.avanceUsuario['3'][$scope.mids[mid]] !== 'undefined') {
+            if (typeof $scope.avanceUsuario['3'] !== 'undefined' && typeof $scope.avanceUsuario['3'][$scope.mids[mid]] !== 'undefined') {
                 tempModulo.avance.leccionesFinalizadas = Object.keys($scope.avanceUsuario['3'][$scope.mids[mid]]).length;
             }else{
                 tempModulo.avance.leccionesFinalizadas = 0;
