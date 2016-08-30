@@ -12,6 +12,8 @@ namespace App\Controller;
 
 use App\Model\Personas;
 use App\Model\Capacitacion;
+use App\Model\Compras;
+use App\Model\PuntoVenta;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Debug\Debug;
@@ -283,6 +285,50 @@ class ApiController extends AbstractActionController {
         $viewModel = new \Zend\View\Model\ViewModel();
         $viewModel->setTerminal(true);
         return $viewModel;
+    }
+    
+    
+    public function getConsolidadoComprasAction() {
+        header('Access-Control-Allow-Origin: *');
+
+        $params = $this->params()->fromQuery();
+        if (isset($params['did'])) {
+            $did = $params['did'];
+        } else {
+            $did = 0;
+        }
+        
+        $comprasObj = new Compras();
+        $data = $comprasObj->getComprasByUsuario($did);
+        
+        echo json_encode($data);
+
+        $viewModel = new \Zend\View\Model\ViewModel();
+        $viewModel->setTerminal(true);
+        return $viewModel;
+        
+    }
+    
+    
+    public function getProductosPuntoventaAction(){
+        header('Access-Control-Allow-Origin: *');
+
+        $params = $this->params()->fromQuery();
+        if (isset($params['pid'])) {
+            $pid = $params['pid'];
+        } else {
+            $pid = 0;
+        }
+        
+        $puntoObj = new PuntoVenta();
+        $data = $puntoObj->getProductoByPunto($pid);
+        
+        echo json_encode($data);
+
+        $viewModel = new \Zend\View\Model\ViewModel();
+        $viewModel->setTerminal(true);
+        return $viewModel;
+        
     }
 
 }
