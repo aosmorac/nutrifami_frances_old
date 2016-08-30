@@ -7,12 +7,13 @@
  * @copyright PMA Colombia 2016
  * @updated 
  * @version 1
- * @author {Abel Oswaldo Moreno Acevedo} <{moreno.abel@gmail.com}>
+ * @author {Alejandro Tunaroza} <{alejandro.tunaroza@gmail.com}>
  * ******************************************************** */
 
 namespace App\Model;
 
-use App\Model\Tables\FampersonasTable;
+use App\Model\Tables\FamPersonasTable;
+use App\Model\Tables\FamAvanceTable;
 use Doctrine\Common\Util\Debug;
 
 /* * ********************************************************
@@ -38,10 +39,13 @@ class Personas {
 
     public function getPersona($cedula = '', $codigo = '', $token = '') {
         /*
-         * Generar y comprar toke
-         * Organizar nombres de campos
+         * Generar y comparar token
          */
-        return $this->personaTable->getPersona($cedula, $codigo);
+        $data = array(
+            'FAM_PER_DOCUMENTO' => $cedula,
+            'FAM_PER_CODIGO' => $codigo
+        );
+        return $this->personaTable->getPersona($data);
     }
 
     public function updateUsuario($params) {
@@ -83,7 +87,7 @@ class Personas {
             'FAM_PER_CODIGO' => $params['FAM_PER_CODIGO'], /* Codigo del jefe de Hogar */
                 /* 'FAM_PER_TOKEN' => $params['token'] */
         );
-        
+
 
         /* Insertarmos el usuario en la base de datos y enviamos respuesta. */
         if ($this->personaTable->insertPersona($data) == 1) {
@@ -109,10 +113,71 @@ class Personas {
         );
         return $response;
     }
-    
+
     public function getFamilia($id = '') {
         return $this->personaTable->getFamilia($id);
     }
-    
+
+    public function addAvance($params) {
+        $famAvanceTable = new FamAvanceTable();
+
+        /* Estructura del params
+          $data = array(
+          'per_id' => $params['per_id'],
+          'cap_id' => $params['cap_id'],
+          'mod_id' => $params['mod_id'],
+          'lec_id' => $params['lec_id']
+          );
+         */
+
+        /* Insertarmos el usuario en la base de datos y enviamos respuesta. */
+        if ($famAvanceTable->insertAvance($params) == 1) {
+            $response = array(
+                'success' => true,
+                'message' => 'El avance fue agregado con éxito'
+            );
+            return $response;
+        }
+
+        /* Si algo falla en el if anterior, enviamos mensaje de error */
+        $response = array(
+            'success' => false,
+            'message' => 'Error! - Los datos no fueron guardados'
+        );
+        return $response;
+    }
+
+    public function getAvanceByPersona($id) {
+        $famAvanceTable = new FamAvanceTable();
+        $avanceTemp = $famAvanceTable->getAvanceByPersona($id);
+
+        $avanceObj = array();
+
+        foreach ($avanceTemp as $item) {
+            $avanceObj[$item["cap_id"]][$item["mod_id"]][$item["lec_id"]] = 'true';
+        }
+        $response = $avanceObj;
+
+        return $response;
+    }
+
+    public function getAvanceByFamilia($id) {
+        /* Preguntamos por todos los miembrs de la famila */
+        $tempFamilia = $this->personaTable->getFamilia($id);
+
+        /* Creamos el arreglo Agregamos el avance del jefe de la familia */
+        $avanceFamiliar = array();
+        $avanceFamiliar[$id] = $this->getAvanceByPersona($id);
+
+        foreach ($tempFamilia as $familiar) {
+            /* Por cada miemnbro de la familia consultamos su avance y lo guardamos en el arreglo */
+            $data = $this->getAvanceByPersona($familiar["FAM_PER_ID"]);
+
+            if (!empty($data)) {
+                $avanceFamiliar[$familiar["FAM_PER_ID"]] = $data;
+            }
+        }
+        return $avanceFamiliar;
+    }
 
 }
