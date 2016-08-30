@@ -21,7 +21,20 @@ nutrifamiApp.controller('HomeController', ['$scope', '$anchorScroll', 'bsLoading
         $scope.mids = nutrifami.training.getModulosId(3);
         /*Creamos un arreglo para poder recorerlo y mostrarlo a traves de directivas */
         for (var mid in $scope.mids) {
-            $scope.modulos.push(nutrifami.training.getModulo($scope.mids[mid]));
+            var tempModulo =nutrifami.training.getModulo($scope.mids[mid]);
+            tempModulo.avance = {};
+            if (tempModulo.activo == '1'){
+                tempModulo.activo = true;
+            }else{
+                tempModulo.activo = false;
+            }
+            
+            if (typeof $scope.avanceUsuario['3'] !== 'undefined' && typeof $scope.avanceUsuario['3'][$scope.mids[mid]] !== 'undefined') {
+                tempModulo.avance.leccionesFinalizadas = Object.keys($scope.avanceUsuario['3'][$scope.mids[mid]]).length;
+            }else{
+                tempModulo.avance.leccionesFinalizadas = 0;
+            }
+            $scope.modulos.push(tempModulo);  
         }
     }]);
 
@@ -29,8 +42,7 @@ nutrifamiApp.directive('modulosInfo', ['$location', function ($location) {
         return {
             restrict: 'E',
             scope: {
-                info: '=',
-                avance: '='
+                info: '='
             },
             templateUrl: 'views/directives/modulosInfo.html',
             link: function ($scope, $element, $attrs) {
@@ -39,7 +51,7 @@ nutrifamiApp.directive('modulosInfo', ['$location', function ($location) {
                     return (Object.keys($scope.info.lecciones).length);
                 };
                 $scope.porcentajeAvance = function () {
-                    return(100 / $scope.totalLecciones() * $scope.avance.leccionesTerminadas);
+                    return(100 / $scope.totalLecciones() * $scope.info.avance.leccionesFinalizadas);
                 };
                 $scope.irAlModulo = function () {
                     $scope.cargando = true;
