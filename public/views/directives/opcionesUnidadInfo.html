@@ -5,7 +5,7 @@
     <a class="opcion-link" href ng-mouseover="rollover = 'rollover'" ng-mouseout="rollover=''" ng-click="click()">
         <div class="opcion" ng-class="[rollover,info.media !== undefined ? 'opcion-con-imagen' : '', info.selected ? 'selected' : 'no-selected']">
             <div class="caption">
-                <img data-ng-src="{{info.media.url}}" alt="{{ info.titulo}}" ng-hide="{{info.media === undefined}}" />
+                <!--<img data-ng-src="{{info.media.url}}" alt="{{ info.titulo}}" ng-hide="{{info.media === undefined}}" />-->
                 <p>{{ info.texto}}</p>
                 <div class="boton"> 
                     <span class="btn btn-default center-block" role="button">Seleccionar</span>
