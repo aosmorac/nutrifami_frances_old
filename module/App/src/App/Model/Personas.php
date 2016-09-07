@@ -66,9 +66,13 @@ class Personas {
             );
             return $response;
         }
+        
+        $dataDoc = array(
+            'FAM_PER_DOCUMENTO' => $params['FAM_PER_DOCUMENTO']
+        );
 
         /* Validamos si el usuario ya existe, retornamos 0 para que el frontend muestre el mensaje */
-        if ($this->personaTable->getPersona($params['FAM_PER_DOCUMENTO']) != false) {
+        if ($this->personaTable->getPersona($dataDoc) != false) {
             $response = array(
                 'success' => false,
                 'message' => 'Error! - El documento ya existe'
