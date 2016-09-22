@@ -23,6 +23,145 @@ h1, h2, h3, h4, h5, h6{
     font-family: 'Muli', sans-serif;
 }
 
+/* LANDING */
+
+.landing header{
+    padding-top: 22px;
+    height: 90px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+}
+
+.landing header .logo{
+    float: left;
+}
+
+.landing header .como-funciona{
+    float: right;
+    margin-right: 50px;
+    color: #ffffff;
+    line-height: 45px;
+    text-decoration: none;
+}
+
+.landing header .btn-primary{
+    padding: 0 45px;
+    line-height: 45px;
+    border-radius: 22px;
+    -moz-border-radius: 22px;
+    -webkit-border-radius: 22px;
+    border:none;
+    background-color: rgba(255,255,255,0.9);
+    font-size: 13pt;
+    color: #00c97e;
+    float: right;
+}
+
+.landing .hero{
+    padding-top: 45px;
+    background-color: #75a8fe;
+    background-image: url('../img/landing-hero-bg.png');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    height: 800px;
+    margin-bottom: 70px;
+}
+
+.landing .hero .descripcion{
+    text-align: center;
+    clear: both;
+    margin-top: 65px;
+}
+
+.landing .hero .descripcion h1{
+    font-size: 30pt;
+    margin-bottom: 30px;
+}
+
+.landing .hero .descripcion p{
+    font-size: 14pt;
+    margin-bottom: 70px;
+}
+
+
+.landing .mi-perfil,
+.landing .aprende,
+.landing .mis-compras{
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 100px;
+}
+
+.landing .mi-perfil h4,
+.landing .aprende h4,
+.landing .mis-compras h4{
+    color: #004d30;
+    font-size: 10pt;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.landing .mi-perfil h2,
+.landing .aprende h2,
+.landing .mis-compras h2{
+    margin-top: 10px;
+    margin-bottom: 25px;
+    color: #00a165;
+    font-size: 30pt;
+}
+
+.landing .mi-perfil p,
+.landing .aprende p,
+.landing .mis-compras p{
+    color: #00a165;
+    font-size: 14pt;
+    padding: 10px 170px;
+    margin-bottom: 70px;
+}
+
+.landing footer{
+    height: 410px;
+    text-align: center;
+    padding: 0px;
+    background: url('../img/landing-footer-bg.png') #00c97e no-repeat;
+    color: #ffffff;
+    margin: 0px;
+    background-position: 65% 63%;
+}
+
+.landing footer h2{
+    margin-top: 110px;
+    font-size: 30pt;
+}
+
+.landing footer .btn-primary{
+    padding: 0 65px;
+    line-height: 55px;
+    border-radius: 27px;
+    -moz-border-radius: 27px;
+    -webkit-border-radius: 27px;
+    border:1px solid #ffffff;
+    background-color: rgba(0,0,0,0);
+    font-size: 15pt;
+    color: #ffffff;
+    margin-top: 27px;
+}
+
+.landing footer .logo{
+    margin-top: 115px;
+    line-height: 19px;
+    font-size: 8px;
+}
+
+.landing footer .logo img{
+    margin-right: 15px;
+    position: relative;
+    top: -5px;
+}
+/* END - LANDING*/
+
 .login {
     background-color: #1863dc;
     height: 100vh;
