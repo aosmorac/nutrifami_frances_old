@@ -33,6 +33,19 @@ h1, h2, h3, h4, h5, h6{
     width: 100%;
 }
 
+.landing header.scrolled{
+    background-color: #75a8fe;
+    animation-name: headerscrolled;
+    animation-duration: 1s;
+    z-index: 10;
+}
+
+/* The animation code */
+@keyframes headerscrolled {
+    from {background-color: rgba(0,0,0,0);}
+    to {background-color: #75a8fe;}
+}
+
 .landing header .logo{
     float: left;
 }
@@ -53,6 +66,7 @@ h1, h2, h3, h4, h5, h6{
     -webkit-border-radius: 22px;
     border:none;
     background-color: rgba(255,255,255,0.9);
+    background-image: none;
     font-size: 13pt;
     color: #00c97e;
     float: right;
@@ -89,9 +103,40 @@ h1, h2, h3, h4, h5, h6{
 .landing .mi-perfil,
 .landing .aprende,
 .landing .mis-compras{
+    position: relative;
     text-align: center;
-    margin-top: 80px;
+    margin-top: 95px;
     margin-bottom: 100px;
+}
+
+.landing .mi-perfil .navegador,
+.landing .aprende .navegador,
+.landing .mis-compras .navegador{
+    position: absolute;
+    left: 0px;
+    top: 50%;
+}
+
+.landing .mi-perfil .navegador li,
+.landing .aprende .navegador li,
+.landing .mis-compras .navegador li{
+    list-style: none;
+}
+
+
+.landing .mi-perfil .navegador a,
+.landing .aprende .navegador a,
+.landing .mis-compras .navegador a{
+    color: rgba(0,201,126,0.2);
+    font-size: 31px;
+    line-height: 20px;
+    text-decoration: none;
+}
+
+.landing .mi-perfil .navegador a.active,
+.landing .aprende .navegador a.active,
+.landing .mis-compras .navegador a.active{
+    color: rgba(0,201,126,1);
 }
 
 .landing .mi-perfil h4,
@@ -147,6 +192,7 @@ h1, h2, h3, h4, h5, h6{
     font-size: 15pt;
     color: #ffffff;
     margin-top: 27px;
+    background-image: none;
 }
 
 .landing footer .logo{

@@ -1,15 +1,15 @@
 <div class="landing">
-    <header>
+    <header ng-class="scrolled == true ? 'scrolled' : ''">
         <div class="container">
             <div class="logo">
-                <img src="../img/logo-landing.png" alt="Logo Nutrifami"/>
+                <a href ng-click="gotoElement('top')"> <img src="../img/logo-landing.png" alt="Logo Nutrifami"/> </a>
             </div>
             <a href="#/login" class="btn btn-primary" role="button">Ingresar</a>
-            <a href="#" class="como-funciona">¿Cómo funciona?</a>
+            <a href ng-click="gotoElement('mi-perfil')" class="como-funciona">¿Cómo funciona?</a>
         </div>
 
     </header>
-    <div class="hero">
+    <div class="hero" id="top">
         <div class="container">
 
             <div class="descripcion">
@@ -17,9 +17,10 @@
                 <p>Aprende jugando sobre alimentación saludable y seguridad alimentaria.<br/>
                     Encuentra consejos para realizar compras eficientes de alimentos. <br/> 
                     Mejora los hábitos alimenticios en tu hogar.</p>
-                <img src="../img/img-app.png" alt="Login aplicación móvil"/>
+                <img src="../img/img-app.png" alt="Login aplicación móvil" />
             </div>
         </div>
+        <div id="mi-perfil"></div>
     </div>
 
     <div class="container">
@@ -28,6 +29,13 @@
             <h2>Mi perfil</h2>
             <p>Crea tu propio perfil y el de tu familia para que todos mejoren sus<br>conocimientos en alimentación saludable </p>
             <img src="../img/landing-mi-perfil.png" alt="Mi perfil"/>
+            <ul class="navegador">
+                <li><a href ng-click="gotoElement('mi-perfil')" class="active">&bull;</a></li>
+                <li><a href ng-click="gotoElement('aprende')">&bull;</a></li>
+                <li><a href ng-click="gotoElement('mis-compras')">&bull;</a></li>
+
+            </ul>
+            <div id="aprende"></div>
         </div>
 
         <div class="aprende">
@@ -36,6 +44,13 @@
             <p>Ingresa a nuestros módulos de capacitación a través de los cuales aprenderás sobre nutrición, cómo combinar mejor los alimentos, diversidad de la dieta, manejo de los alimentos, alimentación de mujeres embarazadas y sus bebes, 
                 hábitos saludables, recetas saludables, etc. </p>
             <img src="../img/landing-aprende.png" alt="Aprende jugando"/>
+            <ul class="navegador">
+                <li><a href ng-click="gotoElement('mi-perfil')">&bull;</a></li>
+                <li><a href ng-click="gotoElement('aprende')" class="active">&bull;</a></li>
+                <li><a href ng-click="gotoElement('mis-compras')">&bull;</a></li>
+
+            </ul>
+            <div id="mis-compras"></div>
         </div>
 
         <div class="mis-compras">
@@ -43,6 +58,12 @@
             <h2>Mi perfil</h2>
             <p>La plataforma te dará importantes consejos sobre cómo seleccionar los alimentos en el momento de comprarlos para alcanzar una dieta balanceada y nutritiva.</p>
             <img src="../img/landing-mis-compras.png" alt="Mis compras"/>
+            <ul class="navegador">
+                <li><a href ng-click="gotoElement('mi-perfil')">&bull;</a></li>
+                <li><a href ng-click="gotoElement('aprende')">&bull;</a></li>
+                <li><a href ng-click="gotoElement('mis-compras')" class="active">&bull;</a></li>
+
+            </ul>
         </div>
     </div>
 
@@ -57,18 +78,3 @@
         </div>
     </footer>
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(window).scroll(function () {
-            var ScrollTop = parseInt($(window).scrollTop());
-            console.log(ScrollTop);
-
-            if (ScrollTop > 775) {
-                $("header").css("background-color", "75a8fe");
-                //document.getElementById('back-to-top').fadeOut;
-            } else {
-                $("header").css("background-color", "");
-            }
-        });
-    });
-</script>
