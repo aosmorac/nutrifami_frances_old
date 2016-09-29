@@ -19,6 +19,11 @@ nutrifamiApp.config(['$routeProvider', function ($routeProvider) {
         });
 
         $routeProvider.when('/', {
+            controller: 'LandingController',
+            templateUrl: 'views/landing.tpl.html'
+        });
+
+        $routeProvider.when('/capacitacion', {
             controller: 'HomeController',
             templateUrl: 'views/home.tpl.html'
         });
@@ -76,7 +81,7 @@ nutrifamiApp.run(['$rootScope', '$location', '$cookieStore', 'bsLoadingOverlaySe
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in
             if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
-                $location.path('/login');
+                $location.path('/');
             }
         });
     }

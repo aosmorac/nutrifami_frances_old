@@ -1,7 +1,8 @@
 var usuarioActivo = new Object();   /* Información del usuario logueado */
 var avanceUsuario = new Object();   /* Información de avance del usuario*/
 
-var base_url = 'http://127.0.0.1:83/'; /* Direccion del servidor */
+/*var base_url = 'http://127.0.0.1:83/'; /* Direccion del servidor */
+var base_url = 'http://www.nutrifami.org/'; /* Direccion del servidor */
 
 var nutrifami = {
     /* nutrifami.usuarioActivoServerInfo */

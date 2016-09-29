@@ -76,11 +76,13 @@ class FamPersonasTable extends AbstractTableGateway {
             'FAM_PER_RANGO_60MAS' => $params['rango_60mas'],
         );
 
-        $documento = $params['login_documento'];
-        $clave = $params['login_codigo'];
-
-        if ($this->getPersona($documento, $clave)) {
-            $this->update($data, array('FAM_PER_DOCUMENTO' => $documento));
+        $dataPersona = array(
+            'FAM_PER_DOCUMENTO' => $params['login_documento'],
+            'FAM_PER_CODIGO' => $params['login_codigo']
+        );
+        
+        if ($this->getPersona($dataPersona)) {
+            $this->update($data, array('FAM_PER_DOCUMENTO' => $params['login_documento']));
             return 1;
         } else {
             return 0;

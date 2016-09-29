@@ -7,7 +7,7 @@
                 <img ng-src="../img/preloader_nutri_30px.gif" alt="Cargando..." ng-show="cargando">
             </div>
             <div class="caption">
-                <h3>{{ info.titulo}}</h3>  
+                <h3>{{ info.titulo.texto}}</h3>  
                 <h4>{{ info.avance.leccionesFinalizadas}} / {{ totalLecciones()}}</h4>
                 <div class="progress">
                     <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{{ porcentajeAvance()}}%;"></div>
@@ -21,7 +21,7 @@
     <div class="modulo modulo-no-disponible">
         <img ng-src="{{info.imagen.url}}">
         <div class="caption">
-            <h3>{{ info.titulo}}</h3>
+            <h3>{{ info.titulo.texto}}</h3>
             <h4>{{ info.avance.leccionesFinalizadas}} / {{ totalLecciones()}}</h4>
             <div class="progress">
                 <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{{ porcentajeAvance()}}%;"></div>
