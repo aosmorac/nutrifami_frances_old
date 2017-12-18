@@ -46,7 +46,7 @@ class Capacitacion
     }
     
     public function getAll() {
-        $capacitaciones =  $this->capacitacionTable->getCapacitacion(0); 
+        $capacitaciones =  $this->capacitacionTable->getCapacitacion(16); 
         $data = Array();
         $dataCapacitacionesId = Array();
         $dataCapacitaciones = Array();
